@@ -15,12 +15,35 @@ import 'main.dart';
 
 class SOS extends StatefulWidget {
   const SOS({super.key});
-
   @override
   State<SOS> createState() => _SOS();
 }
 
 class _SOS extends State<SOS> {
+
+  int selectedPage = 1;
+
+  final _pageOptions = [
+    MyHomePage(),
+    // Navigation(),
+    // ShareLocation()
+    SOS()
+    // Friends()
+    // NearMe()
+  ];
+
+  int _currentIndex = 1;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => _pageOptions[index]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +68,7 @@ class _SOS extends State<SOS> {
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: LiteRollingSwitch(
-                value: true,
+                value: false,
                 textOn: 'Yes',
                 textOff: 'No',
                 colorOn: Colors.greenAccent,
@@ -70,6 +93,59 @@ class _SOS extends State<SOS> {
           ],
 
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.deepPurpleAccent,
+        onTap: _onItemTapped,
+
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 30,),
+            label: 'Home',
+            backgroundColor: Colors.lightBlueAccent[200],
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emergency_share, size: 30,),
+            label: 'SOS Share',
+            backgroundColor: Colors.lightGreenAccent[700],
+          ),
+
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.navigation, size: 30,),
+            label: 'Navigation',
+            backgroundColor: Colors.lightGreenAccent[700],
+          ),
+
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.share_location_sharp, size: 30,),
+            label: 'Share Location',
+            backgroundColor: Colors.lightBlueAccent[200],
+          ),
+
+
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_4, size: 30,),
+            label: 'Contacts',
+            backgroundColor: Colors.lightBlueAccent[200],
+          ),
+
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.near_me_rounded, size: 30,),
+            label: 'Near Me',
+            backgroundColor: Colors.lightGreenAccent[700],
+          ),
+
+        ],
+
+        elevation: 50,
+
       ),
     );
   }
