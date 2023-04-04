@@ -24,14 +24,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Location Sharing App',
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,
-        primaryColor: Colors.cyan[900],
+        primaryColor: Colors.lightBlue[400],
 
         // Define the default font family.
-        fontFamily: 'gotham',
+        fontFamily: 'Gotham',
 
         textTheme: const TextTheme(
           displayLarge: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold),
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
 
       darkTheme: ThemeData(
           brightness: Brightness.dark,
-          
+        primaryColor: Colors.deepPurple,
       ),
 
       themeMode: ThemeMode.system,

@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:locatinsharing/signin.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
@@ -9,53 +11,12 @@ import 'SOS.dart';
 import 'main.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initializeLocationAndSave();
-  // }
-  //
-  // void initializeLocationAndSave() async {
-  //   // Ensure all permissions are collected for Locations
-  //   Location _location = Location();
-  //   bool? _serviceEnabled;
-  //   PermissionStatus? _permissionGranted;
-  //
-  //   _serviceEnabled = await _location.serviceEnabled();
-  //   if (!_serviceEnabled) {
-  //     _serviceEnabled = await _location.requestService();
-  //   }
-  //
-  //   _permissionGranted = await _location.hasPermission();
-  //   if (_permissionGranted == PermissionStatus.denied) {
-  //     _permissionGranted = await _location.requestPermission();
-  //   }
-  //
-  //   // Get capture the current user location
-  //   LocationData _locationData = await _location.getLocation();
-  //   latLng.LatLng currentLatLng =
-  //   latLng.LatLng(_locationData.latitude!, _locationData.longitude!);
-  //
-  //   // Store the user location in sharedPreferences
-  //   sharedPreferences.setDouble('latitude', _locationData.latitude!);
-  //   sharedPreferences.setDouble('longitude', _locationData.longitude!);
-  //
-  //   // Get and store the directions API response in sharedPreferences
-  //   // for (int i = 0; i < restaurants.length; i++) {
-  //   //   Map modifiedResponse = await getDirectionsAPIResponse(currentLatLng, i);
-  //   //   saveDirectionsAPIResponse(i, json.encode(modifiedResponse));
-  //   // }
-  //
-  //   Navigator.pushAndRemoveUntil(
-  //       context,
-  //       MaterialPageRoute(builder: (_) => MyHomePage()),
-  //           (route) => false);
-  // }
 
   int selectedPage = 0;
 
@@ -64,6 +25,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // Navigation(),
     // ShareLocation()
     SOS()
+    //Signin(),
+    // ShareLocation()
+    // SOSSOSSHare()
     // Friends()
     // NearMe()
   ];
@@ -118,59 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
 
-      // bottomNavigationBar: Row(
-      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   children: [
-      //     IconButton(
-      //       icon: const Icon(Icons.home, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.emergency_share, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.navigation, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.contact_phone_rounded, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.near_me, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.location_on, size: 30,),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //   ],
-      //   // This trailing comma makes auto-formatting nicer for build methods.
-      // ),
-
       bottomNavigationBar: BottomNavigationBar(
 
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.indigo[800],
         onTap: _onItemTapped,
 
         items: <BottomNavigationBarItem>[
@@ -186,21 +101,17 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Colors.lightGreenAccent[700],
           ),
 
-
           BottomNavigationBarItem(
             icon: Icon(Icons.navigation, size: 30,),
             label: 'Navigation',
             backgroundColor: Colors.lightGreenAccent[700],
           ),
 
-
           BottomNavigationBarItem(
             icon: Icon(Icons.share_location_sharp, size: 30,),
-            label: 'Share Location',
+            label: 'ShareLocation',
             backgroundColor: Colors.lightBlueAccent[200],
           ),
-
-
 
           BottomNavigationBarItem(
             icon: Icon(Icons.person_4, size: 30,),
@@ -218,50 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
 
         elevation: 50,
-
-
-        // items: const [
-        //   BottomNavigationBarItem(
-        //     label: 'Home',
-        //     icon: Icon(Icons.home, size: 30),
-        //     /* title: Text('Home') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Share Location',
-        //     icon: Icon(Icons.place, size: 30),
-        //     /* title: Text('Inbox') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Friends',
-        //     icon: Icon(Icons.person_4, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Places',
-        //     icon: Icon(Icons.near_me, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'SOS',
-        //     icon: Icon(Icons.emergency_share, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Navigation',
-        //     icon: Icon(Icons.navigation, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        // ],
-
-        // selectedItemColor: Colors.cyan,
-        // elevation: 5.0,
-        // unselectedItemColor: Colors.cyan[800],
-        // backgroundColor: Colors.white,
+        selectedFontSize: 15,
 
       ),
 
@@ -288,6 +156,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+    );
+
+
+  }
+  @override
+  Widget splash(BuildContext context) {
+    return Material(
+      color: Colors.black,
+      child: Center(child: Image.asset('assets/Logo_Vertical.png')),
     );
   }
 }
