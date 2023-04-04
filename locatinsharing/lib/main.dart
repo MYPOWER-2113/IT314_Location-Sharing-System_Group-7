@@ -7,9 +7,13 @@ import'package:locatinsharing/signin.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'homepage.dart';
+
 import 'navigation.dart';
 import 'SOS.dart';
 import 'ShareLoc.dart';
+
+import 'Contacts.dart';
+
 
 late SharedPreferences sharedPreferences;
 
@@ -51,6 +55,9 @@ class MyApp extends StatelessWidget {
       ),
 
       themeMode: ThemeMode.system,
+
+      // home: Signin(),
+
       home: MyHomePage(),
     );
   }
