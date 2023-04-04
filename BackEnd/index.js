@@ -6,7 +6,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
-mongoose.connect("mongodb://localhost:27017/mydb",{ useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://hembhalodiya3112:location%40123@locationshare.yqknqay.mongodb.net/?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true })
 
 
 app.use(cors())
