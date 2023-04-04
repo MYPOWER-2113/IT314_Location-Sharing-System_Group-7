@@ -46,6 +46,7 @@ dependencies:
   permission_handler: ^10.2.0
   flutter_dotenv: ^5.0.2
   mapbox_gl: ^0.16.0
+
 #  mapbox_gl: ^0.16.0
 #  flutter_dotenv: ^5.0.2
 #  shared_preferences: ^2.1.0

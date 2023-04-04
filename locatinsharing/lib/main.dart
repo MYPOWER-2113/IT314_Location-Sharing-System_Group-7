@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:locatinsharing/splash_screen.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import'package:locatinsharing/signin.dart';
@@ -17,49 +18,65 @@ import 'Contacts.dart';
 
 late SharedPreferences sharedPreferences;
 
-Future<void> main() async {
-
+void main() async
+{
   WidgetsFlutterBinding.ensureInitialized();
-  sharedPreferences=await SharedPreferences.getInstance();
-  await dotenv.load(fileName: "assets/config/.env");
-  runApp(const MyApp());
+  runApp(MyApp(child : MaterialApp(
+    title: 'Location Sharing App',
+    theme: ThemeData(
+
+
+      // Define the default brightness and colors.
+      brightness: Brightness.light,
+      primaryColor: Colors.lightBlue[400],
+
+      // Define the default font family.
+      fontFamily: 'Gotham',
+
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontSize: 25.0, /*fontStyle: FontStyle.italic*/),
+        bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+      ),
+    ),
+
+    darkTheme: ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: Colors.deepPurple,
+    ),
+    home: const MySplashScreen(),
+    debugShowCheckedModeBanner: false,
+  )) );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  final Widget? child;
 
-  // This widget is the root of your application.
+  MyApp({this.child});
+
+  static void restartApp(BuildContext context)
+  {
+    context.findAncestorStateOfType<_MyAppState>()!.restartApp();
+  }
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  Key key = UniqueKey();
+  void restartApp()
+  {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Location Sharing App',
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.light,
-        primaryColor: Colors.lightBlue[400],
-
-        // Define the default font family.
-        fontFamily: 'Gotham',
-
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold),
-          titleLarge: TextStyle(fontSize: 25.0, /*fontStyle: FontStyle.italic*/),
-          bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-        ),
-      ),
-
-      darkTheme: ThemeData(
-          brightness: Brightness.dark,
-        primaryColor: Colors.deepPurple,
-      ),
-
-      themeMode: ThemeMode.system,
-
-      // home: Signin(),
-
-      home: MyHomePage(),
-    );
+    return KeyedSubtree(
+        key: key,
+        child: widget.child!);
   }
 }
-
