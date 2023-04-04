@@ -41,6 +41,8 @@ dependencies:
 #  carousel_slider: ^4.0.0
 #  dio: ^4.0.4
   location: ^4.4.0
+  shared_preferences: ^2.1.0
+  permission_handler: ^10.2.0
 #  mapbox_gl: ^0.16.0
 #  flutter_dotenv: ^5.0.2
 #  shared_preferences: ^2.1.0
