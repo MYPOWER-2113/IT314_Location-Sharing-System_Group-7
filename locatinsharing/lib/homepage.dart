@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
-
+import 'SOS.dart';
 import 'main.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,61 +14,71 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-    initializeLocationAndSave();
-  }
-
-  void initializeLocationAndSave() async {
-    // Ensure all permissions are collected for Locations
-    Location _location = Location();
-    bool? _serviceEnabled;
-    PermissionStatus? _permissionGranted;
-
-    _serviceEnabled = await _location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await _location.requestService();
-    }
-
-    _permissionGranted = await _location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _location.requestPermission();
-    }
-
-    // Get capture the current user location
-    LocationData _locationData = await _location.getLocation();
-    latLng.LatLng currentLatLng =
-    latLng.LatLng(_locationData.latitude!, _locationData.longitude!);
-
-    // Store the user location in sharedPreferences
-    sharedPreferences.setDouble('latitude', _locationData.latitude!);
-    sharedPreferences.setDouble('longitude', _locationData.longitude!);
-
-    // Get and store the directions API response in sharedPreferences
-    // for (int i = 0; i < restaurants.length; i++) {
-    //   Map modifiedResponse = await getDirectionsAPIResponse(currentLatLng, i);
-    //   saveDirectionsAPIResponse(i, json.encode(modifiedResponse));
-    // }
-
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => MyHomePage()),
-            (route) => false);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   initializeLocationAndSave();
+  // }
+  //
+  // void initializeLocationAndSave() async {
+  //   // Ensure all permissions are collected for Locations
+  //   Location _location = Location();
+  //   bool? _serviceEnabled;
+  //   PermissionStatus? _permissionGranted;
+  //
+  //   _serviceEnabled = await _location.serviceEnabled();
+  //   if (!_serviceEnabled) {
+  //     _serviceEnabled = await _location.requestService();
+  //   }
+  //
+  //   _permissionGranted = await _location.hasPermission();
+  //   if (_permissionGranted == PermissionStatus.denied) {
+  //     _permissionGranted = await _location.requestPermission();
+  //   }
+  //
+  //   // Get capture the current user location
+  //   LocationData _locationData = await _location.getLocation();
+  //   latLng.LatLng currentLatLng =
+  //   latLng.LatLng(_locationData.latitude!, _locationData.longitude!);
+  //
+  //   // Store the user location in sharedPreferences
+  //   sharedPreferences.setDouble('latitude', _locationData.latitude!);
+  //   sharedPreferences.setDouble('longitude', _locationData.longitude!);
+  //
+  //   // Get and store the directions API response in sharedPreferences
+  //   // for (int i = 0; i < restaurants.length; i++) {
+  //   //   Map modifiedResponse = await getDirectionsAPIResponse(currentLatLng, i);
+  //   //   saveDirectionsAPIResponse(i, json.encode(modifiedResponse));
+  //   // }
+  //
+  //   Navigator.pushAndRemoveUntil(
+  //       context,
+  //       MaterialPageRoute(builder: (_) => MyHomePage()),
+  //           (route) => false);
+  // }
 
   int selectedPage = 0;
 
   final _pageOptions = [
-    // Home(),
+    MyHomePage(),
     // Navigation(),
     // ShareLocation()
-    // SOSSHare()
+    SOS()
     // Friends()
     // NearMe()
   ];
 
   int _currentIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => _pageOptions[index]),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,22 +167,23 @@ class _MyHomePageState extends State<MyHomePage> {
       //   // This trailing comma makes auto-formatting nicer for build methods.
       // ),
 
-
       bottomNavigationBar: BottomNavigationBar(
 
-        onTap: (index){
-          setState(() {
-            selectedPage = index;
-          });
-        },
-
-        currentIndex: selectedPage,
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
 
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home, size: 30,),
             label: 'Home',
             backgroundColor: Colors.lightBlueAccent[200],
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emergency_share, size: 30,),
+            label: 'SOS Share',
+            backgroundColor: Colors.lightGreenAccent[700],
           ),
 
 
@@ -190,11 +201,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emergency_share, size: 30,),
-            label: 'SOS Share',
-            backgroundColor: Colors.lightGreenAccent[700],
-          ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.person_4, size: 30,),
@@ -212,7 +218,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
 
         elevation: 50,
-        selectedItemColor: Colors.deepPurple[600],
 
 
         // items: const [

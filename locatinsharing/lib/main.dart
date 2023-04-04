@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 import 'package:shared_preferences/shared_preferences.dart';
 import'package:locatinsharing/signin.dart';
 import 'homepage.dart';
+import 'SOS.dart';
 
 late SharedPreferences sharedPreferences;
 
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
 
       themeMode: ThemeMode.system,
-      home: Signin(),
+      home: MyHomePage(),
     );
   }
 }
