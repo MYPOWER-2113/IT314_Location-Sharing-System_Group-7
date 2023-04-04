@@ -51,6 +51,7 @@ dependencies:
 #  permission_handler: ^10.2.0
   google_fonts: ^4.0.3
   http: ^0.13.5
+  lite_rolling_switch: ^1.0.1
   flutter_svg: ^2.0.4
 
 dev_dependencies:

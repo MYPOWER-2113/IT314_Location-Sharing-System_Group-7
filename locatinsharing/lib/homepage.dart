@@ -1,14 +1,18 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:locatinsharing/signin.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 import 'navigation.dart';
+import 'SOS.dart';
 import 'main.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -16,16 +20,31 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int selectedPage = 0;
 
-  final _pageOptions = [
     // MyHomePage(),
+
+  
+  final _pageOptions = [
+    MyHomePage(),
     // Navigation(),
     // ShareLocation()
-    // SOSSHare()
+    //Signin(),
+    // ShareLocation()
+    // SOSSOSSHare()
     // Friends()
     // NearMe()
   ];
 
   int _currentIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => _pageOptions[index]),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,65 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
 
-      // bottomNavigationBar: Row(
-      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   children: [
-      //     IconButton(
-      //       icon: const Icon(Icons.home, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.emergency_share, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.navigation, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.contact_phone_rounded, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.near_me, size: 30),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //
-      //     IconButton(
-      //       icon: const Icon(Icons.location_on, size: 30,),
-      //       onPressed: () {
-      //         //write your script
-      //       },
-      //     ),
-      //   ],
-      //   // This trailing comma makes auto-formatting nicer for build methods.
-      // ),
-
-
       bottomNavigationBar: BottomNavigationBar(
 
-        onTap: (index){
-          setState(() {
-            selectedPage = index;
-          });
-        },
-
-        currentIndex: selectedPage,
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.indigo[800],
+        onTap: _onItemTapped,
 
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -132,6 +97,11 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Colors.lightBlueAccent[200],
           ),
 
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emergency_share, size: 30,),
+            label: 'SOS Share',
+            backgroundColor: Colors.lightGreenAccent[700],
+          ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.navigation, size: 30,),
@@ -139,18 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Colors.lightGreenAccent[700],
           ),
 
-
           BottomNavigationBarItem(
             icon: Icon(Icons.share_location_sharp, size: 30,),
-            label: 'Share Location',
+            label: 'ShareLocation',
             backgroundColor: Colors.lightBlueAccent[200],
-          ),
-
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emergency_share, size: 30,),
-            label: 'SOS Share',
-            backgroundColor: Colors.lightGreenAccent[700],
           ),
 
           BottomNavigationBarItem(
@@ -169,51 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
 
         elevation: 50,
-        selectedItemColor: Colors.deepPurple[600],
-
-
-        // items: const [
-        //   BottomNavigationBarItem(
-        //     label: 'Home',
-        //     icon: Icon(Icons.home, size: 30),
-        //     /* title: Text('Home') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Share Location',
-        //     icon: Icon(Icons.place, size: 30),
-        //     /* title: Text('Inbox') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Friends',
-        //     icon: Icon(Icons.person_4, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Places',
-        //     icon: Icon(Icons.near_me, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'SOS',
-        //     icon: Icon(Icons.emergency_share, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Navigation',
-        //     icon: Icon(Icons.navigation, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        // ],
-
-        // selectedItemColor: Colors.cyan,
-        // elevation: 5.0,
-        // unselectedItemColor: Colors.cyan[800],
-        // backgroundColor: Colors.white,
+        selectedFontSize: 15,
 
       ),
 
@@ -240,6 +158,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+    );
+
+
+  }
+  @override
+  Widget splash(BuildContext context) {
+    return Material(
+      color: Colors.black,
+      child: Center(child: Image.asset('assets/Logo_Vertical.png')),
     );
   }
 }
