@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
-
+import 'navigation.dart';
 import 'main.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,53 +14,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-    initializeLocationAndSave();
-  }
-
-  void initializeLocationAndSave() async {
-    // Ensure all permissions are collected for Locations
-    Location _location = Location();
-    bool? _serviceEnabled;
-    PermissionStatus? _permissionGranted;
-
-    _serviceEnabled = await _location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await _location.requestService();
-    }
-
-    _permissionGranted = await _location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _location.requestPermission();
-    }
-
-    // Get capture the current user location
-    LocationData _locationData = await _location.getLocation();
-    latLng.LatLng currentLatLng =
-    latLng.LatLng(_locationData.latitude!, _locationData.longitude!);
-
-    // Store the user location in sharedPreferences
-    sharedPreferences.setDouble('latitude', _locationData.latitude!);
-    sharedPreferences.setDouble('longitude', _locationData.longitude!);
-
-    // Get and store the directions API response in sharedPreferences
-    // for (int i = 0; i < restaurants.length; i++) {
-    //   Map modifiedResponse = await getDirectionsAPIResponse(currentLatLng, i);
-    //   saveDirectionsAPIResponse(i, json.encode(modifiedResponse));
-    // }
-
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => MyHomePage()),
-            (route) => false);
-  }
-
   int selectedPage = 0;
 
   final _pageOptions = [
-    // Home(),
+    // MyHomePage(),
     // Navigation(),
     // ShareLocation()
     // SOSSHare()

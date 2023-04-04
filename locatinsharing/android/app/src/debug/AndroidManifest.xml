@@ -6,9 +6,9 @@
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
-<!--    &lt;!&ndash; Always include this permission &ndash;&gt;-->
-<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+    <!-- Always include this permission -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-<!--    &lt;!&ndash; Include only if your app benefits from precise location access. &ndash;&gt;-->
-<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <!-- Include only if your app benefits from precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>
