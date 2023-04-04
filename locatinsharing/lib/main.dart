@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'homepage.dart';
 import 'navigation.dart';
 import 'SOS.dart';
+import 'ShareLoc.dart';
 
 late SharedPreferences sharedPreferences;
 

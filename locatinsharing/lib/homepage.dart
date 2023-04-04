@@ -25,8 +25,9 @@ class _MyHomePageState extends State<MyHomePage> {
   
   final _pageOptions = [
     MyHomePage(),
-    // Navigation(),
-    // ShareLocation()
+    SOS(),
+    Navigation(),
+    ShareLocation()
     //Signin(),
     // ShareLocation()
     // SOSSOSSHare()
