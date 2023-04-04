@@ -12,8 +12,11 @@ children's whereabouts. Similar to this, relatives and friends can use location 
 activities.
 This application can also be used for navigation purposes, especially when traveling to unfamiliar places. By sharing their location, individuals can easily
 guide others to their destination or receive assistance from others when needed.
-
+This application suggests nearby places, such as restaurants, ATMs, hotels, hospitals, etc., to users.
+This application also has an emergency SOS feature that offers emergency service, allowing users to call for help quickly in case of an emergency. 
+This feature can be handy for individuals who engage in outdoor activities or work remotely.
 This application can be accessed through a variety of devices such as smartphones, tablets, and laptops.
+
 In general, these types of `location-sharing systems` have become more and more popular since they provide a path to stay connected and share their location with others.
 In summary, this android application allows individuals to share their real-time location with others. 
 These systems offer a range of benefits, including increased safety and security, navigation assistance. 
