@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
+import 'package:locatinsharing/Contacts.dart';
 //import 'package:flutter_dotenv/flutter_dotenv.dart';
 //import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,9 @@ import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 import 'homepage.dart';
 import 'main.dart';
+import 'Contacts.dart';
+import 'navigation.dart';
+import 'ShareLoc.dart';
 
 class SOS extends StatefulWidget {
   const SOS({super.key});
@@ -27,7 +31,10 @@ class _SOS extends State<SOS> {
     MyHomePage(),
     // Navigation(),
     // ShareLocation()
-    SOS()
+    SOS(),
+    Navigation(),
+    ShareLocation(),
+    Contacts(),
     // Friends()
     // NearMe()
   ];

@@ -40,11 +40,11 @@ class _MySplashScreenState extends State<MySplashScreen> {
 
             const SizedBox(height: 10,),
             const Text("Location Sharing App",
-            style : TextStyle(
-              fontSize: 20,
-              color : Colors.white,
-              fontWeight: FontWeight.bold
-            )
+              style : TextStyle(
+                fontSize: 20,
+                color : Colors.white,
+                fontWeight: FontWeight.bold
+              )
             )
           ],
         ),

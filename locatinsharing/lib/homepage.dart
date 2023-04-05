@@ -78,11 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
     SOS(),
     Navigation(),
     ShareLocation(),
-    //Signin(),
-    // ShareLocation()
-    // SOSSOSSHare()
-    // Friends()
-
     Contacts(),
 
     // NearMe()
@@ -220,10 +215,6 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'ShareLocation',
             backgroundColor: Colors.lightBlueAccent[200],
           ),
-
-
-
-
 
           BottomNavigationBarItem(
             icon: Icon(Icons.person_4, size: 30,),

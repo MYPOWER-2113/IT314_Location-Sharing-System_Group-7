@@ -8,7 +8,9 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 import 'homepage.dart';
 import 'main.dart';
-
+import 'navigation.dart';
+import 'SOS.dart';
+import 'ShareLoc.dart';
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -25,10 +27,10 @@ class _ContactsState extends State<Contacts> {
 
   final _pageOptions = [
     MyHomePage(),
-    //SOS(),
-    // Navigation(),
-    // ShareLocation()
-    Contacts()
+    SOS(),
+    Navigation(),
+    ShareLocation(),
+    Contacts(),
     // NearMe()
   ];
 

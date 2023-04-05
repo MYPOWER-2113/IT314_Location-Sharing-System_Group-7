@@ -13,6 +13,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import'package:locatinsharing/signin.dart';
 import 'homepage.dart';
 import 'main.dart';
+import 'Contacts.dart';
+import 'navigation.dart';
+import 'SOS.dart';
 
 class ShareLocation extends StatefulWidget {
   @override
@@ -27,18 +30,31 @@ class ShareMyLocation extends State<ShareLocation> {
     // initializeLocationAndSave();
   }
 
-  int selectedPage = 0;
+  int selectedPage = 3;
 
   final _pageOptions = [
-    // Home(),
-    // Navigation(),
-    // ShareLocation()
+    MyHomePage(),
+    SOS(),
+    Navigation(),
+    ShareLocation(),
+    Contacts(),
     // SOSSHare()
     // Friends()
     // NearMe()
   ];
 
-  int _currentIndex = 0;
+  int _currentIndex = 3;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => _pageOptions[index]),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +67,7 @@ class ShareMyLocation extends State<ShareLocation> {
 
       bottomNavigationBar: BottomNavigationBar(
 
-        onTap: (index){
-          setState(() {
-            selectedPage = index;
-          });
-        },
+        onTap: _onItemTapped,
 
         currentIndex: selectedPage,
 
@@ -66,6 +78,12 @@ class ShareMyLocation extends State<ShareLocation> {
             icon: Icon(Icons.home, size: 30,),
             label: 'Home',
             backgroundColor: Colors.lightBlueAccent[200],
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emergency_share, size: 30,),
+            label: 'SOS Share',
+            backgroundColor: Colors.lightGreenAccent[700],
           ),
 
 
@@ -83,11 +101,6 @@ class ShareMyLocation extends State<ShareLocation> {
           ),
 
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emergency_share, size: 30,),
-            label: 'SOS Share',
-            backgroundColor: Colors.lightGreenAccent[700],
-          ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.person_4, size: 30,),
