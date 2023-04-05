@@ -87,8 +87,6 @@ flutter:
     - images/
   #   - images/a_dot_ham.jpeg
     - assets/config/
-    - assets/icon/
-    - assets/image/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

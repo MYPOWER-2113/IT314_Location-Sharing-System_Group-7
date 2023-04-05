@@ -15,7 +15,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
   startTimer()
   {
     Timer(const Duration(seconds: 3), () async{
-        // send user to home screen
+      // send user to home screen
       Navigator.push(context, MaterialPageRoute(builder: (c) => Signin()));
     });
   }
@@ -36,15 +36,15 @@ class _MySplashScreenState extends State<MySplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("images/Logo_Vertical_White.png"),
+            Image.asset("images/Asset 5.png", width: 250, height: 250,),
 
             const SizedBox(height: 10,),
             const Text("Location Sharing App",
-              style : TextStyle(
-                fontSize: 20,
-                color : Colors.white,
-                fontWeight: FontWeight.bold
-              )
+                style : TextStyle(
+                    fontSize: 20,
+                    color : Colors.white,
+                    fontWeight: FontWeight.bold
+                )
             )
           ],
         ),
