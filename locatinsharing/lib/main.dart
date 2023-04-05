@@ -44,7 +44,7 @@ void main() async
       brightness: Brightness.dark,
       primaryColor: Colors.deepPurple,
     ),
-    home: const MySplashScreen(),
+    home:  ShareLocation(),
     debugShowCheckedModeBanner: false,
   )) );
 }
