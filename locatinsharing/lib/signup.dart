@@ -35,7 +35,7 @@ class _SignupState extends State<Signup> {
           children: [
             Positioned(
                 top: 0,
-                child: SvgPicture.asset('images/top.svg', width: 400, height: 150)),
+                child: SvgPicture.asset('images/Signin.png', width: 400, height: 150)),
             Container(
               alignment: Alignment.center,
               child: Form(

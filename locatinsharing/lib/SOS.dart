@@ -63,9 +63,10 @@ class _SOS extends State<SOS> {
       body: Align(
         alignment: Alignment.topCenter,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text("Switch on SOS messaging",style: TextStyle(
+            Text("SOS Messaging",style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
@@ -73,7 +74,7 @@ class _SOS extends State<SOS> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 20),
               child: LiteRollingSwitch(
                 value: false,
                 textOn: 'Yes',
