@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,6 +46,11 @@ class ShareMyLocation extends State<ShareLocation> {
 
   int _currentIndex = 3;
 
+  String? valueChoose;
+  List listItem = [
+    "Contact1","Contact2","Contact3","Contact4","Contact5"
+  ];
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -58,13 +64,7 @@ class ShareMyLocation extends State<ShareLocation> {
 
   @override
   Widget build(BuildContext context) {
-    String? valueChoose;
-    List listItem = [
-      "Contact1","Contact2","Contact3","Contact4","Contact5"
-    ];
-
     return Scaffold(
-
       bottomNavigationBar: BottomNavigationBar(
 
         onTap: _onItemTapped,
@@ -124,27 +124,26 @@ class ShareMyLocation extends State<ShareLocation> {
       ),
 
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 150,),
-            // Text("Signing", style: GoogleFonts.pacifico(fontWeight: FontWeight.bold, fontSize: 50, color: Colors.blue),
-            // ),
-            Padding(padding: EdgeInsets.all(16.0),
+            Padding(padding: EdgeInsets.all(16.10),
                 child: Padding(
                   padding: const EdgeInsets.all(180.0),
                   child: Container(
                     padding: EdgeInsets.only(left: 16,right: 16),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(22)
+                        borderRadius: BorderRadius.circular(12)
                     ),
                     child: DropdownButton(
+                      value: valueChoose,
                       hint: Text("Select Contact: "),
                       dropdownColor: Colors.grey,
                       icon: Icon(Icons.arrow_drop_down),
+                      elevation: 16,
                       iconSize: 40,
                       isExpanded: true,
                       underline: SizedBox(),
@@ -152,14 +151,13 @@ class ShareMyLocation extends State<ShareLocation> {
                           color: Colors.black,
                           fontSize: 22
                       ),
-                      value: valueChoose,
-                      onChanged: (newvalue){
+                      onChanged: (String? newvalue){
                         setState(() {
-                          valueChoose = newvalue as String?;
+                          valueChoose = newvalue! ;
                         });
                       },
                       items: listItem.map((valueItem) {
-                        return DropdownMenuItem(
+                        return DropdownMenuItem<String>(
                           value: valueItem,
                           child: Text(valueItem),
                         );
@@ -178,6 +176,15 @@ class ShareMyLocation extends State<ShareLocation> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))
                   ),
                   onPressed: (){
+                    Fluttertoast.showToast(
+                        msg: "Location Shared",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 2,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 30.0
+                    );
                   }, child: Text("Sent", style: TextStyle(color: Colors.white),)),
             )
           ],
