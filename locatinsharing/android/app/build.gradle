@@ -62,15 +62,20 @@ android {
     }
 }
 
+//configurations.all {
+//    resolutionStrategy {
+//        force 'com.mapbox.common:common:23.4.0'
+//    }
+//}
+
 flutter {
     source '../..'
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.mapbox.maps:android:10.12.1'
+//    implementation 'com.mapbox.maps:android:10.12.1'
 //    implementation ('com.mapbox.mapboxsdk:mapbox-android-core:5.0.0') {
-//        exclude group: 'com.mapbox.common', module: 'common'
+//        exclude group: 'com.mapbox.android.core.location', module: 'common'
 //    }
-
 }

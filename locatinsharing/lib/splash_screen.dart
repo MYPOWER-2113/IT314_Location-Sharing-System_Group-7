@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import'package:locatinsharing/signin.dart';
+import 'homepage.dart';
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
   {
     Timer(const Duration(seconds: 3), () async{
       // send user to home screen
-      Navigator.push(context, MaterialPageRoute(builder: (c) => Signin()));
+      Navigator.push(context, MaterialPageRoute(builder: (c) => MyHomePage()));
     });
   }
 

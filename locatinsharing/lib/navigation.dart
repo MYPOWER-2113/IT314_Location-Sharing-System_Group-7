@@ -24,72 +24,81 @@ class Navigation extends StatefulWidget {
 
 class _Navigation extends State<Navigation>{
 
-  // LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!);
-  // late CameraPosition _initialCameraPostion;
-  // late MapboxMapController controller;
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _initialCameraPostion = CameraPosition(target: ltlg,zoom: 15);
-  //   initializeLocationAndSave();
-  // }
-  //
-  // void initializeLocationAndSave() async {
-  //   // Ensure all permissions are collected for Locations
-  //   Location _location = Location();
-  //   bool? _serviceEnabled;
-  //   PermissionStatus? _permissionGranted;
-  //
-  //   _serviceEnabled = await _location.serviceEnabled();
-  //   if (!_serviceEnabled) {
-  //     _serviceEnabled = await _location.requestService();
-  //   }
-  //
-  //   _permissionGranted = await _location.hasPermission();
-  //   if (_permissionGranted == PermissionStatus.denied) {
-  //     _permissionGranted = await _location.requestPermission();
-  //   }
-  //
-  //   // Get capture the current user location
-  //   LocationData _locationData = await _location.getLocation();
-  //   LatLng currentLatLng = LatLng(_locationData.latitude!, _locationData.longitude!);
-  //
-  //   // Store the user location in sharedPreferences
-  //   sharedPreferences.setDouble('latitude', _locationData.latitude!);
-  //   sharedPreferences.setDouble('longitude', _locationData.longitude!);
-  //
-  //   //
-  //   //   // Get and store the directions API response in sharedPreferences
-  //   //   // for (int i = 0; i < restaurants.length; i++) {
-  //   //   //   Map modifiedResponse = await getDirectionsAPIResponse(currentLatLng, i);
-  //   //   //   saveDirectionsAPIResponse(i, json.encode(modifiedResponse));
-  //   //   // }
-  //   //
-  //   // Navigator.pushAndRemoveUntil(
-  //   //   context,
-  //   //   MaterialPageRoute(builder: (_) => MyHomePage()),
-  //   //   (route) => false
-  //   // );
-  // }
-  //
-  // _onMapCreated(MapboxMapController controller) async {
-  //   this.controller=controller;
-  //
-  // }
-  //
-  // _onStyleLoadedCallback() async {}
+  LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!);
+  late CameraPosition _initialCameraPostion;
+  late MapboxMapController controller;
 
+  @override
+  void initState() {
+    super.initState();
+    _initialCameraPostion = CameraPosition(target: ltlg,zoom: 15);
+    initializeLocationAndSave();
+  }
+
+  void initializeLocationAndSave() async {
+    // Ensure all permissions are collected for Locations
+    Location _location = new Location();
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    _location.getLocation();
+    _serviceEnabled = await _location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await _location.requestService();
+      if(!_serviceEnabled){
+        return;
+      }
+    }
+
+    _permissionGranted = await _location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await _location.requestPermission();
+      if(_permissionGranted != per.PermissionStatus.granted){
+        return;
+      }
+    }
+
+    // Get capture the current user location
+    LocationData _locationData = await _location.getLocation();
+
+    LatLng currentLatLng = LatLng( _locationData.latitude!, _locationData.longitude!);
+
+    // Store the user location in sharedPreferences
+    sharedPreferences.setDouble('latitude', _locationData.latitude!);
+    sharedPreferences.setDouble('longitude', _locationData.longitude!);
+    //
+    //   //
+    //   //   // Get and store the directions API response in sharedPreferences
+    //   //   // for (int i = 0; i < restaurants.length; i++) {
+    //   //   //   Map modifiedResponse = await getDirectionsAPIResponse(currentLatLng, i);
+    //   //   //   saveDirectionsAPIResponse(i, json.encode(modifiedResponse));
+    //   //   // }
+    //   //
+    //   // Navigator.pushAndRemoveUntil(
+    //   //   context,
+    //   //   MaterialPageRoute(builder: (_) => MyHomePage()),
+    //   //   (route) => false
+    //   // );
+    // }
+    //
+    // _onMapCreated(MapboxMapController controller) async {
+    //   this.controller=controller;
+    //
+    // }
+    //
+    // _onStyleLoadedCallback() async {}
+  }
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Navigation'),
+        // title: const Text('Navigation'),
+        title: Text('${ltlg.latitude},${ltlg.longitude}'),
+
       ),
       body: FlutterMap(
         options: MapOptions(
           center: ll.LatLng(23.2156, 72.6369),
-
+          // center: ll.LatLng(ltlg.latitude,ltlg.longitude),
           zoom: 11,
         ),
         nonRotatedChildren: [

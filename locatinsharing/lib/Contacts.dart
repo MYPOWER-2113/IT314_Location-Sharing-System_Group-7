@@ -52,18 +52,18 @@ class _ContactsState extends State<Contacts> {
   //contacts
   List<Contact> contacts = [];
 
-  @override
-  void initState() {
-    super.initState();
-    getAllContacts();
-  }
-
-  getAllContacts() async {
-    List<Contact> _contacts = (await ContactsService.getContacts()).toList();
-    setState(() {
-      contacts = _contacts;
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getAllContacts();
+  // }
+  //
+  // getAllContacts() async {
+  //   List<Contact> _contacts = (await ContactsService.getContacts()).toList();
+  //   setState(() {
+  //     contacts = _contacts;
+  //   });
+  // }
 
   @override
   // ignore: prefer_const_literals_to_create_immutables
@@ -79,21 +79,21 @@ class _ContactsState extends State<Contacts> {
             Text(
               'Contact List',
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: contacts.length,
-              itemBuilder: (context, index) {
-                Contact contact = contacts[index];
-                // return ListTile(
-                //   title: Text(contact.displayName),
-                //   subtitle: Text(
-                //       contact.phones
-                //           .elementAt(0)
-                //           .value
-                //   ),
-                // );
-              },
-            ),
+            // ListView.builder(
+            //   shrinkWrap: true,
+            //   itemCount: contacts.length,
+            //   itemBuilder: (context, index) {
+            //     Contact contact = contacts[index];
+            //     // return ListTile(
+            //     //   title: Text(contact.displayName),
+            //     //   subtitle: Text(
+            //     //       contact.phones
+            //     //           .elementAt(0)
+            //     //           .value
+            //     //   ),
+            //     // );
+            //   },
+            // ),
           ],
         ),
       ),
