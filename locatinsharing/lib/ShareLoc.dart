@@ -12,6 +12,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import'package:locatinsharing/signin.dart';
+import 'NearbyMe.dart';
 import 'homepage.dart';
 import 'main.dart';
 import 'Contacts.dart';
@@ -41,7 +42,7 @@ class ShareMyLocation extends State<ShareLocation> {
     Contacts(),
     // SOSSHare()
     // Friends()
-    // NearMe()
+    NearMe()
   ];
 
   int _currentIndex = 3;
@@ -173,7 +174,7 @@ class ShareMyLocation extends State<ShareLocation> {
                   style: TextButton.styleFrom(
                       primary: Colors.purpleAccent,
                       backgroundColor: Colors.blue, // Background Color
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))
                   ),
                   onPressed: (){
                     Fluttertoast.showToast(
@@ -185,7 +186,7 @@ class ShareMyLocation extends State<ShareLocation> {
                         textColor: Colors.white,
                         fontSize: 30.0
                     );
-                  }, child: Text("Sent", style: TextStyle(color: Colors.white),)),
+                  }, child: Text("SEND", style: TextStyle(color: Colors.white,fontSize: 25),)),
             )
           ],
         ),

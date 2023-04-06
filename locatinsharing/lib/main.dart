@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:locatinsharing/splash_screen.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:locatinsharing/signin.dart';
+import'package:locatinsharing/signin.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'homepage.dart';
 import 'navigation.dart';
 import 'SOS.dart';
 import 'ShareLoc.dart';
+import 'NearbyMe.dart';
 import 'Contacts.dart';
 
 
@@ -72,7 +75,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
     return KeyedSubtree(
         key: key,
         child: widget.child!);

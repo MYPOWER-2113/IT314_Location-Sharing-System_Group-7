@@ -8,21 +8,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 
+import 'homepage.dart';
 import 'navigation.dart';
 import 'SOS.dart';
 import 'ShareLoc.dart';
 import 'Contacts.dart';
-import 'NearbyMe.dart';
 import 'main.dart';
 
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class NearMe extends StatefulWidget {
+  const NearMe({Key? key}) : super(key: key);
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<NearMe> createState() => _NearMeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _NearMeState extends State<NearMe> {
 
   // @override
   // void initState() {
@@ -63,26 +63,28 @@ class _MyHomePageState extends State<MyHomePage> {
   //
   //   Navigator.pushAndRemoveUntil(
   //       context,
-  //       MaterialPageRoute(builder: (_) => MyHomePage()),
+  //       MaterialPageRoute(builder: (_) => NearMe()),
   //           (route) => false);
   // }
 
 
-  int selectedPage = 0;
+  int selectedPage = 5;
 
-  // MyHomePage(),
+  // NearMe(),
 
 
   final _pageOptions = [
+
     MyHomePage(),
     SOS(),
     Navigation(),
     ShareLocation(),
     Contacts(),
-    NearMe()
+    NearMe(),
+    // NearMe()
   ];
 
-  int _currentIndex = 0;
+  int _currentIndex = 5;
 
   void _onItemTapped(int index) {
     setState(() {

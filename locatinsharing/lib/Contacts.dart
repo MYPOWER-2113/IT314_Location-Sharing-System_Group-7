@@ -6,11 +6,14 @@ import 'package:latlong2/latlong.dart' as latLng;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
+
 import 'homepage.dart';
 import 'main.dart';
 import 'navigation.dart';
 import 'SOS.dart';
 import 'ShareLoc.dart';
+import 'NearbyMe.dart';
+
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -31,7 +34,7 @@ class _ContactsState extends State<Contacts> {
     Navigation(),
     ShareLocation(),
     Contacts(),
-    // NearMe()
+    NearMe()
   ];
 
   int _currentIndex = 4;
@@ -81,14 +84,14 @@ class _ContactsState extends State<Contacts> {
               itemCount: contacts.length,
               itemBuilder: (context, index) {
                 Contact contact = contacts[index];
-                return ListTile(
-                  title: Text(contact.displayName),
-                  subtitle: Text(
-                      contact.phones
-                          .elementAt(0)
-                          .value
-                  ),
-                );
+                // return ListTile(
+                //   title: Text(contact.displayName),
+                //   subtitle: Text(
+                //       contact.phones
+                //           .elementAt(0)
+                //           .value
+                //   ),
+                // );
               },
             ),
           ],
@@ -97,7 +100,7 @@ class _ContactsState extends State<Contacts> {
       bottomNavigationBar: BottomNavigationBar(
 
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.deepPurpleAccent,
         onTap: _onItemTapped,
 
         items: <BottomNavigationBarItem>[
@@ -149,6 +152,5 @@ class _ContactsState extends State<Contacts> {
     );
   }
 }
-
 
 

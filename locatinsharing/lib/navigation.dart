@@ -10,6 +10,10 @@ import 'package:mapbox_gl/mapbox_gl.dart' as mpgl;
 
 import 'homepage.dart';
 import 'main.dart';
+import 'Contacts.dart';
+import 'SOS.dart';
+import 'ShareLoc.dart';
+import 'NearbyMe.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);

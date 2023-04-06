@@ -16,6 +16,8 @@ import 'main.dart';
 import 'Contacts.dart';
 import 'navigation.dart';
 import 'ShareLoc.dart';
+import 'NearbyMe.dart';
+
 
 class SOS extends StatefulWidget {
   const SOS({super.key});
@@ -35,8 +37,8 @@ class _SOS extends State<SOS> {
     Navigation(),
     ShareLocation(),
     Contacts(),
-    // Friends()
-    // NearMe()
+    //Friends()
+    NearMe()
   ];
 
   int _currentIndex = 1;
@@ -63,10 +65,9 @@ class _SOS extends State<SOS> {
       body: Align(
         alignment: Alignment.topCenter,
         child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("SOS Messaging",style: TextStyle(
+            Text("SOS messaging",style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
@@ -74,7 +75,7 @@ class _SOS extends State<SOS> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 10),
               child: LiteRollingSwitch(
                 value: false,
                 textOn: 'Yes',
