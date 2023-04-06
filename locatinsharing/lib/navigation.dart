@@ -24,37 +24,30 @@ class Navigation extends StatefulWidget {
 
 class _Navigation extends State<Navigation>{
 
-  LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!);
-  late CameraPosition _initialCameraPostion;
-  late MapboxMapController controller;
 
   @override
   void initState() {
     super.initState();
-    _initialCameraPostion = CameraPosition(target: ltlg,zoom: 15);
+    // _initialCameraPostion = CameraPosition(target: ltlg,zoom: 15);
     initializeLocationAndSave();
+    _initialCameraPostion = CameraPosition(target: ltlg,zoom: 15);
+
   }
 
   void initializeLocationAndSave() async {
     // Ensure all permissions are collected for Locations
     Location _location = new Location();
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    _location.getLocation();
+    bool? _serviceEnabled;
+    PermissionStatus? _permissionGranted;
+
     _serviceEnabled = await _location.serviceEnabled();
     if (!_serviceEnabled) {
       _serviceEnabled = await _location.requestService();
-      if(!_serviceEnabled){
-        return;
-      }
     }
 
     _permissionGranted = await _location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await _location.requestPermission();
-      if(_permissionGranted != per.PermissionStatus.granted){
-        return;
-      }
     }
 
     // Get capture the current user location
@@ -65,41 +58,33 @@ class _Navigation extends State<Navigation>{
     // Store the user location in sharedPreferences
     sharedPreferences.setDouble('latitude', _locationData.latitude!);
     sharedPreferences.setDouble('longitude', _locationData.longitude!);
-    //
-    //   //
-    //   //   // Get and store the directions API response in sharedPreferences
-    //   //   // for (int i = 0; i < restaurants.length; i++) {
-    //   //   //   Map modifiedResponse = await getDirectionsAPIResponse(currentLatLng, i);
-    //   //   //   saveDirectionsAPIResponse(i, json.encode(modifiedResponse));
-    //   //   // }
-    //   //
-    //   // Navigator.pushAndRemoveUntil(
-    //   //   context,
-    //   //   MaterialPageRoute(builder: (_) => MyHomePage()),
-    //   //   (route) => false
-    //   // );
-    // }
-    //
-    // _onMapCreated(MapboxMapController controller) async {
-    //   this.controller=controller;
-    //
-    // }
-    //
-    // _onStyleLoadedCallback() async {}
+
+
   }
+
+  LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!);
+  late CameraPosition _initialCameraPostion;
+  late MapboxMapController controller;
+
+  _onMapCreated(MapboxMapController controller){
+    this.controller=controller;
+  }
+
+  _onStyleLoadedCallback(){}
+
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        // title: const Text('Navigation'),
-        title: Text('${ltlg.latitude},${ltlg.longitude}'),
-
+        title: const Text('Navigation'),
       ),
-      body: FlutterMap(
+
+      /*body: FlutterMap(
         options: MapOptions(
-          center: ll.LatLng(23.2156, 72.6369),
-          // center: ll.LatLng(ltlg.latitude,ltlg.longitude),
-          zoom: 11,
+          // center: ll.LatLng(23.2156, 72.6369),
+          center: ll.LatLng(ltlg.latitude,ltlg.longitude),
+          zoom: 16,
         ),
         nonRotatedChildren: [
           AttributionWidget.defaultWidget(
@@ -117,13 +102,32 @@ class _Navigation extends State<Navigation>{
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: (){
-      //     controller.animateCamera(
-      //         CameraUpdate.newCameraPosition(_initialCameraPostion));
-      //   },
-      //   child: const Icon(Icons.my_location),
-      // ),
+      */
+
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height*0.8,
+              child: MapboxMap(
+                accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                initialCameraPosition: _initialCameraPostion,
+                onMapCreated: _onMapCreated,
+                onStyleLoadedCallback: _onStyleLoadedCallback,
+                myLocationEnabled: true,
+                myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+              ),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPostion));
+        },
+        child: const Icon(Icons.my_location),
+      ),
     );
   }
 }
