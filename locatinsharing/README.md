@@ -27,22 +27,15 @@ MongoDB is a NoSQL database that can handle large volumes of geospatial data. It
 
 ## Implementation:
 
-1. When you’re creating an app, you might want to create a login function. We have use Flutter as the app, Node.js as a backend, and at least MongoDB for storing user info.
-
-2. Map API is loaded in the database. Mongodb is connected to Node.js server. And then it is loaded from MongoDB using Node.js when signed in.
-
-3. Now sign in and sign up page are implemented in flutter.
-
-4. When the app is launched, it will show a splash screen and then Signin page is displayed. Splash screen is to be merged with login page. A splash screen is a graphical control element consisting of a window containing an image, a logo, and the current version of the software.
-
-5. When signed in, it will display the basic map structure. So, Login page is merged with map homepage.
-
-6. Some functionalities are to be implemeneted in map home page. These are represented using buttons.
-
-- Navigation
-- SOS
-- ShareLiveLocation
-- Contacts
-- Friends
-
-7. Map homepage is merged with all these functionalities.
+  1. When you’re creating an app, you might want to create a login function. We have use Flutter as the app, Node.js as a backend, and at least MongoDB for storing user info.
+  2. Map API is loaded in the database. Mongodb is connected to Node.js server. And then it is loaded from MongoDB using Node.js when signed in.
+  3. Now sign in and sign up page are implemented in flutter.
+  4. When the app is launched, it will show a splash screen and then Signin page is displayed. Splash screen is to be merged with login page. A splash screen is a graphical control element consisting of a window containing an image, a logo, and the current version of the software.
+  5. When signed in, it will display the basic map structure. So, Login page is merged with map homepage.
+  6. Some functionalities are to be implemeneted in map home page. These are represented using buttons.
+     - Navigation
+     - SOS
+     - ShareLiveLocation
+     - Contacts
+     - Friends
+  7. Map homepage is merged with all these functionalities.
