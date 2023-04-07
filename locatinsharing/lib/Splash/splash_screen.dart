@@ -5,9 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 import 'package:flutter/material.dart';
-import'package:locatinsharing/signin.dart';
-import 'homepage.dart';
-import 'main.dart';
+import 'package:locatinsharing/Signin_Signup/signin.dart';
+import 'package:locatinsharing/homepage.dart';
+import 'package:locatinsharing/main.dart';
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({Key? key}) : super(key: key);
@@ -38,17 +38,13 @@ class _MySplashScreenState extends State<MySplashScreen> {
     if (!_serviceEnabled) {
       _serviceEnabled = await _location.requestService();
     }
-
     _permissionGranted = await _location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await _location.requestPermission();
     }
-
     // Get capture the current user location
     LocationData _locationData = await _location.getLocation();
-
     LatLng currentLatLng = LatLng( _locationData.latitude!, _locationData.longitude!);
-
     // Store the user location in sharedPreferences
     sharedPreferences.setDouble('latitude', _locationData.latitude!);
     sharedPreferences.setDouble('longitude', _locationData.longitude!);

@@ -5,9 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
-import 'package:locatinsharing/signup.dart';
-import 'homepage.dart';
+import 'package:locatinsharing/homepage.dart';
+import 'package:locatinsharing/main.dart';
+import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/SOS/SOS.dart';
+import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
+import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import 'user.dart';
+import 'package:locatinsharing/Signin_Signup/signup.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);

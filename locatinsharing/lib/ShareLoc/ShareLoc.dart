@@ -11,13 +11,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import'package:locatinsharing/signin.dart';
-import 'NearbyMe.dart';
-import 'homepage.dart';
-import 'main.dart';
-import 'Contacts.dart';
-import 'navigation.dart';
-import 'SOS.dart';
+
+import 'package:locatinsharing/homepage.dart';
+import 'package:locatinsharing/main.dart';
+import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/SOS/SOS.dart';
+import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
+import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
+import 'package:locatinsharing/FriendFamily/Contacts.dart';
+
 
 class ShareLocation extends StatefulWidget {
   @override

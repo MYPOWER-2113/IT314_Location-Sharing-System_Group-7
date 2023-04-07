@@ -2,18 +2,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-import 'package:locatinsharing/signin.dart';
+
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 
-import 'homepage.dart';
-import 'navigation.dart';
-import 'SOS.dart';
-import 'ShareLoc.dart';
-import 'Contacts.dart';
-import 'main.dart';
+import 'package:locatinsharing/homepage.dart';
+import 'package:locatinsharing/main.dart';
+import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/SOS/SOS.dart';
+import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
+import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
+import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
 
 class NearMe extends StatefulWidget {

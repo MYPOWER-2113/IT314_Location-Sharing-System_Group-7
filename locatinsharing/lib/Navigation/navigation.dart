@@ -8,12 +8,13 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 import 'package:mapbox_gl/mapbox_gl.dart' as mpgl;
 
-import 'homepage.dart';
-import 'main.dart';
-import 'Contacts.dart';
-import 'SOS.dart';
-import 'ShareLoc.dart';
-import 'NearbyMe.dart';
+import 'package:locatinsharing/homepage.dart';
+import 'package:locatinsharing/main.dart';
+import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/SOS/SOS.dart';
+import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
+import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
+import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -37,8 +38,8 @@ class _Navigation extends State<Navigation>{
   void initializeLocationAndSave() async {
     // Ensure all permissions are collected for Locations
     Location _location = new Location();
-    bool? _serviceEnabled;
-    PermissionStatus? _permissionGranted;
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
 
     _serviceEnabled = await _location.serviceEnabled();
     if (!_serviceEnabled) {

@@ -2,18 +2,20 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-import 'package:locatinsharing/signin.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 
-import 'navigation.dart';
-import 'SOS.dart';
-import 'ShareLoc.dart';
-import 'Contacts.dart';
-import 'NearbyMe.dart';
-import 'main.dart';
+import 'homepage.dart';
+import 'Navigation/navigation.dart';
+import 'SOS/SOS.dart';
+import 'ShareLoc/ShareLoc.dart';
+import 'NearbyMe/NearbyMe.dart';
+import 'FriendFamily/Contacts.dart';
+import 'Splash/splash_screen.dart';
+import 'Signin_Signup/signin.dart';
+import 'Signin_Signup/signup.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -78,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SOS(),
     Navigation(),
     ShareLocation(),
-    Contacts(),
+    //Contacts(),
     NearMe()
   ];
 

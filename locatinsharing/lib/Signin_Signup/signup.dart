@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
-import 'package:locatinsharing/signin.dart';
+import 'package:locatinsharing/Signin_Signup/signin.dart';
 import 'user.dart';
 
 class Signup extends StatefulWidget {

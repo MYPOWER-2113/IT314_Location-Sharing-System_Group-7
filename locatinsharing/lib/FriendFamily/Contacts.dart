@@ -1,47 +1,43 @@
-import 'package:flutter/cupertino.dart';
+// import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart' as ll;
-import 'package:locatinsharing/Contacts.dart';
-//import 'package:flutter_dotenv/flutter_dotenv.dart';
-//import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:latlong2/latlong.dart' as latLng;
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
-//import 'package:mapbox_gl/mapbox_gl.dart' as mpgl;
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
-import 'homepage.dart';
-import 'main.dart';
-import 'Contacts.dart';
-import 'navigation.dart';
-import 'ShareLoc.dart';
-import 'NearbyMe.dart';
+import 'package:locatinsharing/homepage.dart';
+import 'package:locatinsharing/main.dart';
+import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/SOS/SOS.dart';
+import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
+import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 
 
-class SOS extends StatefulWidget {
-  const SOS({super.key});
+class Contacts extends StatefulWidget {
+  const Contacts({Key? key}) : super(key: key);
+
   @override
-  State<SOS> createState() => _SOS();
+  State<Contacts> createState() => _ContactsState();
 }
 
-class _SOS extends State<SOS> {
+class _ContactsState extends State<Contacts> {
 
-  int selectedPage = 1;
+  //navigation bar
+
+  int selectedPage = 4;
 
   final _pageOptions = [
     MyHomePage(),
-    // Navigation(),
-    // ShareLocation()
     SOS(),
     Navigation(),
     ShareLocation(),
     Contacts(),
-    //Friends()
     NearMe()
   ];
 
-  int _currentIndex = 1;
+  int _currentIndex = 4;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -53,54 +49,52 @@ class _SOS extends State<SOS> {
     );
   }
 
+  //contacts
+  // List<Contact> contacts = [];
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getAllContacts();
+  // }
+  //
+  // getAllContacts() async {
+  //   List<Contact> _contacts = (await ContactsService.getContacts()).toList();
+  //   setState(() {
+  //     contacts = _contacts;
+  //   });
+  // }
+
   @override
+  // ignore: prefer_const_literals_to_create_immutables
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.black,
-        title: Text('Emergency SOS Messaging'),
+        title: Text("Contacts"),
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
+      body: Container(
+        padding: EdgeInsets.all(20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("SOS messaging",style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
+            Text(
+              'Contact List',
             ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: LiteRollingSwitch(
-                value: false,
-                textOn: 'Yes',
-                textOff: 'No',
-                colorOn: Colors.greenAccent,
-                colorOff: Colors.redAccent,
-                iconOn: Icons.check,
-                iconOff: Icons.power_settings_new,
-                animationDuration: Duration(milliseconds: 400),
-                onChanged: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
-                },
-                onTap: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
-                },
-                onDoubleTap: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
-                },
-                onSwipe: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
-                },
-              ),
-            )
+            // ListView.builder(
+            //   shrinkWrap: true,
+            //   itemCount: contacts.length,
+            //   itemBuilder: (context, index) {
+            //     Contact contact = contacts[index];
+            //     // return ListTile(
+            //     //   title: Text(contact.displayName),
+            //     //   subtitle: Text(
+            //     //       contact.phones
+            //     //           .elementAt(0)
+            //     //           .value
+            //     //   ),
+            //     // );
+            //   },
+            // ),
           ],
-
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -154,8 +148,9 @@ class _SOS extends State<SOS> {
         ],
 
         elevation: 50,
-
       ),
     );
   }
 }
+
+
