@@ -1,12 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart' as ll;
+// import 'package:latlong2/latlong.dart' as latlng;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:locatinsharing/Navigation/directions_handler.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
-import 'package:mapbox_gl/mapbox_gl.dart' as mpgl;
 
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
@@ -15,6 +17,7 @@ import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
+
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -25,21 +28,32 @@ class Navigation extends StatefulWidget {
 
 class _Navigation extends State<Navigation>{
 
+  late LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!) ;
+  late CameraPosition _initialCameraPostion;
+  late MapboxMapController controller;
+  late CameraPosition dest=CameraPosition(target: LatLng(72.63394,23.196299),zoom: 15);
+  // late Map _data;
 
   @override
   void initState() {
     super.initState();
-    // _initialCameraPostion = CameraPosition(target: ltlg,zoom: 15);
+
     initializeLocationAndSave();
     _initialCameraPostion = CameraPosition(target: ltlg,zoom: 15);
+    // Map response = json.decode(sharedPreferences.getString('destination')!);
+    // num distance = response['distance']/1000;
+    // num duration = response['duration']/60;
 
+    dest=CameraPosition(target: LatLng(23.196299,72.63394),zoom: 15);
+
+    // Initialize map symbols
   }
 
   void initializeLocationAndSave() async {
     // Ensure all permissions are collected for Locations
-    Location _location = new Location();
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    Location _location = Location();
+    bool? _serviceEnabled;
+    PermissionStatus? _permissionGranted;
 
     _serviceEnabled = await _location.serviceEnabled();
     if (!_serviceEnabled) {
@@ -60,19 +74,72 @@ class _Navigation extends State<Navigation>{
     sharedPreferences.setDouble('latitude', _locationData.latitude!);
     sharedPreferences.setDouble('longitude', _locationData.longitude!);
 
+    // Get and store the directions API repsonse in sharedPreferences
+    // print("${currentLatLng.latitude},${currentLatLng.longitude}");
+    Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng);
+    saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
 
   }
 
-  LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!);
-  late CameraPosition _initialCameraPostion;
-  late MapboxMapController controller;
 
-  _onMapCreated(MapboxMapController controller){
+  _addSourceAndLineLayer() async {
+  //  Can animate camera to focus on items
+    controller.animateCamera(CameraUpdate.newCameraPosition(dest));
+
+  //  add a polyline between source and Destination
+    late String? key;
+    key=sharedPreferences.getString('destiny')!;
+    Map resp = json.decode(key);
+    Map geometry = resp['geometry'];
+  //   Map geometry = getGeometryFromSharedPrefs("destiny");
+    final _fills = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": 0,
+          "properties": <String,dynamic>{},
+          "geometry": geometry,
+        },
+      ]
+    };
+
+  //  Remove linelayer and source if it exists
+  //   if(removeLayer==true){
+  //     await controller.removeLayer("lines");
+  //     await controller.removeSource("fills");
+  //   }
+
+  //  add new source and linelayer
+    await controller.addSource("fills", GeojsonSourceProperties(data: _fills));
+    await controller.addLineLayer(
+      "fills",
+      "lines",
+      LineLayerProperties(
+        lineColor: Colors.blue.toHexStringRGB(),
+        lineCap: "round",
+        lineJoin: "round",
+        lineWidth: 4,
+      ),
+    );
+  }
+
+  _onMapCreated(MapboxMapController controller) async {
     this.controller=controller;
   }
 
-  _onStyleLoadedCallback(){}
+  _onStyleLoadedCallback() async {
+    late CameraPosition des=dest;
+    await controller.addSymbol(
+      SymbolOptions(
+        geometry: des.target,
+        iconSize: 0.1,
+        iconImage: "images/Variety-fruits-vegetables.png",
+      ),
+    ) ;
 
+    _addSourceAndLineLayer();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -80,30 +147,6 @@ class _Navigation extends State<Navigation>{
       appBar: AppBar(
         title: const Text('Navigation'),
       ),
-
-      /*body: FlutterMap(
-        options: MapOptions(
-          // center: ll.LatLng(23.2156, 72.6369),
-          center: ll.LatLng(ltlg.latitude,ltlg.longitude),
-          zoom: 16,
-        ),
-        nonRotatedChildren: [
-          AttributionWidget.defaultWidget(
-            source: 'OpenStreetMap contributors',
-            onSourceTapped: null,
-          ),
-        ],
-        children: [
-          TileLayer(
-            urlTemplate: 'https://api.mapbox.com/styles/v1/ronitjain04/clfxzfjit000301qflgwwr3ip/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm9uaXRqYWluMDQiLCJhIjoiY2xmeHdsdGt1MHY5ajNpczZwZ2gzZ2U3YiJ9.4YWhnln8WAvbrzSEKYf_Jg',
-            additionalOptions: {
-              'accessToken': 'pk.eyJ1Ijoicm9uaXRqYWluMDQiLCJhIjoiY2xmeHdsdGt1MHY5ajNpczZwZ2gzZ2U3YiJ9.4YWhnln8WAvbrzSEKYf_Jg',
-              'id': 'mapbox.mapbox-streets-v8'
-            },
-          ),
-        ],
-      ),
-      */
 
       body: SafeArea(
         child: Stack(
@@ -117,7 +160,9 @@ class _Navigation extends State<Navigation>{
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 myLocationEnabled: true,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                compassEnabled: true,
+
               ),
             )
           ],
