@@ -108,26 +108,20 @@ class _NearMeState extends State<NearMe> {
           onPressed: () {},
         ),
 
-        title: Text("LocSS"),
+        title: Text("Near Me"),
 
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.notifications_none, size: 30,),
             onPressed: () {},
           ),
-
-          // IconButton(
-          //   icon: Icon(Icons.search),
-          //   onPressed: () {},
-          // )
-
         ],
 
         //backgroundColor: Colors.cyan,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.lightGreenAccent, Colors.lightBlueAccent],
+              colors: [Colors.purple.shade300, Colors.greenAccent.shade200],
               begin: Alignment.bottomRight,
               end: Alignment.topLeft,
             ),
@@ -135,152 +129,51 @@ class _NearMeState extends State<NearMe> {
         ),
       ),
 
-
       bottomNavigationBar: BottomNavigationBar(
-        // bottomNavigationBar: Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   children: [
-        //     IconButton(
-        //       icon: const Icon(Icons.home, size: 30),
-        //       onPressed: () {
-        //         //write your script
-        //       },
-        //     ),
-        //
-        //     IconButton(
-        //       icon: const Icon(Icons.emergency_share, size: 30),
-        //       onPressed: () {
-        //         //write your script
-        //       },
-        //     ),
-        //
-        //     IconButton(
-        //       icon: const Icon(Icons.navigation, size: 30),
-        //       onPressed: () {
-        //         //write your script
-        //       },
-        //     ),
-        //
-        //     IconButton(
-        //       icon: const Icon(Icons.contact_phone_rounded, size: 30),
-        //       onPressed: () {
-        //         //write your script
-        //       },
-        //     ),
-        //
-        //     IconButton(
-        //       icon: const Icon(Icons.near_me, size: 30),
-        //       onPressed: () {
-        //         //write your script
-        //       },
-        //     ),
-        //
-        //     IconButton(
-        //       icon: const Icon(Icons.location_on, size: 30,),
-        //       onPressed: () {
-        //         //write your script
-        //       },
-        //     ),
-        //   ],
-        //   // This trailing comma makes auto-formatting nicer for build methods.
-        // ),
-
-
-
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.deepPurpleAccent,
+        selectedItemColor: Colors.purple[900],
         onTap: _onItemTapped,
 
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home, size: 30,),
             label: 'Home',
-            backgroundColor: Colors.lightBlueAccent[200],
+            backgroundColor: Colors.teal[300],
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.emergency_share, size: 30,),
             label: 'SOS Share',
-            backgroundColor: Colors.lightGreenAccent[700],
+            backgroundColor: Colors.purple[300],
           ),
-
 
           BottomNavigationBarItem(
             icon: Icon(Icons.navigation, size: 30,),
             label: 'Navigation',
-            backgroundColor: Colors.lightGreenAccent[700],
+            backgroundColor: Colors.teal[300],
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.share_location_sharp, size: 30,),
             label: 'ShareLocation',
-            backgroundColor: Colors.lightBlueAccent[200],
+            backgroundColor: Colors.purple[300],
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.person_4, size: 30,),
             label: 'Contacts',
-            backgroundColor: Colors.lightBlueAccent[200],
+            backgroundColor: Colors.teal[300],
           ),
-
 
           BottomNavigationBarItem(
             icon: Icon(Icons.near_me_rounded, size: 30,),
             label: 'Near Me',
-            backgroundColor: Colors.lightGreenAccent[700],
+            backgroundColor: Colors.purple[300],
           ),
-
         ],
 
         elevation: 50,
         selectedFontSize: 15,
-
-
-        // items: const [
-        //   BottomNavigationBarItem(
-        //     label: 'Home',
-        //     icon: Icon(Icons.home, size: 30),
-        //     /* title: Text('Home') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Share Location',
-        //     icon: Icon(Icons.place, size: 30),
-        //     /* title: Text('Inbox') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Friends',
-        //     icon: Icon(Icons.person_4, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Places',
-        //     icon: Icon(Icons.near_me, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'SOS',
-        //     icon: Icon(Icons.emergency_share, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        //
-        //   BottomNavigationBarItem(
-        //     label: 'Navigation',
-        //     icon: Icon(Icons.navigation, size: 30),
-        //     /* title: Text('Account') */
-        //   ),
-        // ],
-
-        // selectedItemColor: Colors.cyan,
-        // elevation: 5.0,
-        // unselectedItemColor: Colors.cyan[800],
-        // backgroundColor: Colors.white,
-
-
       ),
 
 

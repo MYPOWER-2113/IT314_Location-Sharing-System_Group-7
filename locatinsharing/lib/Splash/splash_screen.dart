@@ -96,9 +96,9 @@ class _MySplashScreenState extends State<MySplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("images/Asset 5.png", width: 250, height: 250,),
+            Image.asset("images/Logo_Horizontal_Black.png", width: 500, height: 200,),
 
-            const SizedBox(height: 10,),
+            const SizedBox(height: 80,),
             const Text("Location Sharing App",
                 style : TextStyle(
                     fontSize: 20,

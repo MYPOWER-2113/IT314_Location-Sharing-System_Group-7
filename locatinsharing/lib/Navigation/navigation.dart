@@ -141,39 +141,158 @@ class _Navigation extends State<Navigation>{
     _addSourceAndLineLayer();
   }
 
+  int selectedPage = 0;
+
+  final _pageOptions = [
+    MyHomePage(),
+    SOS(),
+    Navigation(),
+    ShareLocation(),
+    Contacts(),
+    NearMe()
+  ];
+
+  int _currentIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => _pageOptions[index]),
+    );
+  }
+
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Navigation'),
-      ),
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
 
-      body: SafeArea(
-        child: Stack(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height*0.8,
-              child: MapboxMap(
-                accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-                initialCameraPosition: _initialCameraPostion,
-                onMapCreated: _onMapCreated,
-                onStyleLoadedCallback: _onStyleLoadedCallback,
-                myLocationEnabled: true,
-                myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
-                compassEnabled: true,
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {},
+            ),
 
+            title: Text("LocSS"),
+
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.notifications_none, size: 30,),
+                onPressed: () {},
               ),
-            )
-          ],
+            ],
+
+            //backgroundColor: Colors.cyan,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.purple.shade300, Colors.greenAccent.shade200],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                ),
+              ),
+            ),
+          ),
+
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            selectedItemColor: Colors.teal[900],
+            onTap: _onItemTapped,
+
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home, size: 30,),
+                label: 'Home',
+                backgroundColor: Colors.teal[300],
+              ),
+
+              BottomNavigationBarItem(
+                icon: Icon(Icons.emergency_share, size: 30,),
+                label: 'SOS Share',
+                backgroundColor: Colors.purple[300],
+              ),
+
+              BottomNavigationBarItem(
+                icon: Icon(Icons.navigation, size: 30,),
+                label: 'Navigation',
+                backgroundColor: Colors.teal[300],
+              ),
+
+              BottomNavigationBarItem(
+                icon: Icon(Icons.share_location_sharp, size: 30,),
+                label: 'ShareLocation',
+                backgroundColor: Colors.purple[300],
+              ),
+
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_4, size: 30,),
+                label: 'Contacts',
+                backgroundColor: Colors.teal[300],
+              ),
+
+              BottomNavigationBarItem(
+                icon: Icon(Icons.near_me_rounded, size: 30,),
+                label: 'Near Me',
+                backgroundColor: Colors.purple[300],
+              ),
+            ],
+
+            elevation: 50,
+            selectedFontSize: 15,
+          ),
+
+          body: SafeArea(
+            child: Stack(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.8,
+                  child: MapboxMap(
+                    accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                    initialCameraPosition: _initialCameraPostion,
+                    onMapCreated: _onMapCreated,
+                    onStyleLoadedCallback: _onStyleLoadedCallback,
+                    myLocationEnabled: true,
+                    myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                    // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                    compassEnabled: true,
+
+                  ),
+                )
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){
+              controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPostion));
+            },
+            child: const Icon(Icons.my_location),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPostion));
-        },
-        child: const Icon(Icons.my_location),
-      ),
+
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical:100.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Card(
+                child: TextField(
+                  decoration: InputDecoration(
+
+                    contentPadding: EdgeInsets.all(16.0),
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+
+      ],
     );
   }
 }
