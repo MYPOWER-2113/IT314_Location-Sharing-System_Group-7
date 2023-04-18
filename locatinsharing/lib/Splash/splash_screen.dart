@@ -98,14 +98,14 @@ class _MySplashScreenState extends State<MySplashScreen> {
           children: [
             Image.asset("images/Logo_Horizontal_Black.png", width: 500, height: 200,),
 
-            const SizedBox(height: 80,),
-            const Text("Location Sharing App",
-                style : TextStyle(
-                    fontSize: 20,
-                    color : Colors.white,
-                    fontWeight: FontWeight.bold
-                )
-            )
+            // const SizedBox(height: 80,),
+            // const Text("Location Sharing App",
+            //     style : TextStyle(
+            //         fontSize: 20,
+            //         color : Colors.white,
+            //         fontWeight: FontWeight.bold
+            //     )
+            // )
           ],
         ),
       ),

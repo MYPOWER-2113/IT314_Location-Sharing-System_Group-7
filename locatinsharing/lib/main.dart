@@ -70,9 +70,11 @@ void main() async
           brightness: Brightness.dark,
           primaryColor: Colors.deepPurple,
         ),
-    home: MySplashScreen(),
-    debugShowCheckedModeBanner: false,
-  )) );
+        home: MySplashScreen(),
+        debugShowCheckedModeBanner: false,
+      )
+    )
+  );
 }
 
 class MyApp extends StatefulWidget {

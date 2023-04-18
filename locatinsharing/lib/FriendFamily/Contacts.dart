@@ -90,7 +90,7 @@ class _ContactsState extends State<Contacts> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.purple.shade300, Colors.greenAccent.shade200],
+              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
               begin: Alignment.bottomRight,
               end: Alignment.topLeft,
             ),
@@ -107,37 +107,37 @@ class _ContactsState extends State<Contacts> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home, size: 30,),
             label: 'Home',
-            backgroundColor: Colors.teal[300],
+            backgroundColor: Colors.greenAccent.shade200,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.emergency_share, size: 30,),
             label: 'SOS Share',
-            backgroundColor: Colors.purple[300],
+            backgroundColor: Colors.blueAccent.shade100,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.navigation, size: 30,),
             label: 'Navigation',
-            backgroundColor: Colors.teal[300],
+            backgroundColor: Colors.greenAccent.shade200,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.share_location_sharp, size: 30,),
             label: 'ShareLocation',
-            backgroundColor: Colors.purple[300],
+            backgroundColor: Colors.blueAccent.shade100,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.person_4, size: 30,),
             label: 'Contacts',
-            backgroundColor: Colors.teal[300],
+            backgroundColor: Colors.greenAccent.shade200,
           ),
 
           BottomNavigationBarItem(
             icon: Icon(Icons.near_me_rounded, size: 30,),
             label: 'Near Me',
-            backgroundColor: Colors.purple[300],
+            backgroundColor: Colors.blueAccent.shade100,
           ),
         ],
 
