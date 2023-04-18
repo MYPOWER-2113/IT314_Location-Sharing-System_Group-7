@@ -1,7 +1,7 @@
 const express = require('express')
 const User = require('../models/user.model')
 const router = express.Router()
-
+const jwt = require("jsonwebtoken")
 
 router.post('/signup',async(req,res)=>{
     const {email,password} = req.body;
@@ -10,7 +10,7 @@ router.post('/signup',async(req,res)=>{
 
     if(await User.findOne({email}))
     {
-      res.json({
+      res.status(400).json({
                 message:'Email is already registered'
             })   
     }
@@ -24,23 +24,31 @@ router.post('/signup',async(req,res)=>{
     }
     
   } catch (e) {
-    res.status(422).json(e);
+    res.status(500).json({error : e.message});
   }
     
 })
 
 
 router.post('/signin', async(req,res)=>{
-  const {email,password} = req.body;
+  try{const {email,password} = req.body;
   const userDoc = await User.findOne({email});
+
   if (userDoc) {
     if (password == userDoc.password) {
-      res.json(userDoc)
-    } else {
-      res.status(422).json('pass not ok');
+        const token = jwt.sign({id:userDoc._id}, "passwordKey");
+        res.json({token, ...userDoc._doc})
+    } 
+    else {
+      res.status(400).json({msg : "Password is Wrong"});
     }
-  } else {
-    res.json('not found');
+  } 
+  else {
+     return res.status(400).json({msg : "User with this email does not exist !"});
+  }}
+  catch(e)
+  {
+    res.status(500).json({error : e.message});
   }
 })
 module.exports = router

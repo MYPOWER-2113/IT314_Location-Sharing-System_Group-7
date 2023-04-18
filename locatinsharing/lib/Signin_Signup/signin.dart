@@ -11,8 +11,10 @@ import 'package:locatinsharing/Navigation/navigation.dart';
 import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
+import 'auth.dart';
 import 'user.dart';
 import 'package:locatinsharing/Signin_Signup/signup.dart';
+import 'package:locatinsharing/Signin_Signup/custom_textfield.dart';
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
@@ -24,21 +26,31 @@ class Signin extends StatefulWidget {
 class _SigninState extends State<Signin> {
   final _formKey = GlobalKey<FormState>();
 
-  Future save() async{
-    var res = await http.post(
-      Uri.parse("http://localhost:8080/signin"),headers: <String,String>{'Context-Type':'application/jason;charSet=UTF-8'},
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthService authService = AuthService();
 
-      body: <String,String>{
-        'email': user.email,
-        'password':user.password
-      }
+  void signinUser() {
+    authService.signInUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
     );
-
-    print(res.body);
-    Navigator.push(context, new MaterialPageRoute(builder: (context)=>MyHomePage()));
   }
+  // Future save() async{
+  //   var res = await http.post(
+  //     Uri.parse("http://10.200.8.251:8080/signin"),headers: <String,String>{'Context-Type':'application/jason;charSet=UTF-8'},
+  //
+  //     body: <String,String>{
+  //       'email': user.email,
+  //       'password':user.password
+  //     }
+  //   );
+  //   print(res.body);
+  //   Navigator.push(context, new MaterialPageRoute(builder: (context)=>MyHomePage()));
+  // }
 
-  User user = User('', '');
+  //User user = User('', '');
 
   @override
   Widget build(BuildContext context) {
@@ -72,133 +84,38 @@ class _SigninState extends State<Signin> {
                   // ),
 
                   const SizedBox(height: 235,),
-
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: TextFormField(
-                      controller: TextEditingController(text: user.email),
-                      onChanged: (value){
-                        user.email = value;
-                      },
-                      validator: (value){
-                        if(value!.isEmpty){
-                          return 'Email field can\'t be empty';
-                        }
-
-                        else  if(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value)){
-                          return null;
-                        }
-
-                        else{
-                          return 'Enter valid email';
-                        }
-                      },
-
-                      decoration: InputDecoration(
-                        fillColor: Colors.grey.shade50,
-                        filled: true,
-                        hintText: 'Email',
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide(color: Colors.blue)
-                        ),
-
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: Colors.blue)
-                        ),
-
-                        errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: Colors.red)
-                        ),
-
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: Colors.red)
-                        ),
-                      ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomTextField(
+                      controller: emailController,
+                      hintText: 'Enter your email',
                     ),
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-
-                    child: TextFormField(
-                      controller: TextEditingController(text: user.password),
-                      onChanged: (value){
-                        user.password = value;
-                      },
-
-                      validator: (value){
-                        if(value!.isEmpty){
-                          return 'Password field can\'t be empty';
-                        }
-
-                        else{
-                          return null;
-                        }
-                      },
-
-                      decoration: InputDecoration(
-
-                        fillColor: Colors.grey.shade50,
-                        filled: true,
-
-                        hintText: 'Password',
-
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: Colors.blue)
-                        ),
-
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: Colors.blue)
-                        ),
-
-                        errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: Colors.red)
-                        ),
-
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: Colors.red)
-                        ),
-                      ),
+                  const SizedBox(height: 40),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomTextField(
+                      controller: passwordController,
+                      hintText: 'Enter your password',
                     ),
                   ),
 
-                  Padding(padding: EdgeInsets.all(16.0),
-
-                    child: Container(
-                      height: 40,
-                      width: 400,
-                      child: TextButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.purpleAccent,
-                            backgroundColor: Colors.greenAccent[600], // Background Color
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))
-                          ),
-                          onPressed: () {
-                            if(_formKey.currentState!.validate()){
-                              save();
-                            }
-                            else{
-                              print("not ok");
-                            }
-                          },
-                            child: Text(
-                              'Sign in',
-                              style: TextStyle(
-                                  fontSize: 27,
-                                  fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: signinUser,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.blue),
+                      textStyle: MaterialStateProperty.all(
+                        const TextStyle(color: Colors.white),
                       ),
+                      minimumSize: MaterialStateProperty.all(
+                        Size(MediaQuery.of(context).size.width / 2.5, 50),
+                      ),
+                    ),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
 

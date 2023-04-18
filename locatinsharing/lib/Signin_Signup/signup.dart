@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:locatinsharing/Signin_Signup/signin.dart';
 import 'user.dart';
+import 'auth.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -17,17 +18,32 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
-  Future save() async{
-    var res = await http.post(Uri.parse("http://localhost:8080/signup"),headers: <String,String>{'Context-Type':'application/jason;charSet=UTF-8'},
-        body: <String,String>{
-          'email': user.email,
-          'password':user.password
-        }
+  // Future save() async{
+  //   var res = await http.post(Uri.parse("http://10.200.8.251:8080/signup"),headers: <String,String>{'Context-Type':'application/jason;charSet=UTF-8'},
+  //       body: <String,String>{
+  //         'email': user.email,
+  //         'password':user.password
+  //       }
+  //   );
+  //
+  //   print(res.body);
+  //   Navigator.push(context, new MaterialPageRoute(builder: (context)=>Signin()));
+  // }
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthService authService = AuthService();
+
+  void signupUser() {
+    authService.signUpUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
+      //name: nameController.text,
     );
-    print(res.body);
-    Navigator.push(context, new MaterialPageRoute(builder: (context)=>Signin()));
   }
-  User user = User('', '');
+
+  //User user = User('', '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +67,9 @@ class _SignupState extends State<Signup> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TextFormField(
-                        controller: TextEditingController(text: user.email),
-                        onChanged: (value){
-                          user.email = value;
+                        controller: emailController,
+                        onChanged: (String value){
+                          //user.email = value;
                         },
                         validator: (value){
                           if(value!.isEmpty){
@@ -92,9 +108,9 @@ class _SignupState extends State<Signup> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TextFormField(
-                        controller: TextEditingController(text: user.password),
-                        onChanged: (value){
-                          user.password = value;
+                        controller: passwordController,
+                        onChanged: (String value){
+                          //user.password = value;
                         },
                         validator: (value){
                           if(value!.isEmpty){
@@ -136,8 +152,9 @@ class _SignupState extends State<Signup> {
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))
                             ),
                             onPressed: (){
+
                               if(_formKey.currentState!.validate()){
-                                save();
+                                signupUser;
                               }
                               else{
                                 print("not ok");

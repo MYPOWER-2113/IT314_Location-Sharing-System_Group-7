@@ -14,6 +14,10 @@ import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
 import 'package:locatinsharing/Splash/splash_screen.dart';
+import 'package:provider/provider.dart';
+
+import 'Signin_Signup/auth.dart';
+import 'Signin_Signup/user_provider.dart';
 
 late SharedPreferences sharedPreferences;
 
@@ -46,34 +50,40 @@ void main() async
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
   await dotenv.load(fileName: "assets/config/.env");
-  runApp(MyApp
-    (
-      child : MaterialApp(
-        title: 'Location Sharing App',
-        theme: ThemeData(
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: MyApp
+        (
+          child : MaterialApp(
+            title: 'Location Sharing App',
+            theme: ThemeData(
 
-          // Define the default brightness and colors.
-          brightness: Brightness.light,
-          primaryColor: Colors.lightBlue[400],
+              // Define the default brightness and colors.
+              brightness: Brightness.light,
+              primaryColor: Colors.lightBlue[400],
 
-          // Define the default font family.
-          fontFamily: 'Gotham',
+              // Define the default font family.
+              fontFamily: 'Gotham',
 
-          textTheme: const TextTheme(
-            displayLarge: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold),
-            titleLarge: TextStyle(fontSize: 25.0, /*fontStyle: FontStyle.italic*/),
-            bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-          ),
-        ),
+              textTheme: const TextTheme(
+                displayLarge: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold),
+                titleLarge: TextStyle(fontSize: 25.0, /*fontStyle: FontStyle.italic*/),
+                bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+              ),
+            ),
 
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Colors.deepPurple,
-        ),
-        home: MySplashScreen(),
-        debugShowCheckedModeBanner: false,
-      )
-    )
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              primaryColor: Colors.deepPurple,
+            ),
+            home: MySplashScreen(),
+            debugShowCheckedModeBanner: false,
+          )
+      ),
+    ),
   );
 }
 
@@ -91,6 +101,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+
 class _MyAppState extends State<MyApp> {
 
   Key key = UniqueKey();
@@ -106,5 +117,13 @@ class _MyAppState extends State<MyApp> {
     return KeyedSubtree(
         key: key,
         child: widget.child!);
+  }
+
+  final AuthService authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    authService.getUserData(context);
   }
 }
