@@ -141,7 +141,7 @@ class ShareMyLocation extends State<ShareLocation> {
         selectedFontSize: 15,
       ),
 
-      body: Center(
+      body: Align(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,7 +149,7 @@ class ShareMyLocation extends State<ShareLocation> {
             const SizedBox(height: 150,),
             Padding(padding: EdgeInsets.all(16.10),
                 child: Padding(
-                  padding: const EdgeInsets.all(180.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: Container(
                     padding: EdgeInsets.only(left: 16,right: 16),
                     decoration: BoxDecoration(
@@ -186,7 +186,7 @@ class ShareMyLocation extends State<ShareLocation> {
                 )
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(65, 20, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
               child: TextButton(
                   style: TextButton.styleFrom(
                       primary: Colors.purpleAccent,
@@ -198,10 +198,10 @@ class ShareMyLocation extends State<ShareLocation> {
                         msg: "Location Shared",
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 2,
+                        timeInSecForIosWeb: 1,
                         backgroundColor: Colors.red,
                         textColor: Colors.white,
-                        fontSize: 30.0
+                        fontSize: 10.0
                     );
                   }, child: Text("SEND", style: TextStyle(color: Colors.white,fontSize: 25),)),
             )
