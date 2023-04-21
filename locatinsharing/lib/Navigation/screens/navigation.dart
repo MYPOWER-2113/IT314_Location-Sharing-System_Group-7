@@ -5,6 +5,8 @@ import 'package:flutter_map/flutter_map.dart';
 // import 'package:latlong2/latlong.dart' as latlng;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
+import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
+import 'package:locatinsharing/Navigation/screens/prepare_ride.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
@@ -31,6 +33,8 @@ class _Navigation extends State<Navigation>{
   late CameraPosition _initialCameraPostion;
   late MapboxMapController controller;
   late CameraPosition dest=CameraPosition(target: LatLng(72.63394,23.196299),zoom: 15);
+  late String currentAddress;
+
   // late Map _data;
 
   @override
@@ -44,7 +48,7 @@ class _Navigation extends State<Navigation>{
     // num duration = response['duration']/60;
 
     dest=CameraPosition(target: LatLng(23.196299,72.63394),zoom: 15);
-
+    currentAddress = getCurrentAddressFromSharedPrefs();
     // Initialize map symbols
   }
 
@@ -246,19 +250,62 @@ class _Navigation extends State<Navigation>{
           body: SafeArea(
             child: Stack(
               children: [
+                MapboxMap(
+                  accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                  initialCameraPosition: _initialCameraPostion,
+                  onMapCreated: _onMapCreated,
+                  onStyleLoadedCallback: _onStyleLoadedCallback,
+                  myLocationEnabled: true,
+                  myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                  // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                  compassEnabled: true,
+                ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.8,
-                  child: MapboxMap(
-                    accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-                    initialCameraPosition: _initialCameraPostion,
-                    onMapCreated: _onMapCreated,
-                    onStyleLoadedCallback: _onStyleLoadedCallback,
-                    myLocationEnabled: true,
-                    myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                    // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
-                    compassEnabled: true,
-
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              'Hi there!',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 20),
+                            const Text('You are currently here:'),
+                            Text(currentAddress,
+                                style: const TextStyle(color: Colors.indigo)),
+                            const SizedBox(height: 20),
+                            ElevatedButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const PrepareRide())),
+                                style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(20)),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Text('Where do you wanna go today?'),
+                                    ])),
+                          ]),
+                    ),
                   ),
+                  // child: MapboxMap(
+                  //   accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                  //   initialCameraPosition: _initialCameraPostion,
+                  //   onMapCreated: _onMapCreated,
+                  //   onStyleLoadedCallback: _onStyleLoadedCallback,
+                  //   myLocationEnabled: true,
+                  //   myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                  //   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                  //   compassEnabled: true,
+                  //
+                  // ),
                 )
               ],
             ),
