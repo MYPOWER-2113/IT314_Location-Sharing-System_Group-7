@@ -1,11 +1,12 @@
 const express = require('express')
 const User = require('../models/user.model')
+const auth = require("../middleware/auth");
 const router = express.Router()
 const jwt = require("jsonwebtoken")
 const bcryptjs = require("bcryptjs");
 
 // Sign Up
-router.post("signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -70,9 +71,9 @@ router.post("/tokenIsValid", async (req, res) => {
 });
 
 // get user data
-// router.get("/", auth, async (req, res) => {
-//   const user = await User.findById(req.user);
-//   res.json({ ...user._doc, token: req.token });
-// });
+router.get("/", auth, async (req, res) => {
+  const user = await User.findById(req.user);
+  res.json({ ...user._doc, token: req.token });
+});
 
 module.exports = router
