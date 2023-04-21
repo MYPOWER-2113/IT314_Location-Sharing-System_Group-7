@@ -79,7 +79,7 @@ void main() async
               brightness: Brightness.dark,
               primaryColor: Colors.deepPurple,
             ),
-            home: MySplashScreen(),
+            home: MyHomePage(),
             debugShowCheckedModeBanner: false,
           )
       ),

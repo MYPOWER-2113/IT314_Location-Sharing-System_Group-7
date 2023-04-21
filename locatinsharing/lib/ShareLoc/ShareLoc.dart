@@ -20,6 +20,10 @@ import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
+// import 'package:sms/contact.dart';
+import 'package:flutter_sms/flutter_sms.dart';
+// import 'package:flutter_s';
+
 
 class ShareLocation extends StatefulWidget {
   @override
@@ -52,6 +56,11 @@ class ShareMyLocation extends State<ShareLocation> {
     "Contact1","Contact2","Contact3","Contact4","Contact5"
   ];
 
+  void _sendSMS() async{
+    List<String> recepients=["+919313601005"];
+    await sendSMS(message:"HI there, Its a test message from flutter",recipients:recepients);
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -64,7 +73,7 @@ class ShareMyLocation extends State<ShareLocation> {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContextontext) {
     return Scaffold(
       appBar: AppBar(
 
@@ -194,6 +203,8 @@ class ShareMyLocation extends State<ShareLocation> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))
                   ),
                   onPressed: (){
+
+                    _sendSMS();
                     Fluttertoast.showToast(
                         msg: "Location Shared",
                         toastLength: Toast.LENGTH_LONG,
