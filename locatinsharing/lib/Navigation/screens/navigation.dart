@@ -268,7 +268,7 @@ class _Navigation extends State<Navigation>{
                 //   compassEnabled: true,
                 // ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  // width: MediaQuery.of(context).size.width,
                   // child: Card(
                   //   clipBehavior: Clip.antiAlias,
                   //   child: Padding(
@@ -302,6 +302,8 @@ class _Navigation extends State<Navigation>{
                   //         ]),
                   //   ),
                   // ),
+
+                  height: MediaQuery.of(context).size.height*1,
                   child: MapboxMap(
                     accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
                     initialCameraPosition: _initialCameraPostion,
