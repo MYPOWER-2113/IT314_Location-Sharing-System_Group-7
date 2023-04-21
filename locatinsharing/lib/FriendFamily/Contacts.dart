@@ -9,7 +9,7 @@ import 'package:permission_handler/permission_handler.dart' as per;
 
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
-import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/Navigation/screens/navigation.dart';
 import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';

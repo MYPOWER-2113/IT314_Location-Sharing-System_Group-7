@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mapbox_turn_by_turn/widgets/endpoints_card.dart';
-import 'package:mapbox_turn_by_turn/widgets/search_listview.dart';
+import '../widgets/endpoints_card.dart';
+import '../widgets/search_listview.dart';
 
-import '../widgets/review_ride_fa_button.dart';
+// import '../widgets/review_ride_fa_button.dart';
 
 class PrepareRide extends StatefulWidget {
   const PrepareRide({Key? key}) : super(key: key);
@@ -72,7 +72,7 @@ class _PrepareRideState extends State<PrepareRide> {
           physics: const ScrollPhysics(),
           child: Column(
             children: [
-              endpointsCard(sourceController, destinationController),
+              // endpointsCard(sourceController, destinationController),
               isLoading
                   ? const LinearProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
@@ -83,13 +83,12 @@ class _PrepareRideState extends State<PrepareRide> {
                       child: Center(
                           child: Text(hasResponded ? noResponse : noRequest)))
                   : Container(),
-              searchListView(responses, isResponseForDestination,
-                  destinationController, sourceController),
+              // searchListView(responses, isResponseForDestination,destinationController, sourceController),
             ],
           ),
         ),
       ),
-      floatingActionButton: reviewRideFaButton(context),
+      // floatingActionButton: reviewRideFaButton(context),
     );
   }
 }

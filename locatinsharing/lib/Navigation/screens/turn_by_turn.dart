@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mapbox_navigation/library.dart';
+import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+// import 'package:flutter_mapbox_navigation/library.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:mapbox_turn_by_turn/helpers/shared_prefs.dart';
-import 'package:mapbox_turn_by_turn/ui/rate_ride.dart';
+import '../helper/shared_prefs.dart';
+import '../ui/rate_ride.dart';
 
 class TurnByTurn extends StatefulWidget {
   const TurnByTurn({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _TurnByTurnState extends State<TurnByTurn> {
     if (!mounted) return;
 
     // Setup directions and options
-    directions = MapBoxNavigation(onRouteEvent: _onRouteEvent);
+    // directions = MapBoxNavigation(onRouteEvent: _onRouteEvent);
     _options = MapBoxOptions(
         zoom: 18.0,
         voiceInstructionsEnabled: true,
@@ -70,8 +71,8 @@ class _TurnByTurnState extends State<TurnByTurn> {
   }
 
   Future<void> _onRouteEvent(e) async {
-    distanceRemaining = await directions.distanceRemaining;
-    durationRemaining = await directions.durationRemaining;
+    // distanceRemaining = await directions.distanceRemaining;
+    // durationRemaining = await directions.durationRemaining;
 
     switch (e.eventType) {
       case MapBoxEvent.progress_change:

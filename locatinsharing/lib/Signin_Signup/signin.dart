@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
-import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/Navigation/screens/navigation.dart';
 import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 // import 'package:latlong2/latlong.dart' as latlng;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:locatinsharing/Navigation/directions_handler.dart';
+import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
@@ -12,7 +12,6 @@ import 'package:permission_handler/permission_handler.dart' as per;
 
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
-import 'package:locatinsharing/Navigation/navigation.dart';
 import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';

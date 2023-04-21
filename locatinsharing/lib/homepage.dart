@@ -10,7 +10,7 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 
 import 'homepage.dart';
-import 'Navigation/navigation.dart';
+import 'Navigation/screens/navigation.dart';
 import 'SOS/SOS.dart';
 import 'ShareLoc/ShareLoc.dart';
 import 'NearbyMe/NearbyMe.dart';

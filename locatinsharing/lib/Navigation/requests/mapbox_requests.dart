@@ -1,5 +1,5 @@
-import 'navigation.dart';
-import 'dio_exceptions.dart';
+import '../screens/navigation.dart';
+import '../helper/dio_exceptions.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

@@ -3,11 +3,11 @@
 import 'dart:convert';
 
 import 'package:mapbox_gl/mapbox_gl.dart';
-import '../main.dart';
+import '../../main.dart';
 
-import 'mapbox_requests.dart';
-import 'requests/mapbox_rev_geocoding.dart';
-import 'requests/mapbox_search.dart';
+import '../requests/mapbox_requests.dart';
+import '../requests/mapbox_rev_geocoding.dart';
+import '../requests/mapbox_search.dart';
 
 // -- Mapbox Search Query --
 String getValidatedQueryFromQuery(String query) {
