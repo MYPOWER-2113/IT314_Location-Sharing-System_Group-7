@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-
 import '../helper/dio_exceptions.dart';
 
 String baseUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places';

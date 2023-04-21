@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:locatinsharing/main.dart';
 import '../helper/dio_exceptions.dart';
 
+
 String baseUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 String accessToken = dotenv.env['MAPBOX_ACCESS_TOKEN']!;
 String searchType = 'place%2Cpostcode%2Caddress';

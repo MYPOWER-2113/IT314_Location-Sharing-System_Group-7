@@ -1,13 +1,12 @@
 // import 'dart:convert';
-
+import 'package:latlong2/latlong.dart' as latlng;
 import 'dart:convert';
-
 import 'package:mapbox_gl/mapbox_gl.dart';
 import '../../main.dart';
-
 import '../requests/mapbox_requests.dart';
 import '../requests/mapbox_rev_geocoding.dart';
 import '../requests/mapbox_search.dart';
+
 
 // -- Mapbox Search Query --
 String getValidatedQueryFromQuery(String query) {
@@ -54,7 +53,7 @@ Future<Map> getParsedReverseGeocoding (LatLng latLng) async{
 
 
 // -- Mapbox Directions --
-Future <Map> getDirectionsAPIResponse(LatLng sourceLatLng,LatLng destinationLatLng) async{
+Future <Map> getDirectionsAPIResponse(latlng.LatLng sourceLatLng,latlng.LatLng destinationLatLng) async{
   print("${sourceLatLng.latitude},${sourceLatLng.longitude}");
 
   final response = await getDrivingroute(sourceLatLng , destinationLatLng);
