@@ -65,7 +65,7 @@ dependencies:
   dio: ^5.1.1
 #  geocoder: ^0.2.1
   geocoding: ^2.1.0
-  flutter_mapbox_navigation: ^0.1.0
+#  flutter_mapbox_navigation: ^0.1.0
   flutter_rating_bar: ^4.0.1
 #  mapbox_navigation: ^1.0.4
 

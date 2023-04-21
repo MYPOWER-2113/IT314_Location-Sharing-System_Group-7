@@ -34,7 +34,7 @@ class _Navigation extends State<Navigation>{
   late CameraPosition _initialCameraPostion;
   late MapboxMapController controller;
   late CameraPosition dest=CameraPosition(target: LatLng(72.63394,23.196299),zoom: 15);
-  // late String currentAddress;
+  late String currAdd;
 
   // late Map _data;
 
@@ -44,7 +44,7 @@ class _Navigation extends State<Navigation>{
 
     initializeLocationAndSave();
     _initialCameraPostion = CameraPosition(target: ltlg as LatLng,zoom: 15);
-    // currentAddress = getCurrentAddressFromSharedPrefs();
+    currAdd = getCurrentAddressFromSharedPrefs();
 
     // Map response = json.decode(sharedPreferences.getString('destination')!);
     // num distance = response['distance']/1000;
@@ -73,21 +73,22 @@ class _Navigation extends State<Navigation>{
     // Get capture the current user location
     LocationData _locationData = await _location.getLocation();
 
-    ll.LatLng currentLatLng = ll.LatLng( _locationData.latitude!, _locationData.longitude!);
-
+    LatLng currentLatLng = LatLng( _locationData.latitude!, _locationData.longitude!);
+    String currentAddress = (await getParsedReverseGeocoding(currentLatLng))['place'];
     // String mp = (await getParsedReverseGeocoding(currentLatLng))['place']!;
     // String _currentAddress = mp['place'];
     // print(_currentAddress);
     // Store the user location in sharedPreferences
-
+    // print(currentAddress);
     sharedPreferences.setDouble('latitude', _locationData.latitude!);
     sharedPreferences.setDouble('longitude', _locationData.longitude!);
-    // sharedPreferences.setString('current-address', mp);
+
+    sharedPreferences.setString('current-address', currentAddress);
 
     // Get and store the directions API repsonse in sharedPreferences
     // print("${currentLatLng.latitude},${currentLatLng.longitude}");
-    // Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng);
-    // saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
+    Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng,LatLng(26.915458,75.818982));
+    saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
 
   }
 
@@ -257,16 +258,16 @@ class _Navigation extends State<Navigation>{
           body: SafeArea(
             child: Stack(
               children: [
-                // MapboxMap(
-                //   accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-                //   initialCameraPosition: _initialCameraPostion,
-                //   onMapCreated: _onMapCreated,
-                //   onStyleLoadedCallback: _onStyleLoadedCallback,
-                //   myLocationEnabled: true,
-                //   myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                //   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
-                //   compassEnabled: true,
-                // ),
+                MapboxMap(
+                  accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                  initialCameraPosition: _initialCameraPostion,
+                  onMapCreated: _onMapCreated,
+                  onStyleLoadedCallback: _onStyleLoadedCallback,
+                  myLocationEnabled: true,
+                  myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                  // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                  compassEnabled: true,
+                ),
                 SizedBox(
                   // width: MediaQuery.of(context).size.width,
                   // child: Card(
@@ -313,8 +314,52 @@ class _Navigation extends State<Navigation>{
                     myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
                     // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
                     compassEnabled: true,
-
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              'Hi there!',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 20),
+                            const Text('You are currently here:'),
+                            Text(currAdd,
+                                style: const TextStyle(color: Colors.indigo)),
+                            const SizedBox(height: 20),
+                            ElevatedButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const PrepareRide())),
+                                style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(20)),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Text('Where do you wanna go today?'),
+                                    ])),
+                          ]),
+                    ),
                   ),
+                  // height: MediaQuery.of(context).size.height*0.8,
+                  // child: MapboxMap(
+                  //   accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                  //   initialCameraPosition: _initialCameraPostion,
+                  //   onMapCreated: _onMapCreated,
+                  //   onStyleLoadedCallback: _onStyleLoadedCallback,
+                  //   myLocationEnabled: true,
+                  //   myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                  //   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                  //   compassEnabled: true,
+                  //
+                  // ),
                 )
               ],
             ),
