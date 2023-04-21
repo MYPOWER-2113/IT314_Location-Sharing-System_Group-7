@@ -40,10 +40,10 @@ Future<List> getParsedResponseForQuery(String value) async {
 
 // -- Mapbox Reverse Geocoding --
 Future<Map> getParsedReverseGeocoding (LatLng latLng) async{
-  var response = json.decode(await getReverseGeocodingGivenLatLngUsingMapbox(latLng));
+  final response = await getReverseGeocodingGivenLatLngUsingMapbox(latLng);
   Map feature = response['features'][0];
-  String st = response['features'][0]['place_name'];
-  print(st);
+  // String st = response['features'][0]['place_name'];
+  // print(st);
   Map revGeocode = {
     'name': feature['text'],
     'address': feature['place_name'].split('${feature['text']}, ')[1],
@@ -55,7 +55,7 @@ Future<Map> getParsedReverseGeocoding (LatLng latLng) async{
 
 
 // -- Mapbox Directions --
-Future <Map> getDirectionsAPIResponse(ll.LatLng sourceLatLng,ll.LatLng destinationLatLng) async{
+Future <Map> getDirectionsAPIResponse(LatLng sourceLatLng,LatLng destinationLatLng) async{
   print("${sourceLatLng.latitude},${sourceLatLng.longitude}");
 
   final response = await getDrivingroute(sourceLatLng , destinationLatLng);
@@ -77,9 +77,9 @@ Future <Map> getDirectionsAPIResponse(ll.LatLng sourceLatLng,ll.LatLng destinati
   return modifiedResponse;
 }
 
-// void saveDirectionsAPIResponse(String response){
-//   sharedPreferences.setString('destiny',response);
-// }
+void saveDirectionsAPIResponse(String response){
+  sharedPreferences.setString('destiny',response);
+}
 
 
 LatLng getCenterCoordinatesForPolyline(Map geometry) {
