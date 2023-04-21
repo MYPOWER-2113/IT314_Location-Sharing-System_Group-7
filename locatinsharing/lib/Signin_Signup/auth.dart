@@ -20,15 +20,15 @@ class AuthService {
   }) async {
     try {
       User user = User(
-        //id: '',
+        id: '',
         //name: name,
         password: password,
         email: email,
-        //token: '',
+        token: '',
       );
 
       http.Response res = await http.post(
-        Uri.parse("http://10.200.8.251:8080/signup"),
+        Uri.parse('http://10.200.8.251:8080/signup'),
         body: user.toJson(),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -43,6 +43,7 @@ class AuthService {
             context,
             'Account created! Login with the same credentials!',
           );
+          Navigator.push(context, new MaterialPageRoute(builder: (context)=>Signin()));
         },
       );
     } catch (e) {

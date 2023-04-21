@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:locatinsharing/Signin_Signup/signin.dart';
 import 'user.dart';
 import 'auth.dart';
+import 'custom_textfield.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -35,6 +36,7 @@ class _SignupState extends State<Signup> {
   final AuthService authService = AuthService();
 
   void signupUser() {
+    //print("in auth");
     authService.signUpUser(
       context: context,
       email: emailController.text,
@@ -64,102 +66,38 @@ class _SignupState extends State<Signup> {
                     Text("Signiup", style: GoogleFonts.pacifico(fontWeight: FontWeight.bold, fontSize: 50, color: Colors.blue),
                     ),
                     const SizedBox(height: 25,),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: TextFormField(
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomTextField(
                         controller: emailController,
-                        onChanged: (String value){
-                          //user.email = value;
-                        },
-                        validator: (value){
-                          if(value!.isEmpty){
-                            return 'Email field can\'t be empty';
-                          }
-                          else  if(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(value)){
-                            return null;
-                          }
-                          else{
-                            return 'Enter valid email';
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Email',
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.blue)
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.blue)
-                          ),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red)
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red)
-                          ),
-                        ),
+                        hintText: 'Enter your email',
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: TextFormField(
+                    const SizedBox(height: 20),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomTextField(
                         controller: passwordController,
-                        onChanged: (String value){
-                          //user.password = value;
-                        },
-                        validator: (value){
-                          if(value!.isEmpty){
-                            return 'Password field can\'t be empty';
-                          }
-                          else{
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.blue)
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.blue)
-                          ),
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red)
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red)
-                          ),
-                        ),
+                        hintText: 'Enter your password',
                       ),
                     ),
-                    Padding(padding: EdgeInsets.all(16.0),
-                      child: Container(
-                        height: 50,
-                        width: 400,
-                        child: TextButton(
-                            style: TextButton.styleFrom(
-                                primary: Colors.purpleAccent,
-                                backgroundColor: Colors.blue, // Background Color
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))
-                            ),
-                            onPressed: (){
 
-                              if(_formKey.currentState!.validate()){
-                                signupUser;
-                              }
-                              else{
-                                print("not ok");
-                              }
-                            }, child: Text("Signup", style: TextStyle(color: Colors.white),)),
+                    const SizedBox(height: 40),
+                    ElevatedButton(
+                      onPressed: signupUser,
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                        textStyle: MaterialStateProperty.all(
+                          const TextStyle(color: Colors.white),
+                        ),
+                        minimumSize: MaterialStateProperty.all(
+                          Size(MediaQuery.of(context).size.width / 2.5, 50),
+                        ),
+                      ),
+                      child: const Text(
+                        "Signup",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
                     Padding(
