@@ -304,16 +304,16 @@ class _Navigation extends State<Navigation>{
                   //   ),
                   // ),
 
-                  height: MediaQuery.of(context).size.height*1,
-                  child: MapboxMap(
-                    accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-                    initialCameraPosition: _initialCameraPostion,
-                    onMapCreated: _onMapCreated,
-                    onStyleLoadedCallback: _onStyleLoadedCallback,
-                    myLocationEnabled: true,
-                    myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                    // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
-                    compassEnabled: true,
+                  //height: MediaQuery.of(context).size.height*1,
+                  // child: MapboxMap(
+                  //   accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                  //   initialCameraPosition: _initialCameraPostion,
+                  //   onMapCreated: _onMapCreated,
+                  //   onStyleLoadedCallback: _onStyleLoadedCallback,
+                  //   myLocationEnabled: true,
+                  //   myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
+                  //   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
+                  //   compassEnabled: true,
                   width: MediaQuery.of(context).size.width,
                   child: Card(
                     clipBehavior: Clip.antiAlias,
