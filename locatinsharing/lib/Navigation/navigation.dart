@@ -76,8 +76,8 @@ class _Navigation extends State<Navigation>{
 
     // Get and store the directions API repsonse in sharedPreferences
     // print("${currentLatLng.latitude},${currentLatLng.longitude}");
-    Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng);
-    saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
+    // Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng);
+    // saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
 
   }
 

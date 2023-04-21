@@ -1,20 +1,65 @@
 // import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'dart:convert';
+
 import 'package:mapbox_gl/mapbox_gl.dart';
 import '../main.dart';
-import 'package:latlong2/latlong.dart' as latLng;
-// import 'mapbox_navigation/main.dart';
 
 import 'mapbox_requests.dart';
-// import '';
+import 'requests/mapbox_rev_geocoding.dart';
+import 'requests/mapbox_search.dart';
 
-Future <Map> getDirectionsAPIResponse(LatLng currentLatLng) async{
-  print("${currentLatLng.latitude},${currentLatLng.longitude}");
+// -- Mapbox Search Query --
+String getValidatedQueryFromQuery(String query) {
+  // Remove whitespaces
+  String validatedQuery = query.trim();
+  return validatedQuery;
+}
 
-  final response = await getDrivingroute(currentLatLng , LatLng(23.196299,72.63394));
+Future<List> getParsedResponseForQuery(String value) async {
+  List parsedResponses = [];
 
-  print("${currentLatLng.latitude},${currentLatLng.longitude}");
+  // If empty query send blank response
+  String query = getValidatedQueryFromQuery(value);
+  if (query == '') return parsedResponses;
+
+  // Else search and then send response
+  var response = json.decode(await getSearchResultsFromQueryUsingMapbox(query));
+
+  List features = response['features'];
+  for (var feature in features) {
+    Map response = {
+      'name': feature['text'],
+      'address': feature['place_name'].split('${feature['text']}, ')[1],
+      'place': feature['place_name'],
+      'location': LatLng(feature['center'][1], feature['center'][0])
+    };
+    parsedResponses.add(response);
+  }
+  return parsedResponses;
+}
+
+// -- Mapbox Reverse Geocoding --
+Future<Map> getParsedReverseGeocoding (LatLng latLng) async{
+  var response = json.decode(await getReverseGeocodingGivenLatLngUsingMapbox(latLng));
+  Map feature = response['features'][0];
+  Map revGeocode = {
+    'name': feature['text'],
+    'address': feature['place_name'].split('${feature['text']}, ')[1],
+    'place': feature['place_name'],
+    'location': latLng,
+  };
+  return revGeocode;
+}
+
+
+// -- Mapbox Directions --
+Future <Map> getDirectionsAPIResponse(LatLng sourceLatLng,LatLng destinationLatLng) async{
+  print("${sourceLatLng.latitude},${sourceLatLng.longitude}");
+
+  final response = await getDrivingroute(sourceLatLng , destinationLatLng);
+
+  print("${sourceLatLng.latitude},${sourceLatLng.longitude}");
 
   Map geometry = response['routes'][0]['geometry'];
   num duration = response['routes'][0]['duration'];
@@ -35,14 +80,10 @@ void saveDirectionsAPIResponse(String response){
   sharedPreferences.setString('destiny',response);
 }
 
-// Map getGeometryFromSharedPrefs(String key) {
-//   Map geometry = getDecodedResponseFromSharedPrefs(key)['geometry'];
-//   return geometry;
-// }
 
-// Map getDecodedResponseFromSharedPrefs(String key) {
-//   // String key = 'restaurant--$index';
-//   Map response = json.decode(sharedPreferences.getString(key)!);
-//   return response;
-// }
+LatLng getCenterCoordinatesForPolyline(Map geometry) {
+  List coordinates = geometry['coordinates'];
+  int pos = (coordinates.length / 2).round();
+  return LatLng(coordinates[pos][1], coordinates[pos][0]);
+}
 
