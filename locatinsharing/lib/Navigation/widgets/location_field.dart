@@ -48,8 +48,7 @@ class _LocationFieldState extends State<LocationField> {
 
     // Set responses and isDestination in parent
     PrepareRide.of(context)?.responsesState = response;
-    PrepareRide.of(context)?.isResponseForDestinationState =
-        widget.isDestination;
+    PrepareRide.of(context)?.isResponseForDestinationState = widget.isDestination;
     setState(() => query = value);
   }
 

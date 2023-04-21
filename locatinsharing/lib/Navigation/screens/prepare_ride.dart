@@ -72,7 +72,7 @@ class _PrepareRideState extends State<PrepareRide> {
           physics: const ScrollPhysics(),
           child: Column(
             children: [
-              // endpointsCard(sourceController, destinationController),
+              endpointsCard(sourceController, destinationController),
               isLoading
                   ? const LinearProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
@@ -83,7 +83,7 @@ class _PrepareRideState extends State<PrepareRide> {
                       child: Center(
                           child: Text(hasResponded ? noResponse : noRequest)))
                   : Container(),
-              // searchListView(responses, isResponseForDestination,destinationController, sourceController),
+              searchListView(responses, isResponseForDestination,destinationController, sourceController),
             ],
           ),
         ),

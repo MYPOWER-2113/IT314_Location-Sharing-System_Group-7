@@ -4,7 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../screens/navigation.dart';
 import '../helper/dio_exceptions.dart';
 import 'package:locatinsharing/main.dart';
-import 'package:latlong2/latlong.dart' as latlng;
+import 'package:latlong2/latlong.dart' as ll;
+import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:dio/dio.dart';
 
 
@@ -16,7 +17,7 @@ String navType = 'driving';
 
 Dio _dio = Dio();
 
-Future getDrivingroute(latlng.LatLng source, latlng.LatLng destination) async {
+Future getDrivingroute(ll.LatLng source, ll.LatLng destination) async {
   String url = '$baseUrl/$navType/${source.longitude},${source.latitude};${destination.longitude},${destination.latitude}?alternatives=true&continue_straight=true&geometries=geojson&language=en&overview=full&steps=true&access_token=$accessToken';
   print(url);
   try {
