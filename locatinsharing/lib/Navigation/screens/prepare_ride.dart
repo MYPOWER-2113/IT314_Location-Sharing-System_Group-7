@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/endpoints_card.dart';
 import '../widgets/search_listview.dart';
-// import '../widgets/review_ride_fa_button.dart';
+import '../widgets/review_route_button.dart';
 
 
 class PrepareRide extends StatefulWidget {
@@ -88,7 +88,7 @@ class _PrepareRideState extends State<PrepareRide> {
           ),
         ),
       ),
-      // floatingActionButton: reviewRideFaButton(context),
+      floatingActionButton: reviewRideFaButton(context),
     );
   }
 }

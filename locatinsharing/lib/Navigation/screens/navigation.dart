@@ -95,7 +95,7 @@ class _Navigation extends State<Navigation>{
 
   _addSourceAndLineLayer() async {
   //  Can animate camera to focus on items
-    controller.animateCamera(CameraUpdate.newCameraPosition(dest));
+  //   controller.animateCamera(CameraUpdate.newCameraPosition(dest));
 
   //  add a polyline between source and Destination
     late String? key;
@@ -262,7 +262,7 @@ class _Navigation extends State<Navigation>{
                   accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
                   initialCameraPosition: _initialCameraPostion,
                   onMapCreated: _onMapCreated,
-                  onStyleLoadedCallback: _onStyleLoadedCallback,
+                  // onStyleLoadedCallback: _onStyleLoadedCallback,
                   myLocationEnabled: true,
                   myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
                   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
