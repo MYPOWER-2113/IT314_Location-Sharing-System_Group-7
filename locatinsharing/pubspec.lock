@@ -174,6 +174,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  flutter_mapbox_navigation:
+    dependency: "direct main"
+    description:
+      name: flutter_mapbox_navigation
+      sha256: "3dfcf9cd622b5c9fd7c35ee29d90ee5ddb11b90f986361d1263f9a28caa10bab"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.26"
   flutter_rating_bar:
     dependency: "direct main"
     description:

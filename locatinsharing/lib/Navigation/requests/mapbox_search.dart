@@ -15,7 +15,7 @@ String proximity = '${sharedPreferences.getDouble('longitude')}%2C${sharedPrefer
 Dio _dio = Dio();
 
 Future getSearchResultsFromQueryUsingMapbox(String query) async {
-  String url = '$baseUrl/$query.json?limit=$searchResultsLimit&proximity=$proximity&access_token=$accessToken';
+  String url = '$baseUrl/$query.json?limit=$searchResultsLimit&proximity=$proximity&autocomplete=true&access_token=$accessToken';
   url = Uri.parse(url).toString();
   // print(url);
   try {

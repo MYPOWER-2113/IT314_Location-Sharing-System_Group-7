@@ -6,7 +6,7 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import '../helper/directions_handler.dart';
 import '../helper/shared_prefs.dart';
 import '../helper/commons.dart';
-// import '../widgets/review_ride_bottom_sheet.dart';
+import '../widgets/review_route_bottom.dart';
 
 class ReviewRide extends StatefulWidget {
   final Map modifiedResponse;
@@ -54,16 +54,16 @@ class _ReviewRideState extends State<ReviewRide> {
   }
 
   _onStyleLoadedCallback() async {
-    for (int i = 0; i < _kTripEndPoints.length; i++) {
-      String iconImage = i == 0 ? 'circle' : 'square';
-      await controller.addSymbol(
-        SymbolOptions(
-          geometry: _kTripEndPoints[i].target,
-          iconSize: 0.1,
-          iconImage: "assets/icon/$iconImage.png",
-        ),
-      );
-    }
+    // for (int i = 0; i < _kTripEndPoints.length; i++) {
+    //   String iconImage = i == 0 ? 'circle' : 'square';
+    //   await controller.addSymbol(
+    //     SymbolOptions(
+    //       geometry: _kTripEndPoints[i].target,
+    //       iconSize: 0.1,
+    //       iconImage: "assets/icon/$iconImage.png",
+    //     ),
+    //   );
+    // }
     _addSourceAndLineLayer();
   }
 
@@ -135,7 +135,7 @@ class _ReviewRideState extends State<ReviewRide> {
                 compassEnabled: true,
               ),
             ),
-            // reviewRideBottomSheet(context, distance, dropOffTime),
+            reviewRideBottomSheet(context, distance, dropOffTime),
           ],
         ),
       ),

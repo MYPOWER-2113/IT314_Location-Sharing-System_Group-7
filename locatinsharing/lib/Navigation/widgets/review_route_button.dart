@@ -7,7 +7,11 @@ import '../screens/review_route.dart';
 
 Widget reviewRideFaButton(BuildContext context) {
   return FloatingActionButton.extended(
+
       icon: const Icon(Icons.route_outlined),
+
+      // icon: const Icon(Icons.local_taxi),
+
       onPressed: () async {
         LatLng sourceLatLng = getTripLatLngFromSharedPrefs('source');
         LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
@@ -23,8 +27,12 @@ Widget reviewRideFaButton(BuildContext context) {
         );
       },
 
+
       backgroundColor: Colors.blueAccent,
       foregroundColor: Colors.white,
 
       label: const Text('Review Path'));
+
+      // label: const Text('Review Route'));
+
 }

@@ -3,6 +3,20 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven{
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                // Do not change the username below.
+                // This should always be `mapbox` (not your username).
+                username = "mapbox"
+                // Use the secret token you stored in gradle.properties as the password
+//                password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
+                password = MAPBOX_DOWNLOADS_TOKEN
+            }
+        }
     }
 
     dependencies {
@@ -15,27 +29,18 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven{
-            url 'https://api.mapbox.com/downloads/v2/releases/maven'
-            authentication {
-                basic(BasicAuthentication)
-            }
-            credentials {
-                // Do not change the username below.
-                // This should always be `mapbox` (not your username).
-                username = "mapbox"
-                // Use the secret token you stored in gradle.properties as the password
-                password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
-            }
-        }
     }
 
-    configurations.all {
-        resolutionStrategy {
-            force 'com.mapbox.common:common:23.4.0'
-        }
-    }
+//    configurations.all {
+//        resolutionStrategy {
+//            force 'com.mapbox.common:common:23.4.0'
+//        }
+//    }
 }
+
+//implementation(project(':flutter_mapbox_navigation')){
+//    exclude group: 'com.mapbox.android'
+//}
 
 rootProject.buildDir = '../build'
 subprojects {
