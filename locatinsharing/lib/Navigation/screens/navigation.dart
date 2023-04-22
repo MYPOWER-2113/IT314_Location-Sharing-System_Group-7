@@ -344,7 +344,7 @@ class _Navigation extends State<Navigation>{
             ),
               child: const Icon(Icons.my_location),
             ),
-            backgroundColor: Colors.blueAccent.shade700,
+            backgroundColor: Colors.blueAccent.shade200,
             foregroundColor: Colors.white,
           ),
 

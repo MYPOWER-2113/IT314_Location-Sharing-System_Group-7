@@ -63,10 +63,10 @@ class _PrepareRideState extends State<PrepareRide> {
 
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back)
+            icon: const Icon(Icons.arrow_back_ios_rounded)
         ),
 
-        title: const Text('LocSS'),
+        title: const Text('Search Place to Navigate'),
 
         actions: const [
           // CircleAvatar(backgroundImage: AssetImage('assets/image/person.jpg')),

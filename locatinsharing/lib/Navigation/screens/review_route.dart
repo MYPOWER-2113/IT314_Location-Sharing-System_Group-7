@@ -34,13 +34,12 @@ class _ReviewRideState extends State<ReviewRide> {
     _initialiseDirectionsResponse();
 
     // initialise initialCameraPosition, address and trip end points
-    _initialCameraPosition = CameraPosition(
-        target: getCenterCoordinatesForPolyline(geometry), zoom: 11);
+    _initialCameraPosition = CameraPosition(target: getCenterCoordinatesForPolyline(geometry), zoom: 11);
 
     for (String type in ['source', 'destination']) {
-      _kTripEndPoints
-          .add(CameraPosition(target: getTripLatLngFromSharedPrefs(type)));
+      _kTripEndPoints.add(CameraPosition(target: getTripLatLngFromSharedPrefs(type)));
     }
+
     super.initState();
   }
 
@@ -104,9 +103,22 @@ class _ReviewRideState extends State<ReviewRide> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: const Icon(Icons.arrow_back)),
-        title: const Text('Review Ride'),
+
+            icon: const Icon(Icons.arrow_back_ios_rounded)),
+
+        title: const Text('Review Route'),
+
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
       ),
+
       body: SafeArea(
         child: Stack(
           children: [
@@ -127,6 +139,34 @@ class _ReviewRideState extends State<ReviewRide> {
           ],
         ),
       ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPosition));
+        },
+        elevation: 0,
+        child: Container(
+          height: 70,
+          width: 70,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.redAccent.withOpacity(0.2),
+                spreadRadius: 3,
+                blurRadius: 3,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: const Icon(Icons.my_location),
+        ),
+        backgroundColor: Colors.blueAccent.shade200,
+        foregroundColor: Colors.white,
+      ),
+
+
     );
   }
 }

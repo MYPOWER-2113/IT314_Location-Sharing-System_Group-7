@@ -78,10 +78,10 @@ class _LocationFieldState extends State<LocationField> {
           controller: widget.textEditingController,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           placeholder: placeholderText,
-          placeholderStyle: GoogleFonts.rubik(color: Colors.indigo[300]),
+          placeholderStyle: GoogleFonts.rubik(color: Colors.white),
 
           decoration: BoxDecoration(
-            color: Colors.indigo[100],
+            color: Colors.blueAccent.shade100.withOpacity(0.5),
             borderRadius: const BorderRadius.all(Radius.circular(5)),
           ),
 
