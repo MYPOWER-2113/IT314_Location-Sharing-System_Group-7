@@ -38,7 +38,8 @@ class _LocationFieldState extends State<LocationField> {
     }
 
     setState(() => searchOnStoppedTyping =
-        Timer(const Duration(seconds: 1), () => _searchHandler(value)));
+        Timer(const Duration(seconds: 1), () => _searchHandler(value))
+    );
   }
 
   _searchHandler(String value) async {

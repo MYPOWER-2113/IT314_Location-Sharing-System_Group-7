@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:locatinsharing/homepage.dart';
-import 'package:locatinsharing/main.dart';
-import 'package:locatinsharing/Navigation/screens/navigation.dart';
-import 'package:locatinsharing/SOS/SOS.dart';
-import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
-import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
-import 'package:locatinsharing/FriendFamily/Contacts.dart';
 import 'package:locatinsharing/Splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -77,7 +68,7 @@ void main() async
 
             darkTheme: ThemeData(
               brightness: Brightness.dark,
-              primaryColor: Colors.deepPurple,
+              primaryColor: Colors.blueAccent,
             ),
             home: MySplashScreen(),
             debugShowCheckedModeBanner: false,

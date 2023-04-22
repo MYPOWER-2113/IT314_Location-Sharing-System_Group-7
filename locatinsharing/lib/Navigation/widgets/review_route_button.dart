@@ -27,7 +27,6 @@ Widget reviewRideFaButton(BuildContext context) {
         );
       },
 
-
       backgroundColor: Colors.blueAccent,
       foregroundColor: Colors.white,
 

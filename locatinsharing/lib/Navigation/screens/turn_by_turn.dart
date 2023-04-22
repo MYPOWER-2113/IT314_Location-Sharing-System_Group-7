@@ -99,8 +99,10 @@ class _TurnByTurnState extends State<TurnByTurn> {
         if (!isMultipleStop) {
           await Future.delayed(const Duration(seconds: 3));
           await _controller.finishNavigation();
-        } else {}
+        }
+        else {}
         break;
+
       case MapBoxEvent.navigation_finished:
       case MapBoxEvent.navigation_cancelled:
         routeBuilt = false;

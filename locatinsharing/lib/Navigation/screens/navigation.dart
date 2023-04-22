@@ -308,14 +308,11 @@ class _Navigation extends State<Navigation>{
                                         Text('Where do you wanna go today?'),
                                       ]
                                   )
-
-
                               ),
                             ]
                           ),
                         ),
                       ),
-
                     )
                 )
               ],
@@ -350,9 +347,6 @@ class _Navigation extends State<Navigation>{
 
             floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
         ),
-
-
-
       ],
     );
   }

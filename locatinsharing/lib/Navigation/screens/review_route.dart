@@ -165,8 +165,6 @@ class _ReviewRideState extends State<ReviewRide> {
         backgroundColor: Colors.blueAccent.shade200,
         foregroundColor: Colors.white,
       ),
-
-
     );
   }
 }

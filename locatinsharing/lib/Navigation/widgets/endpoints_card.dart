@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'location_field.dart';
 
 Widget endpointsCard(TextEditingController sourceController,
-    TextEditingController destinationController) {
+    TextEditingController destinationController)
+{
   return Card(
     elevation: 5,
     clipBehavior: Clip.antiAlias,
