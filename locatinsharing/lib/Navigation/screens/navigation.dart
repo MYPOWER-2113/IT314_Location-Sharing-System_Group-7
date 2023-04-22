@@ -268,98 +268,46 @@ class _Navigation extends State<Navigation>{
                   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
                   compassEnabled: true,
                 ),
-                SizedBox(
-                  // width: MediaQuery.of(context).size.width,
-                  // child: Card(
-                  //   clipBehavior: Clip.antiAlias,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(15),
-                  //     child: Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         mainAxisSize: MainAxisSize.min,
-                  //         children: [
-                  //           const Text(
-                  //             'Hi there!',
-                  //             style: TextStyle(
-                  //                 fontSize: 18, fontWeight: FontWeight.bold),
-                  //           ),
-                  //           const SizedBox(height: 20),
-                  //           const Text('You are currently here:'),
-                  //           Text(sharedPreferences.getString('current-address')!,
-                  //               style: const TextStyle(color: Colors.indigo)),
-                  //           const SizedBox(height: 20),
-                  //           ElevatedButton(
-                  //               onPressed: () => Navigator.push(
-                  //                   context,
-                  //                   MaterialPageRoute(
-                  //                       builder: (_) => const PrepareRide())),
-                  //               style: ElevatedButton.styleFrom(
-                  //                   padding: const EdgeInsets.all(20)),
-                  //               child: Row(
-                  //                   mainAxisAlignment: MainAxisAlignment.center,
-                  //                   children: const [
-                  //                     Text('Where do you wanna go today?'),
-                  //                   ])),
-                  //         ]),
-                  //   ),
-                  // ),
 
-                  //height: MediaQuery.of(context).size.height*1,
-                  // child: MapboxMap(
-                  //   accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-                  //   initialCameraPosition: _initialCameraPostion,
-                  //   onMapCreated: _onMapCreated,
-                  //   onStyleLoadedCallback: _onStyleLoadedCallback,
-                  //   myLocationEnabled: true,
-                  //   myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                  //   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
-                  //   compassEnabled: true,
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    clipBehavior: Clip.antiAlias,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              'Hi there!',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 20),
-                            const Text('You are currently here:'),
-                            Text(currAdd,
-                                style: const TextStyle(color: Colors.indigo)),
-                            const SizedBox(height: 20),
-                            ElevatedButton(
-                                onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => const PrepareRide())),
-                                style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(20)),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text('Where do you wanna go today?'),
-                                    ])),
-                          ]),
-                    ),
-                  ),
-                  // height: MediaQuery.of(context).size.height*0.8,
-                  // child: MapboxMap(
-                  //   accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
-                  //   initialCameraPosition: _initialCameraPostion,
-                  //   onMapCreated: _onMapCreated,
-                  //   onStyleLoadedCallback: _onStyleLoadedCallback,
-                  //   myLocationEnabled: true,
-                  //   myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                  //   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
-                  //   compassEnabled: true,
-                  //
-                  // ),
+                Positioned(
+                  bottom: 0,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  'Hi there!',
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 20),
+                                const Text('You are currently here:'),
+                                Text(currAdd,
+                                    style: const TextStyle(color: Colors.indigo)),
+                                const SizedBox(height: 20),
+                                ElevatedButton(
+                                    onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => const PrepareRide())),
+                                    style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.all(20)),
+                                    child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: const [
+                                          Text('Where do you wanna go today?'),
+                                        ])),
+                              ]),
+                        ),
+                      ),
+
+                    )
                 )
               ],
             ),
@@ -373,24 +321,6 @@ class _Navigation extends State<Navigation>{
           ),
         ),
 
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical:100.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Card(
-                child: TextField(
-                  decoration: InputDecoration(
-
-                    contentPadding: EdgeInsets.all(16.0),
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
 
 
       ],

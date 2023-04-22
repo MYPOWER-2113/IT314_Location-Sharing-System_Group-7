@@ -64,7 +64,7 @@ class _PrepareRideState extends State<PrepareRide> {
             icon: const Icon(Icons.arrow_back)),
         title: const Text('Mapbox Cabs'),
         actions: const [
-          CircleAvatar(backgroundImage: AssetImage('assets/image/person.jpg')),
+          // CircleAvatar(backgroundImage: AssetImage('assets/image/person.jpg')),
         ],
       ),
       body: SafeArea(

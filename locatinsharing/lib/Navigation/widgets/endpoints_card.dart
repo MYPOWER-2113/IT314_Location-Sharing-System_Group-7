@@ -26,14 +26,14 @@ Widget endpointsCard(TextEditingController sourceController,
           ),
           Expanded(
             child: Column(
-              // children: [
-              //   LocationField(
-              //       isDestination: false,
-              //       textEditingController: sourceController),
-              //   LocationField(
-              //       isDestination: true,
-              //       textEditingController: destinationController),
-              // ],
+              children: [
+                LocationField(
+                    isDestination: false,
+                    textEditingController: sourceController),
+                LocationField(
+                    isDestination: true,
+                    textEditingController: destinationController),
+              ],
             ),
           ),
         ],
