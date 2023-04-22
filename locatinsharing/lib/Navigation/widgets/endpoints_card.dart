@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'location_field.dart';
 
 Widget endpointsCard(TextEditingController sourceController,
@@ -8,6 +7,7 @@ Widget endpointsCard(TextEditingController sourceController,
     elevation: 5,
     clipBehavior: Clip.antiAlias,
     margin: const EdgeInsets.all(0),
+
     child: Container(
       padding: const EdgeInsets.all(15),
       child: Row(
@@ -24,15 +24,18 @@ Widget endpointsCard(TextEditingController sourceController,
               const Icon(Icons.stop, size: 12),
             ],
           ),
+
           Expanded(
             child: Column(
               children: [
                 LocationField(
                     isDestination: false,
-                    textEditingController: sourceController),
+                    textEditingController: sourceController
+                ),
                 LocationField(
                     isDestination: true,
-                    textEditingController: destinationController),
+                    textEditingController: destinationController
+                ),
               ],
             ),
           ),

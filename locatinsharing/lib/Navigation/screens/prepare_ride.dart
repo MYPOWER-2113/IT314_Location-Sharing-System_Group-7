@@ -35,6 +35,7 @@ class _PrepareRideState extends State<PrepareRide> {
       hasResponded = true;
       isEmptyResponse = responses.isEmpty;
     });
+
     Future.delayed(
       const Duration(milliseconds: 500),
       () => setState(() {
@@ -59,14 +60,30 @@ class _PrepareRideState extends State<PrepareRide> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back)),
-        title: const Text('Mapbox Cabs'),
+            icon: const Icon(Icons.arrow_back)
+        ),
+
+        title: const Text('LocSS'),
+
         actions: const [
           // CircleAvatar(backgroundImage: AssetImage('assets/image/person.jpg')),
         ],
+
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
       ),
+
+
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const ScrollPhysics(),
@@ -75,13 +92,16 @@ class _PrepareRideState extends State<PrepareRide> {
               endpointsCard(sourceController, destinationController),
               isLoading
                   ? const LinearProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white)
+              )
                   : Container(),
               isEmptyResponse
                   ? Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Center(
-                          child: Text(hasResponded ? noResponse : noRequest)))
+                          child: Text(hasResponded ? noResponse : noRequest)
+                      )
+              )
                   : Container(),
               searchListView(responses, isResponseForDestination,destinationController, sourceController),
             ],

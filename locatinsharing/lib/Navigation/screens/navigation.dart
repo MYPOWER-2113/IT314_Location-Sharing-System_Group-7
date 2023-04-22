@@ -270,40 +270,49 @@ class _Navigation extends State<Navigation>{
                 ),
 
                 Positioned(
-                  bottom: 0,
+                  top: 20,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         clipBehavior: Clip.antiAlias,
                         child: Padding(
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(10),
                           child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Text(
-                                  'Hi there!',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 20),
-                                const Text('You are currently here:'),
-                                Text(currAdd,
-                                    style: const TextStyle(color: Colors.indigo)),
-                                const SizedBox(height: 20),
-                                ElevatedButton(
-                                    onPressed: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => const PrepareRide())),
-                                    style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.all(20)),
-                                    child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: const [
-                                          Text('Where do you wanna go today?'),
-                                        ])),
-                              ]),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                'Hello!',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 20),
+                              const Text('You are currently here:'),
+                              Text(currAdd,
+                                  style: const TextStyle(color: Colors.blueAccent)),
+                              const SizedBox(height: 20),
+                              ElevatedButton(
+                                  onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => const PrepareRide()
+                                      )
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(20),
+                                    backgroundColor: Colors.greenAccent.shade200,
+                                  ),
+                                  child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: const [
+                                        Text('Where do you wanna go today?'),
+                                      ]
+                                  )
+
+
+                              ),
+                            ]
+                          ),
                         ),
                       ),
 
@@ -317,8 +326,29 @@ class _Navigation extends State<Navigation>{
             onPressed: (){
               controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPostion));
             },
-            child: const Icon(Icons.my_location),
+            elevation: 0,
+            child: Container(
+                height: 70,
+                width: 70,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  boxShadow: [
+                    BoxShadow(
+                    color: Colors.redAccent.withOpacity(0.2),
+                    spreadRadius: 3,
+                    blurRadius: 3,
+                    offset: Offset(0, 3),
+                ),
+              ],
+            ),
+              child: const Icon(Icons.my_location),
+            ),
+            backgroundColor: Colors.blueAccent.shade700,
+            foregroundColor: Colors.white,
           ),
+
+            floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
         ),
 
 
