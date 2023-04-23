@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:locatinsharing/Navigation/screens/prepare_ride.dart';
+import 'package:locatinsharing/ui/Slide_Page.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
@@ -105,12 +106,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Stack(
       children: [
         Scaffold(
+          drawer: const DrawerScreen(),
           appBar: AppBar(
 
-            leading: IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {},
-            ),
+            // leading: IconButton(
+            //   icon: Icon(Icons.menu),
+            //   onPressed: () => Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (_) => NavBar(),
+            //     )
+            // ),
+            // ),
 
             title: Text("LocSS"),
 
@@ -209,16 +216,16 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Card(
-                child: TextField(
-                  decoration: InputDecoration(
-
-                    contentPadding: EdgeInsets.all(16.0),
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                ),
-              ),
+              // Card(
+              //   child: TextField(
+              //     decoration: InputDecoration(
+              //
+              //       contentPadding: EdgeInsets.all(16.0),
+              //       hintText: "Search",
+              //       prefixIcon: Icon(Icons.search),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
