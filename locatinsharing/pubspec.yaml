@@ -67,7 +67,8 @@ dependencies:
 #  geocoder: ^0.2.1
   geocoding: ^2.1.0
 #  mapbox_navigation: ^1.0.4
-
+  get: ^4.1.4
+  get_storage: ^2.0.2
 
 dev_dependencies:
   flutter_test:

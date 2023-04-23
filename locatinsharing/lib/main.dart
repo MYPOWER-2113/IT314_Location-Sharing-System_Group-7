@@ -20,7 +20,11 @@ import 'package:provider/provider.dart';
 import 'Signin_Signup/auth.dart';
 import 'Signin_Signup/user_provider.dart';
 
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
 late SharedPreferences sharedPreferences;
+
 
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -130,7 +134,8 @@ late SharedPreferences sharedPreferences;
 // }
 
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(
     MultiProvider(
       providers: [
