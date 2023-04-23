@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+
 import 'package:locatinsharing/Signin_Signup/signin.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:locatinsharing/homepage.dart';
-import 'package:locatinsharing/main.dart';
-import 'package:locatinsharing/Navigation/navigation.dart';
-import 'package:locatinsharing/SOS/SOS.dart';
-import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
-import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
-import 'package:locatinsharing/FriendFamily/Contacts.dart';
 import 'package:locatinsharing/Splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -141,7 +135,38 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
+
+      // child: MyApp
+      //   (
+      //     child : MaterialApp(
+      //       title: 'Location Sharing App',
+      //       theme: ThemeData(
+      //
+      //         // Define the default brightness and colors.
+      //         brightness: Brightness.light,
+      //         primaryColor: Colors.lightBlue[400],
+      //
+      //         // Define the default font family.
+      //         fontFamily: 'Gotham',
+      //
+      //         textTheme: const TextTheme(
+      //           displayLarge: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold),
+      //           titleLarge: TextStyle(fontSize: 25.0, /*fontStyle: FontStyle.italic*/),
+      //           bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+      //         ),
+      //       ),
+      //
+      //       darkTheme: ThemeData(
+      //         brightness: Brightness.dark,
+      //         primaryColor: Colors.blueAccent,
+      //       ),
+      //       home: MySplashScreen(),
+      //       debugShowCheckedModeBanner: false,
+      //     )
+      // ),
+
       child: const MyApp(),
+// >>>>>>> main
     ),
   );
 }

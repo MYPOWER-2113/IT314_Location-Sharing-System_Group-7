@@ -4,13 +4,15 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:locatinsharing/Navigation/screens/prepare_ride.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
 
+import 'Slide_nav_bar/Slide_Page.dart';
 import 'homepage.dart';
-import 'Navigation/navigation.dart';
+import 'Navigation/screens/navigation.dart';
 import 'SOS/SOS.dart';
 import 'ShareLoc/ShareLoc.dart';
 import 'NearbyMe/NearbyMe.dart';
@@ -81,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _pageOptions = [
     MyHomePage(),
     SOS(),
-    Navigation(),
+    PrepareRide(),
     ShareLocation(),
     Contacts(),
     NearMe()
@@ -104,13 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Stack(
       children: [
         Scaffold(
+          drawer: const DrawerScreen(),
           appBar: AppBar(
-
-            leading: IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {},
-            ),
-
             title: Text("LocSS"),
 
             actions: <Widget>[
@@ -208,16 +205,16 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Card(
-                child: TextField(
-                  decoration: InputDecoration(
-
-                    contentPadding: EdgeInsets.all(16.0),
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                ),
-              ),
+              // Card(
+              //   child: TextField(
+              //     decoration: InputDecoration(
+              //
+              //       contentPadding: EdgeInsets.all(16.0),
+              //       hintText: "Search",
+              //       prefixIcon: Icon(Icons.search),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

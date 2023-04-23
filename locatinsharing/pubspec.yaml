@@ -45,7 +45,7 @@ dependencies:
   flutter_map: ^3.1.0
 #  carousel_slider: ^4.0.0
 #  dio: ^4.0.4
-  provider: 6.0.5
+  provider: ^6.0.5
   location: ^4.4.0
   shared_preferences: ^2.1.0
   permission_handler: ^10.2.0
@@ -67,9 +67,18 @@ dependencies:
   dio: ^5.1.1
 #  geocoder: ^0.2.1
   geocoding: ^2.1.0
+
+  flutter_mapbox_navigation: ^0.0.26
+#    sdk: flutter
+  flutter_rating_bar: ^4.0.1
+  url_launcher: ^6.1.10
+  firebase_auth: ^4.2.2
+  #  mapbox_navigation: ^1.0.4
+
 #  mapbox_navigation: ^1.0.4
-  get: ^4.1.4
-  get_storage: ^2.0.2
+  get: ^4.6.5
+  get_storage: ^2.1.1
+
 
 dev_dependencies:
   flutter_test:

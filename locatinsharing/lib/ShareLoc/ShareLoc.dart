@@ -14,11 +14,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
-import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/Navigation/screens/navigation.dart';
 import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
+
+import '../../Slide_nav_bar/Slide_Page.dart';
 
 // import 'package:sms/contact.dart';
 import 'package:flutter_sms/flutter_sms.dart';
@@ -32,6 +34,7 @@ import 'package:flutter_sms/flutter_sms.dart';
 //
 // Uri _link = Uri.parse(baseUrl + path + "?lat=$lat&long=$long");
 // // print(_link.toString());
+
 
 
 class ShareLocation extends StatefulWidget {
@@ -129,14 +132,8 @@ class ShareMyLocation extends State<ShareLocation> {
   Widget build(BuildContextontext) {
     return Scaffold(
 
+      drawer: const DrawerScreen(),
       appBar: AppBar(
-
-
-
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
 
         title: Text("Share Location"),
 

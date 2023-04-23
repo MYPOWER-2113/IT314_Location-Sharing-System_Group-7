@@ -9,10 +9,11 @@ import 'package:permission_handler/permission_handler.dart' as per;
 
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
-import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/Navigation/screens/navigation.dart';
 import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
+import '../../Slide_nav_bar/Slide_Page.dart';
 
 
 class Contacts extends StatefulWidget {
@@ -69,14 +70,8 @@ class _ContactsState extends State<Contacts> {
   // ignore: prefer_const_literals_to_create_immutables
   Widget build(BuildContext context) {
     return Scaffold(
-
+      drawer: const DrawerScreen(),
       appBar: AppBar(
-
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
-
         title: Text("Contacts"),
 
         actions: <Widget>[

@@ -15,12 +15,15 @@ import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
-import 'package:locatinsharing/Navigation/navigation.dart';
+import 'package:locatinsharing/Navigation/screens/navigation.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 
+import '../../Slide_nav_bar/Slide_Page.dart';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
 
 
 class SOS extends StatefulWidget {
@@ -78,13 +81,8 @@ class _SOS extends State<SOS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerScreen(),
       appBar: AppBar(
-
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
-
         title: Text("SOS Emergency"),
 
         actions: <Widget>[
