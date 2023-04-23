@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../Slide_nav_bar/Slide_Page.dart';
 import '../widgets/endpoints_card.dart';
 import '../widgets/search_listview.dart';
 import '../widgets/review_route_button.dart';
@@ -59,6 +60,7 @@ class _PrepareRideState extends State<PrepareRide> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerScreen(),
       appBar: AppBar(
 
         leading: IconButton(

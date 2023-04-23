@@ -20,6 +20,8 @@ import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
+import '../../Slide_nav_bar/Slide_Page.dart';
+
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -180,13 +182,8 @@ class _Navigation extends State<Navigation>{
     return Stack(
       children: [
         Scaffold(
+          drawer: const DrawerScreen(),
           appBar: AppBar(
-
-            leading: IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {},
-            ),
-
             title: Text("Navigation"),
 
             actions: <Widget>[

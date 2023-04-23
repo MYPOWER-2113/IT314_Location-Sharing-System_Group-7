@@ -21,6 +21,7 @@ import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
 import '../Navigation/screens/navigation.dart';
+import '../../Slide_nav_bar/Slide_Page.dart';
 
 class NearMe extends StatefulWidget {
   const NearMe({Key? key}) : super(key: key);
@@ -222,13 +223,8 @@ class _NearMeState extends State<NearMe> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      drawer: const DrawerScreen(),
       appBar: AppBar(
-
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
-
         title: Text("Near Me"),
 
         actions: <Widget>[

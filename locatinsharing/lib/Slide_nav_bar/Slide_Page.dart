@@ -9,7 +9,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.account_circle,
-        color: Color(0xFF13C0E3),
+        color: Color(0X82B1FFFF),
       ),
       "title": "Profile",
       "trailing": Icon(
@@ -20,7 +20,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.animation_rounded,
-        color: Color(0xFF13C0E3),
+        color: Color(0X69F0AEFF),
       ),
       "title": "About Us",
       "trailing": Icon(Icons.chevron_right),
@@ -29,7 +29,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.help,
-        color: Color(0xFF13C0E3),
+        color: Color(0X82B1FFFF),
       ),
       "title": "Help",
       "trailing": Icon(Icons.chevron_right),
@@ -38,7 +38,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.settings,
-        color: Color(0xFF13C0E3),
+        color: Color(0X69F0AEFF),
       ),
       "title": "Settings",
       "trailing": Icon(Icons.chevron_right),
@@ -47,7 +47,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.exit_to_app,
-        color: Color(0xFF13C0E3),
+        color: Color(0X82B1FFFF),
       ),
       "title": "Log Out",
       "trailing": Icon(Icons.chevron_right),
