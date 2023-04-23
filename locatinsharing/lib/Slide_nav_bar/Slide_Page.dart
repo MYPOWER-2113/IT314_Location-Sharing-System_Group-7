@@ -129,7 +129,7 @@ class DrawerScreen extends StatelessWidget {
                     else if (sideMenuData['action_id'] == 2) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const Help(),
+                          builder: (context) => Help(),
                         ),
                       );
                     }
