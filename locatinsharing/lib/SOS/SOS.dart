@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:latlong2/latlong.dart' as ll;
 
 //import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -19,6 +20,10 @@ import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 
 import '../../Slide_nav_bar/Slide_Page.dart';
+
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
 
 
 class SOS extends StatefulWidget {
@@ -51,6 +56,27 @@ class _SOS extends State<SOS> {
       MaterialPageRoute(builder: (context) => _pageOptions[index]),
     );
   }
+
+  // for switch state start here
+
+  final switchData = GetStorage();
+  bool isSwitched = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if(switchData.read('isSwitched') != null)
+      {
+        setState(() {
+          isSwitched = switchData.read('isSwitched');
+        });
+      }
+  }
+
+
+
+  // for switch state ends here
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +166,7 @@ class _SOS extends State<SOS> {
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: LiteRollingSwitch(
-                value: false,
+                value: isSwitched,
                 textOn: 'Yes',
                 textOff: 'No',
                 colorOn: Colors.greenAccent,
@@ -148,8 +174,11 @@ class _SOS extends State<SOS> {
                 iconOn: Icons.check,
                 iconOff: Icons.power_settings_new,
                 animationDuration: Duration(milliseconds: 400),
-                onChanged: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
+                onChanged: (value) {
+                  setState(() {
+                    isSwitched = value;
+                    switchData.write('isSwitched', isSwitched);
+                  });
                 },
                 onTap: (bool state) {
                   print('turned ${(state) ? 'yes' : 'no'}');

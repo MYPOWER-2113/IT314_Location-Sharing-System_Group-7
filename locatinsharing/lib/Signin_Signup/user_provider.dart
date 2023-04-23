@@ -3,10 +3,10 @@ import 'package:locatinsharing/Signin_Signup/user.dart';
 
 class UserProvider extends ChangeNotifier {
   User _user = User(
-    //id: '',
+    id: '',
     //name: '',
     email: '',
-    //token: '',
+    token: '',
     password: '',
   );
 
