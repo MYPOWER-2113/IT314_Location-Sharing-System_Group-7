@@ -30,6 +30,43 @@ class ShareLocation extends StatefulWidget {
   State<ShareLocation> createState() => ShareMyLocation();
 }
 
+class People{
+  @override
+  String ? _name, _number;
+  People(String ? name, String ? number)
+  {
+    _name = name;
+    _number = number;
+  }
+}
+
+class MenuItem{
+  final String text;
+  final IconData icon;
+  const MenuItem({
+    required this.text,
+    required this.icon,
+  });
+}
+
+class MenuItems{
+  static const List<MenuItem> itemFirst = [itemProfile,itemSettings];
+  static const List<MenuItem> itemSecond = [itemSignout];
+  static const itemSettings = MenuItem(text: "Settings", icon: Icons.settings);
+  static const itemProfile = MenuItem(text: "Your Profile", icon: Icons.person);
+  static const itemSignout = MenuItem(text: "Sign Out", icon: Icons.logout);
+}
+
+PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem<MenuItem>(
+  value: item,
+    child: Row(
+      children: [
+        Icon(item.icon, color: Colors.black, size: 20),
+        const SizedBox(width: 12),
+        Text(item.text),
+      ],
+    ),
+);
 
 class ShareMyLocation extends State<ShareLocation> {
   @override
@@ -51,14 +88,22 @@ class ShareMyLocation extends State<ShareLocation> {
 
   int _currentIndex = 3;
 
-  String? valueChoose;
+  String valueChoose="Select Contacts";
+  List ppl=[];
   List listItem = [
-    "Contact1","Contact2","Contact3","Contact4","Contact5"
+
+    "Select Contacts"
+    ,"+919664842368","+917014850582","+916353553548","+919313601005"
   ];
 
-  void _sendSMS() async{
-    List<String> recepients=["+919313601005"];
-    await sendSMS(message:"HI there, Its a test message from flutter",recipients:recepients);
+  // double ? _lat;
+  // double ? _long;
+  final lat = 51.05 ;
+  final long = 0.89 ;
+
+  void _sendSMS(String recipitent) async{
+    List<String> recepients=[recipitent];
+    await sendSMS(message:"HI there, Its a test message from flutter. The Google map link is as follows https://www.google.com/maps/@$lat,$long,16z",recipients:recepients);
   }
 
   void _onItemTapped(int index) {
@@ -77,6 +122,8 @@ class ShareMyLocation extends State<ShareLocation> {
     return Scaffold(
       appBar: AppBar(
 
+
+
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {},
@@ -84,9 +131,18 @@ class ShareMyLocation extends State<ShareLocation> {
 
         title: Text("Share Location"),
 
+
         actions: <Widget>[
+          PopupMenuButton<MenuItem>(
+              itemBuilder: (context) => [
+                ...MenuItems.itemFirst.map(buildItem).toList(),
+                PopupMenuDivider(),
+                ...MenuItems.itemSecond.map(buildItem).toList(),
+              ],
+          ),
           IconButton(
             icon: Icon(Icons.notifications_none, size: 30,),
+            // padding:
             onPressed: () {},
           ),
         ],
@@ -167,6 +223,7 @@ class ShareMyLocation extends State<ShareLocation> {
                     ),
                     child: DropdownButton(
                       value: valueChoose,
+                      // hint: Te,
                       hint: Text("Select Contact: "),
                       dropdownColor: Colors.grey,
                       icon: Icon(Icons.arrow_drop_down),
@@ -203,17 +260,18 @@ class ShareMyLocation extends State<ShareLocation> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))
                   ),
                   onPressed: (){
-
-                    _sendSMS();
-                    Fluttertoast.showToast(
-                        msg: "Location Shared",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 10.0
-                    );
+                    if(valueChoose != "Select Contacts") {
+                      _sendSMS(valueChoose);
+                      Fluttertoast.showToast(
+                          msg: "Location Shared",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 10.0
+                      );
+                    }
                   }, child: Text("SEND", style: TextStyle(color: Colors.white,fontSize: 25),)),
             )
           ],
