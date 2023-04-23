@@ -1,6 +1,9 @@
-// import 'package:demosidebar/views/profile_screen.dart';
-// import 'package:demosidebar/views/setting_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:locatinsharing/Slide_nav_bar/About_us.dart';
+import 'package:locatinsharing/Slide_nav_bar/Logout.dart';
+
+import 'Settings.dart';
+import 'help.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -8,24 +11,14 @@ class DrawerScreen extends StatelessWidget {
   final List drawerMenuListname = const [
     {
       "leading": Icon(
-        Icons.account_circle,
-        color: Color(0X82B1FFFF),
-      ),
-      "title": "Profile",
-      "trailing": Icon(
-        Icons.chevron_right,
-      ),
-      "action_id": 1,
-    },
-    {
-      "leading": Icon(
         Icons.animation_rounded,
         color: Color(0X69F0AEFF),
       ),
       "title": "About Us",
       "trailing": Icon(Icons.chevron_right),
-      "action_id": 2,
+      "action_id": 1,
     },
+
     {
       "leading": Icon(
         Icons.help,
@@ -33,8 +26,9 @@ class DrawerScreen extends StatelessWidget {
       ),
       "title": "Help",
       "trailing": Icon(Icons.chevron_right),
-      "action_id": 3,
+      "action_id": 2,
     },
+
     {
       "leading": Icon(
         Icons.settings,
@@ -42,8 +36,9 @@ class DrawerScreen extends StatelessWidget {
       ),
       "title": "Settings",
       "trailing": Icon(Icons.chevron_right),
-      "action_id": 4,
+      "action_id": 3,
     },
+
     {
       "leading": Icon(
         Icons.exit_to_app,
@@ -51,7 +46,7 @@ class DrawerScreen extends StatelessWidget {
       ),
       "title": "Log Out",
       "trailing": Icon(Icons.chevron_right),
-      "action_id": 5,
+      "action_id": 4,
     },
   ];
 
@@ -62,50 +57,99 @@ class DrawerScreen extends StatelessWidget {
         width: 280,
         child: Drawer(
           child: ListView(
+            // Remove padding
+            padding: EdgeInsets.zero,
             children: [
-              const ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://www.channelfutures.com/files/2019/10/Focus-877x432.jpg"),
-                ),
-                title: Text(
-                  "BL Kumawat",
-                  style: TextStyle(
-                    color: Colors.black,
+              UserAccountsDrawerHeader(
+
+                accountName: Text('Oflutter.com'),
+                accountEmail: Text('example@gmail.com'),
+
+                currentAccountPicture: CircleAvatar(
+                  child: ClipOval(
+                    child: Image.network(
+                      'https://oflutter.com/wp-content/uploads/2021/02/girl-profile.png',
+                      fit: BoxFit.cover,
+                      width: 90,
+                      height: 90,
+                    ),
                   ),
                 ),
-                subtitle: Text(
-                  "7014333352",
-                  style: TextStyle(
-                    color: Colors.black,
+
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage('https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg')
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 1,
-              ),
+          // child: ListView(
+          //   children: [
+          //     const ListTile(
+          //       leading: CircleAvatar(
+          //         backgroundImage: NetworkImage(
+          //             "https://www.channelfutures.com/files/2019/10/Focus-877x432.jpg"),
+          //       ),
+          //       title: Text(
+          //         "BL Kumawat",
+          //         style: TextStyle(
+          //           color: Colors.black,
+          //         ),
+          //       ),
+          //       subtitle: Text(
+          //         "7014333352",
+          //         style: TextStyle(
+          //           color: Colors.black,
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(
+          //       height: 1,
+          //     ),
               ...drawerMenuListname.map((sideMenuData) {
+
                 return ListTile(
                   leading: sideMenuData['leading'],
                   title: Text(
                     sideMenuData['title'],
                   ),
                   trailing: sideMenuData['trailing'],
+
                   onTap: () {
-                    // Navigator.pop(context);
-                    // if (sideMenuData['action_id'] == 1) {
-                    //   Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const ProfileScreen(),
-                    //     ),
-                    //   );
-                    // } else if (sideMenuData['action_id'] == 4) {
-                    //   Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const SettingScreen(),
-                    //     ),
-                    //   );
-                    // }
+                    Navigator.pop(context);
+                    if (sideMenuData['action_id'] == 1) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AboutUs(),
+                        ),
+                      );
+                    }
+
+                    else if (sideMenuData['action_id'] == 2) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const Help(),
+                        ),
+                      );
+                    }
+
+                    else if (sideMenuData['action_id'] == 3) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SettingScreen(),
+                        ),
+                      );
+                    }
+
+                    else if (sideMenuData['action_id'] == 4) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const Logout(),
+                        ),
+                      );
+                    }
+
                   },
                 );
               }).toList(),

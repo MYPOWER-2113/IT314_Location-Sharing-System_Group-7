@@ -68,6 +68,7 @@ dependencies:
   flutter_mapbox_navigation: ^0.0.26
 #    sdk: flutter
   flutter_rating_bar: ^4.0.1
+  url_launcher: ^6.1.10
   #  mapbox_navigation: ^1.0.4
 
 
