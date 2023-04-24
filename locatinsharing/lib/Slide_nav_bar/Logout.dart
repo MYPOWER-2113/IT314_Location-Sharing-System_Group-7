@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:locatinsharing/Signin_Signup/signin.dart';
+import 'package:locatinsharing/homepage.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
 
 class Logout extends StatelessWidget {
@@ -18,13 +20,17 @@ class Logout extends StatelessWidget {
             TextButton(
               child: Text('No'),
               onPressed: () {
-                Navigator.of(context).pop(false);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => MyHomePage())
+                );
               },
             ),
             TextButton(
               child: Text('Yes'),
               onPressed: () async {
-                Navigator.of(context).pop(true);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => Signin())
+                );
               },
             ),
           ],
@@ -32,37 +38,69 @@ class Logout extends StatelessWidget {
       },
     );
 
-    if (confirm == true) {
-      // await _auth.signOut();
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/signin',
-            (route) => false,
-      );
-    }
+    // if (confirm == true) {
+    //   // await _auth.signOut();
+    //   // Navigator.pushNamedAndRemoveUntil(
+    //   //   context,
+    //   //   '/signin',
+    //   //       (route) => false,
+    //   // );
+    //
+    //   Navigator.push(context,
+    //       MaterialPageRoute(builder: (c) => Signin())
+    //   );
+
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Logout'),
-        //backgroundColor: Colors.cyan,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft,
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            title: const Text('Logout'),
+            //backgroundColor: Colors.cyan,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
 
-      body: const Center(
-          child: Text('Logout')
-      ),
+          body: const Center(
+            child: Text('Logout')
+          ),
+        ),
+
+        AlertDialog(
+          title: Text('Log Out'),
+          content: Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+          TextButton(
+            child: Text('No'),
+            onPressed: () {
+            Navigator.of(context).pop(false);
+            },
+          ),
+
+          TextButton(
+              child: Text('Yes'),
+              onPressed: () async {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        ),
+      ],
     );
+
+
+
   }
 }
 
