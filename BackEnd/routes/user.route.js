@@ -8,20 +8,28 @@ const bcryptjs = require("bcryptjs");
 // Sign Up
 router.post("/signup", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name , email, password, number} = req.body;
 
-    const existingUser = await User.findOne({email});
+    existingUser = (await User.findOne({email})) ;
     if (existingUser) {
       return res
         .status(400)
         .json({ msg: "User with same email already exists!" });
     }
+    existingUser = (await User.findOne({number})) ;
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ msg: "User with same number already exists!" });
+    }
 
     const hashedPassword = await bcryptjs.hash(password, 8);
 
     let user = new User({
+      name,
       email,
       password: hashedPassword,
+      number,
     });
     user = await user.save();
     res.json(user);
@@ -33,7 +41,7 @@ router.post("/signup", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password} = req.body;
 
     const user = await User.findOne({email});
     if (!user) {

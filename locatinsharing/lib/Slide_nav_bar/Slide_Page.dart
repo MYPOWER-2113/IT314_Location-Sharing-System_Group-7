@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:locatinsharing/Slide_nav_bar/About_us.dart';
 import 'package:locatinsharing/Slide_nav_bar/Logout.dart';
-
+import 'package:locatinsharing/Signin_Signup/user.dart';
+import 'package:provider/provider.dart';
+import '../Signin_Signup/user_provider.dart';
 import 'Settings.dart';
 import 'help.dart';
 
@@ -52,6 +54,7 @@ class DrawerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return SafeArea(
       child: SizedBox(
         width: 280,
@@ -61,9 +64,8 @@ class DrawerScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-
-                accountName: Text('Oflutter.com'),
-                accountEmail: Text('example@gmail.com'),
+                accountName: Text(user.name),
+                accountEmail: Text(user.email),
 
                 decoration: BoxDecoration(
                   color: Colors.blue,

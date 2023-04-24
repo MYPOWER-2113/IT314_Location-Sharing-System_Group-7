@@ -10,25 +10,28 @@ import 'package:http/http.dart' as http;
 import 'package:locatinsharing/Signin_Signup/user_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'constants.dart';
 
 class AuthService {
   void signUpUser({
     required BuildContext context,
     required String email,
     required String password,
-    //required String name,
+    required String name,
+    required String number,
   }) async {
     try {
       User user = User(
         id: '',
-        //name: name,
+        name: name,
         password: password,
         email: email,
         token: '',
+        number: number,
       );
 
       http.Response res = await http.post(
-        Uri.parse('http://10.200.8.251:8080/signup'),
+        Uri.parse('${Constants.uri}/signup'),
         body: user.toJson(),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -60,7 +63,7 @@ class AuthService {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       final navigator = Navigator.of(context);
       http.Response res = await http.post(
-        Uri.parse("http://10.200.8.251:8080/signin"),
+        Uri.parse("${Constants.uri}/signin"),
         body: jsonEncode({
           'email': email,
           'password': password,
@@ -103,7 +106,7 @@ class AuthService {
       }
 
       var tokenRes = await http.post(
-        Uri.parse('http://10.200.8.251:8080/tokenIsValid'),
+        Uri.parse('${Constants.uri}/tokenIsValid'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': token!,
@@ -114,7 +117,7 @@ class AuthService {
 
       if (response == true) {
         http.Response userRes = await http.get(
-          Uri.parse('http://10.200.8.251:8080/'),
+          Uri.parse('${Constants.uri}/'),
           headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8', 'x-auth-token': token},
         );
 

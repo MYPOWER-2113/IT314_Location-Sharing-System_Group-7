@@ -31,8 +31,10 @@ class _SignupState extends State<Signup> {
   //   Navigator.push(context, new MaterialPageRoute(builder: (context)=>Signin()));
   // }
 
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
   final AuthService authService = AuthService();
 
   void signupUser() {
@@ -41,7 +43,8 @@ class _SignupState extends State<Signup> {
       context: context,
       email: emailController.text,
       password: passwordController.text,
-      //name: nameController.text,
+      name: nameController.text,
+      number: numberController.text,
     );
   }
 
@@ -65,7 +68,17 @@ class _SignupState extends State<Signup> {
                     const SizedBox(height: 150,),
                     Text("Signiup", style: GoogleFonts.pacifico(fontWeight: FontWeight.bold, fontSize: 50, color: Colors.blue),
                     ),
-                    const SizedBox(height: 25,),
+
+                    const SizedBox(height: 20),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomTextField(
+                        controller: nameController,
+                        hintText: 'Enter your Name',
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomTextField(
@@ -80,6 +93,15 @@ class _SignupState extends State<Signup> {
                       child: CustomTextField(
                         controller: passwordController,
                         hintText: 'Enter your password',
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomTextField(
+                        controller: numberController,
+                        hintText: 'Enter your mobile number',
                       ),
                     ),
 
