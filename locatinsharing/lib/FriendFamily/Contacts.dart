@@ -1,4 +1,6 @@
 // import 'package:contacts_service/contacts_service.dart';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
@@ -6,6 +8,7 @@ import 'package:latlong2/latlong.dart' as latLng;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
+import 'package:flutter_contacts/flutter_contacts.dart';
 
 import 'package:locatinsharing/homepage.dart';
 import 'package:locatinsharing/main.dart';
@@ -24,6 +27,14 @@ class Contacts extends StatefulWidget {
 }
 
 class _ContactsState extends State<Contacts> {
+
+  List<Contact>? contacts ;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getContact();
+  }
 
   //navigation bar
 
@@ -66,6 +77,15 @@ class _ContactsState extends State<Contacts> {
   //   });
   // }
 
+
+  void getContact() async {
+    if (await FlutterContacts.requestPermission()) {
+      contacts = await FlutterContacts.getContacts(
+          withProperties: true, withPhoto: true);
+
+      setState(() {});
+    }
+  }
   @override
   // ignore: prefer_const_literals_to_create_immutables
   Widget build(BuildContext context) {
@@ -140,13 +160,21 @@ class _ContactsState extends State<Contacts> {
         selectedFontSize: 15,
       ),
 
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: <Widget>[
-            Text(
-              'Contact List',
-            ),
+      body: (contacts) == null
+        ? Center(child: CircularProgressIndicator())
+        : ListView.builder(
+          itemCount: contacts!.length,
+        itemBuilder: (BuildContext context, int index){
+          Uint8List? image = contacts![index].photo;
+          String number = (contacts![index].phones.isNotEmpty) ? (contacts![index].phones.first.number) : "--";
+            return ListTile(
+              leading: (contacts![index].photo == null)
+                  ? const CircleAvatar(child: Icon(Icons.person))
+                  : CircleAvatar(backgroundImage: MemoryImage(image!)),
+              title: Text(contacts![index].name.first),
+              subtitle: Text(number),
+            );
+        }
             // ListView.builder(
             //   shrinkWrap: true,
             //   itemCount: contacts.length,
@@ -162,10 +190,10 @@ class _ContactsState extends State<Contacts> {
             //     // );
             //   },
             // ),
-          ],
-        ),
-      ),
-    );
+
+        ));
+
+
   }
 }
 

@@ -66,6 +66,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
 
+
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.blueAccent.shade200,
@@ -74,6 +75,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
 
       home:MySplashScreen(),
+
     );
   }
 }
