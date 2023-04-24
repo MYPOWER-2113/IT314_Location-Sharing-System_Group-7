@@ -55,16 +55,16 @@ class _ReviewRideState extends State<ReviewRide> {
   }
 
   _onStyleLoadedCallback() async {
-    // for (int i = 0; i < _kTripEndPoints.length; i++) {
-    //   String iconImage = i == 0 ? 'circle' : 'square';
-    //   await controller.addSymbol(
-    //     SymbolOptions(
-    //       geometry: _kTripEndPoints[i].target,
-    //       iconSize: 0.1,
-    //       iconImage: "assets/icon/$iconImage.png",
-    //     ),
-    //   );
-    // }
+    for (int i = 0; i < _kTripEndPoints.length; i++) {
+      String iconImage = i == 0 ? 'circle' : 'square';
+      await controller.addSymbol(
+        SymbolOptions(
+          geometry: _kTripEndPoints[i].target,
+          iconSize: 0.1,
+          iconImage: "assets/icon/$iconImage.png",
+        ),
+      );
+    }
     _addSourceAndLineLayer();
   }
 

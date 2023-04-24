@@ -32,7 +32,8 @@ class Navigation extends StatefulWidget {
 
 class _Navigation extends State<Navigation>{
 
-  late LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!) ;
+  late LatLng ltlg = getCurrentLatLngFromSharedPrefs();
+  // LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!) ;
   late CameraPosition _initialCameraPostion;
   late MapboxMapController controller;
   late CameraPosition dest=CameraPosition(target: LatLng(72.63394,23.196299),zoom: 15);
@@ -44,7 +45,7 @@ class _Navigation extends State<Navigation>{
   void initState() {
     super.initState();
 
-    initializeLocationAndSave();
+    // initializeLocationAndSave();
     _initialCameraPostion = CameraPosition(target: ltlg as LatLng,zoom: 15);
     currAdd = getCurrentAddressFromSharedPrefs();
 
@@ -56,43 +57,43 @@ class _Navigation extends State<Navigation>{
     // Initialize map symbols
   }
 
-  void initializeLocationAndSave() async {
-    // Ensure all permissions are collected for Locations
-    Location _location = Location();
-    bool? _serviceEnabled;
-    PermissionStatus? _permissionGranted;
-
-    _serviceEnabled = await _location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await _location.requestService();
-    }
-
-    _permissionGranted = await _location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _location.requestPermission();
-    }
-
-    // Get capture the current user location
-    LocationData _locationData = await _location.getLocation();
-
-    LatLng currentLatLng = LatLng( _locationData.latitude!, _locationData.longitude!);
-    String currentAddress = (await getParsedReverseGeocoding(currentLatLng))['place'];
-    // String mp = (await getParsedReverseGeocoding(currentLatLng))['place']!;
-    // String _currentAddress = mp['place'];
-    // print(_currentAddress);
-    // Store the user location in sharedPreferences
-    // print(currentAddress);
-    sharedPreferences.setDouble('latitude', _locationData.latitude!);
-    sharedPreferences.setDouble('longitude', _locationData.longitude!);
-
-    sharedPreferences.setString('current-address', currentAddress);
-
-    // Get and store the directions API repsonse in sharedPreferences
-    // print("${currentLatLng.latitude},${currentLatLng.longitude}");
-    Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng,LatLng(26.915458,75.818982));
-    saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
-
-  }
+  // void initializeLocationAndSave() async {
+  //   // Ensure all permissions are collected for Locations
+  //   Location _location = Location();
+  //   bool? _serviceEnabled;
+  //   PermissionStatus? _permissionGranted;
+  //
+  //   _serviceEnabled = await _location.serviceEnabled();
+  //   if (!_serviceEnabled) {
+  //     _serviceEnabled = await _location.requestService();
+  //   }
+  //
+  //   _permissionGranted = await _location.hasPermission();
+  //   if (_permissionGranted == PermissionStatus.denied) {
+  //     _permissionGranted = await _location.requestPermission();
+  //   }
+  //
+  //   // Get capture the current user location
+  //   LocationData _locationData = await _location.getLocation();
+  //
+  //   LatLng currentLatLng = LatLng( _locationData.latitude!, _locationData.longitude!);
+  //   String currentAddress = (await getParsedReverseGeocoding(currentLatLng))['place'];
+  //   // String mp = (await getParsedReverseGeocoding(currentLatLng))['place']!;
+  //   // String _currentAddress = mp['place'];
+  //   // print(_currentAddress);
+  //   // Store the user location in sharedPreferences
+  //   // print(currentAddress);
+  //   sharedPreferences.setDouble('latitude', _locationData.latitude!);
+  //   sharedPreferences.setDouble('longitude', _locationData.longitude!);
+  //
+  //   sharedPreferences.setString('current-address', currentAddress);
+  //
+  //   // Get and store the directions API repsonse in sharedPreferences
+  //   // print("${currentLatLng.latitude},${currentLatLng.longitude}");
+  //   Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng,LatLng(26.915458,75.818982));
+  //   saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
+  //
+  // }
 
 
   _addSourceAndLineLayer() async {
