@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _pageOptions = [
     MyHomePage(),
     SOS(),
-    PrepareRide(),
+    Navigation(),
     ShareLocation(),
     Contacts(),
     NearMe()
