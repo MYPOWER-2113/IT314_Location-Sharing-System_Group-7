@@ -31,7 +31,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
     Timer(const Duration(seconds: 3), () async{
       // send user to home screen
 
-      Navigator.push(context, MaterialPageRoute(builder: (c) => Provider.of<UserProvider>(context).user.token.isEmpty ? const Signin() : const MyHomePage()));
+      Navigator.push(context, MaterialPageRoute(builder: (c) => Provider.of<UserProvider>(context).user.token.isEmpty ? const MyHomePage() : const MyHomePage()));
       // Navigator.push(context,
       //     MaterialPageRoute(builder: (c) => MyHomePage())
       // );
