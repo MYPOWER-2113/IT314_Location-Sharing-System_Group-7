@@ -327,15 +327,7 @@ class _SignupState extends State<Signup> {
                                     BorderRadius.circular(50), // <-- Radius
                                   ),
                                 ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                        const MyHomePage()),
-                                  );
-                                },
-
+                                onPressed: signupUser,
                                 child: Text(
                                   "Sign Up",
                                   style: GoogleFonts.poppins(
