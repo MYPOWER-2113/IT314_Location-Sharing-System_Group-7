@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:latlong2/latlong.dart' as ll;
@@ -24,6 +27,11 @@ import '../../Slide_nav_bar/Slide_Page.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'package:flutter_android_volume_keydown/flutter_android_volume_keydown.dart';
+
+int _volumeButtonPressCount = 0;
+DateTime _lastVolumeButtonPressTime = DateTime.now();
+
 
 
 class SOS extends StatefulWidget {
@@ -31,6 +39,7 @@ class SOS extends StatefulWidget {
   @override
   State<SOS> createState() => _SOS();
 }
+
 
 class _SOS extends State<SOS> {
 
@@ -57,10 +66,11 @@ class _SOS extends State<SOS> {
     );
   }
 
-  // for switch state start here
 
-  final switchData = GetStorage();
+  // for switch state start here
   bool isSwitched = false;
+  final switchData = GetStorage();
+
 
   @override
   void initState() {
@@ -73,10 +83,11 @@ class _SOS extends State<SOS> {
         });
       }
   }
-
-
-
   // for switch state ends here
+
+
+  // -----> if switch is on activate volume button to take input
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +96,14 @@ class _SOS extends State<SOS> {
       appBar: AppBar(
         title: Text("SOS Emergency"),
 
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications_none, size: 30,),
+            onPressed: () {},
+          ),
+        ],
+
+        //backgroundColor: Colors.cyan,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -95,6 +114,7 @@ class _SOS extends State<SOS> {
           ),
         ),
       ),
+
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -148,6 +168,8 @@ class _SOS extends State<SOS> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            
+
             Text("SOS messaging",style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -159,21 +181,28 @@ class _SOS extends State<SOS> {
               padding: EdgeInsets.only(top: 10),
               child: LiteRollingSwitch(
                 value: isSwitched,
-                textOn: 'Yes',
-                textOff: 'No',
+                textOn: 'On',
+                textOff: 'Off',
                 colorOn: Colors.greenAccent,
                 colorOff: Colors.redAccent,
                 iconOn: Icons.check,
                 iconOff: Icons.power_settings_new,
                 animationDuration: Duration(milliseconds: 400),
                 onChanged: (value) {
+
                   setState(() {
                     isSwitched = value;
                     switchData.write('isSwitched', isSwitched);
+                    // if(value) {
+                    //   VolumeButtonListener();
+                    // }
                   });
                 },
                 onTap: (bool state) {
                   print('turned ${(state) ? 'yes' : 'no'}');
+                  // if(state) {
+                  //   VolumeButtonListener();
+                  // }
                 },
                 onDoubleTap: (bool state) {
                   print('turned ${(state) ? 'yes' : 'no'}');
@@ -182,12 +211,118 @@ class _SOS extends State<SOS> {
                   print('turned ${(state) ? 'yes' : 'no'}');
                 },
               ),
-            )
+            ),
+            if (isSwitched) // Display this only if the switch is turned on
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                child: Text('The switch is turned on!'),
+
+              ),
           ],
-
         ),
-      ),
-
+        ),
     );
+  }
+}
+
+// class VolumeButtonListener extends State<SOS> {
+//   @override
+//   _VolumeButtonListenerState createState() => _VolumeButtonListenerState();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//    TODO: implement build
+//     throw UnimplementedError();
+//   }
+// }
+//
+// class _VolumeButtonListenerState extends State<VolumeButtonListener> {
+//   // Track the number of times the volume button has been pressed
+//
+//   // Handle the volume button press
+//   void _handleVolumeButtonPress() {
+//     setState(() {
+//       _volumeButtonPressCount++;
+//     });
+//       // Volume button has been pressed three or more times, do something here
+//       // For example, show a toast message or perform an action
+//       DateTime now = DateTime.now();
+//       if (now.difference(_lastVolumeButtonPressTime) > Duration(seconds: 5)) {
+//         // reset the press count if the last press was more than 2 seconds ago
+//         _volumeButtonPressCount = 0;
+//       }
+//       else {
+//         _lastVolumeButtonPressTime = now;
+//         if (_volumeButtonPressCount >= 3) {
+//           print('Volume button pressed three or more times');
+//           // send message
+//
+//           _volumeButtonPressCount = 0;
+//         }
+//       }
+//     }
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return RawKeyboardListener(
+//       focusNode: FocusNode(),
+//       onKey: (RawKeyEvent event) {
+//         while (event is RawKeyDownEvent) {
+//           while (event. == PhysicalKeyboardKey.audioVolumeDown ||
+//               event.physicalKey == PhysicalKeyboardKey.audioVolumeUp) {
+//             // Call the volume button press handler
+//             _handleVolumeButtonPress();
+//           }
+//         }
+//       },
+//       child: Container(
+//         // Your app's UI goes here
+//         child: Text('Press the volume button three times'),
+//       ),
+//     );
+//   }
+// }
+
+class _MyAppState extends State<SOS> {
+  StreamSubscription<HardwareButton>? subscription;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void startListening() {
+    subscription = FlutterAndroidVolumeKeydown.stream.listen((event) {
+      if (event == HardwareButton.volume_down) {
+        print("Volume down received");
+      } else if (event == HardwareButton.volume_up) {
+        print("Volume up received");
+      }
+    });
+  }
+
+  void stopListening() {
+    subscription?.cancel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              ElevatedButton(
+                  onPressed: startListening,
+                  child: const Text("Start listening")),
+              ElevatedButton(
+                  onPressed: stopListening,
+                  child: const Text("Stop listening")),
+            ],
+          ),
+        ),
+      );
   }
 }
