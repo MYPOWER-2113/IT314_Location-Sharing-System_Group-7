@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mapbox_search_flutter/mapbox_search_flutter.dart';
 import '../../Slide_nav_bar/Slide_Page.dart';
 import '../widgets/endpoints_card.dart';
 import '../widgets/search_listview.dart';
@@ -66,6 +67,7 @@ class _PrepareRideState extends State<PrepareRide> {
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.arrow_back_ios_rounded)
+
         ),
 
         title: const Text('Search Place to Navigate'),
