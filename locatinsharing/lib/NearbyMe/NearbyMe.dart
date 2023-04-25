@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 // import 'package:latlong2/latlong.dart';
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
 import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
@@ -25,12 +26,12 @@ import '../../Slide_nav_bar/Slide_Page.dart';
 
 class NearMe extends StatefulWidget {
   const NearMe({Key? key}) : super(key: key);
+
   @override
   State<NearMe> createState() => _NearMeState();
 }
 
 class _NearMeState extends State<NearMe> {
-
   // @override
   // void initState() {
   //   super.initState();
@@ -74,10 +75,13 @@ class _NearMeState extends State<NearMe> {
   //           (route) => false);
   // }
 
-  late LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!) ;
+  late LatLng ltlg = LatLng(sharedPreferences.getDouble('latitude')!,
+      sharedPreferences.getDouble('longitude')!);
+
   late CameraPosition _initialCameraPostion;
   late MapboxMapController controller;
-  late CameraPosition dest=CameraPosition(target: LatLng(72.63394,23.196299),zoom: 15);
+  late CameraPosition dest =
+      CameraPosition(target: LatLng(72.63394, 23.196299), zoom: 15);
   late String currAdd;
 
   // late Map _data;
@@ -87,14 +91,14 @@ class _NearMeState extends State<NearMe> {
     super.initState();
 
     initializeLocationAndSave();
-    _initialCameraPostion = CameraPosition(target: ltlg as LatLng,zoom: 15);
+    _initialCameraPostion = CameraPosition(target: ltlg as LatLng, zoom: 15);
     currAdd = getCurrentAddressFromSharedPrefs();
 
     // Map response = json.decode(sharedPreferences.getString('destination')!);
     // num distance = response['distance']/1000;
     // num duration = response['duration']/60;
 
-    dest=CameraPosition(target: LatLng(23.196299,72.63394),zoom: 15);
+    dest = CameraPosition(target: LatLng(23.196299, 72.63394), zoom: 15);
     // Initialize map symbols
   }
 
@@ -117,8 +121,10 @@ class _NearMeState extends State<NearMe> {
     // Get capture the current user location
     LocationData _locationData = await _location.getLocation();
 
-    LatLng currentLatLng = LatLng( _locationData.latitude!, _locationData.longitude!);
-    String currentAddress = (await getParsedReverseGeocoding(currentLatLng))['place'];
+    LatLng currentLatLng =
+        LatLng(_locationData.latitude!, _locationData.longitude!);
+    String currentAddress =
+        (await getParsedReverseGeocoding(currentLatLng))['place'];
     // String mp = (await getParsedReverseGeocoding(currentLatLng))['place']!;
     // String _currentAddress = mp['place'];
     // print(_currentAddress);
@@ -131,9 +137,9 @@ class _NearMeState extends State<NearMe> {
 
     // Get and store the directions API repsonse in sharedPreferences
     // print("${currentLatLng.latitude},${currentLatLng.longitude}");
-    Map modifiedresponse = await getDirectionsAPIResponse(currentLatLng,LatLng(26.915458,75.818982));
+    Map modifiedresponse = await getDirectionsAPIResponse(
+        currentLatLng, LatLng(26.915458, 75.818982));
     saveDirectionsAPIResponse(jsonEncode(modifiedresponse));
-
   }
 
   _addSourceAndLineLayer() async {
@@ -142,7 +148,7 @@ class _NearMeState extends State<NearMe> {
 
     //  add a polyline between source and Destination
     late String? key;
-    key=sharedPreferences.getString('destiny')!;
+    key = sharedPreferences.getString('destiny')!;
     Map resp = json.decode(key);
     Map geometry = resp['geometry'];
     //   Map geometry = getGeometryFromSharedPrefs("destiny");
@@ -152,7 +158,7 @@ class _NearMeState extends State<NearMe> {
         {
           "type": "Feature",
           "id": 0,
-          "properties": <String,dynamic>{},
+          "properties": <String, dynamic>{},
           "geometry": geometry,
         },
       ]
@@ -179,25 +185,24 @@ class _NearMeState extends State<NearMe> {
   }
 
   _onMapCreated(MapboxMapController controller) async {
-    this.controller=controller;
+    this.controller = controller;
   }
 
   _onStyleLoadedCallback() async {
-    late CameraPosition des=dest;
+    late CameraPosition des = dest;
     await controller.addSymbol(
       SymbolOptions(
         geometry: des.target,
         iconSize: 0.1,
         iconImage: "images/Variety-fruits-vegetables.png",
       ),
-    ) ;
+    );
 
     _addSourceAndLineLayer();
   }
 
   int selectedPage = 5;
   final _pageOptions = [
-
     MyHomePage(),
     SOS(),
     Navigation(),
@@ -221,7 +226,6 @@ class _NearMeState extends State<NearMe> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
@@ -238,55 +242,63 @@ class _NearMeState extends State<NearMe> {
           ),
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blue[900],
         onTap: _onItemTapped,
-
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 30,),
+            icon: Icon(
+              Icons.home,
+              size: 30,
+            ),
             label: 'Home',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.emergency_share, size: 30,),
+            icon: Icon(
+              Icons.emergency_share,
+              size: 30,
+            ),
             label: 'SOS Share',
             backgroundColor: Colors.blueAccent.shade100,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.navigation, size: 30,),
+            icon: Icon(
+              Icons.navigation,
+              size: 30,
+            ),
             label: 'Navigation',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.share_location_sharp, size: 30,),
+            icon: Icon(
+              Icons.share_location_sharp,
+              size: 30,
+            ),
             label: 'ShareLocation',
             backgroundColor: Colors.blueAccent.shade100,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_4, size: 30,),
+            icon: Icon(
+              Icons.person_4,
+              size: 30,
+            ),
             label: 'Contacts',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.near_me_rounded, size: 30,),
+            icon: Icon(
+              Icons.near_me_rounded,
+              size: 30,
+            ),
             label: 'Near Me',
             backgroundColor: Colors.blueAccent.shade100,
           ),
         ],
-
         elevation: 50,
         selectedFontSize: 15,
       ),
-
-
       body: SafeArea(
         child: Stack(
           children: [
@@ -303,10 +315,10 @@ class _NearMeState extends State<NearMe> {
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPostion));
+        onPressed: () {
+          controller.animateCamera(
+              CameraUpdate.newCameraPosition(_initialCameraPostion));
         },
         elevation: 0,
         child: Container(
@@ -329,7 +341,6 @@ class _NearMeState extends State<NearMe> {
         backgroundColor: Colors.blueAccent.shade200,
         foregroundColor: Colors.white,
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }

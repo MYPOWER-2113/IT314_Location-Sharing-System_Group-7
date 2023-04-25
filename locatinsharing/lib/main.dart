@@ -1,14 +1,14 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_map/flutter_map.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
+
 // import 'package:latlong2/latlong.dart' as latLng;
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
 import 'package:locatinsharing/Signin_Signup/signin.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
+
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
 
   @override
-  void initState(){
+  void initState() {
     // sharedPreferences = await SharedPreferences.getInstance();
 
     super.initState();
@@ -77,8 +77,10 @@ class _MyAppState extends State<MyApp> {
     // Get capture the current user location
     LocationData _locationData = await _location.getLocation();
 
-    LatLng currentLatLng = LatLng( _locationData.latitude!, _locationData.longitude!);
-    String currentAddress = (await getParsedReverseGeocoding(currentLatLng))['place'];
+    LatLng currentLatLng =
+        LatLng(_locationData.latitude!, _locationData.longitude!);
+    String currentAddress =
+        (await getParsedReverseGeocoding(currentLatLng))['place'];
     // String mp = (await getParsedReverseGeocoding(currentLatLng))['place']!;
     // String _currentAddress = mp['place'];
     // print(_currentAddress);
@@ -110,23 +112,19 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'Gotham',
 
         textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize:40.0, fontWeight: FontWeight.bold),
-          titleLarge: TextStyle(fontSize: 25.0, /*fontStyle: FontStyle.italic*/),
+          displayLarge: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+          titleLarge: TextStyle(
+            fontSize: 25.0, /*fontStyle: FontStyle.italic*/
+          ),
           bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-
         ),
       ),
-
-
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.blueAccent.shade200,
       ),
-
       debugShowCheckedModeBanner: false,
-
-      home:MySplashScreen(),
-
+      home: MySplashScreen(),
     );
   }
 }

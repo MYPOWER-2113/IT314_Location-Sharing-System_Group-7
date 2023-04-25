@@ -9,6 +9,7 @@ import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
 import 'package:locatinsharing/Navigation/requests/mapbox_requests.dart';
 import 'package:locatinsharing/Navigation/screens/prepare_ride.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
+
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
@@ -30,6 +31,7 @@ import 'main.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 
@@ -38,7 +40,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  CameraPosition cameraPos=CameraPosition(target: getCurrentLatLngFromSharedPrefs(),zoom: 15.0);
+  CameraPosition cameraPos =
+      CameraPosition(target: getCurrentLatLngFromSharedPrefs(), zoom: 15.0);
   TextEditingController sourceController = TextEditingController();
   MapController mapcontrol = MapController();
   late MapboxMapController mapController;
@@ -60,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Future.delayed(
       const Duration(milliseconds: 500),
-          () => setState(() {
+      () => setState(() {
         isLoading = false;
       }),
     );
@@ -149,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _onmapcreated(MapboxMapController controller){
+  void _onmapcreated(MapboxMapController controller) {
     mapController = controller;
   }
 
@@ -275,17 +278,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
                   // compassEnabled: true,
                 ),
-
                 SafeArea(
                   child: SingleChildScrollView(
                     physics: const ScrollPhysics(),
                     child: Column(
                       children: [
                         endpCard(sourceController),
-                        isLoading ? const LinearProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)
-                        ) : Container(),
-                        isEmptyResponse ? Padding(padding: const EdgeInsets.only(top: 20), child: Center(child: Text(hasResponded ? noResponse : noRequest))
-                        ) : Container(),
+                        isLoading
+                            ? const LinearProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.black))
+                            : Container(),
+                        isEmptyResponse
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Center(
+                                    child: Text(
+                                        hasResponded ? noResponse : noRequest)))
+                            : Container(),
                         // searchView(responses, sourceController, mapController),
                         ListView.builder(
                           shrinkWrap: true,
@@ -298,26 +308,29 @@ class _MyHomePageState extends State<MyHomePage> {
                                   onTap: () {
                                     String text = responses[index]['place'];
                                     sourceController.text = text;
-                                    sharedPreferences.setString('search', json.encode(responses[index]));
+                                    sharedPreferences.setString('search',
+                                        json.encode(responses[index]));
 
-                                    mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: responses[index]['location'],zoom:11)));
+                                    mapController.animateCamera(
+                                        CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                                target: responses[index]
+                                                    ['location'],
+                                                zoom: 11)));
                                     // CameraPosition=mapController.cameraPosition;
-                                    FocusManager.instance.primaryFocus?.unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
                                   },
-
                                   leading: const SizedBox(
                                     height: double.infinity,
                                     child: CircleAvatar(child: Icon(Icons.map)),
                                   ),
-
                                   title: Text(responses[index]['name'],
-                                      style: const TextStyle(fontWeight: FontWeight.bold)
-                                  ),
-
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold)),
                                   subtitle: Text(responses[index]['address'],
                                       overflow: TextOverflow.ellipsis),
                                 ),
-
                                 const Divider(),
                               ],
                             );
@@ -327,7 +340,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

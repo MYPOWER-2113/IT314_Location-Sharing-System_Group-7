@@ -25,7 +25,6 @@ class DioExceptions implements Exception {
       default:
         message = "Something went wrong";
         break;
-
     }
   }
 

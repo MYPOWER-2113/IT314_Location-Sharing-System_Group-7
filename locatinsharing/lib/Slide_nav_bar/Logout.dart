@@ -5,13 +5,12 @@ import 'package:locatinsharing/homepage.dart';
 import '../Signin_Signup/auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
-
 class Logout extends StatelessWidget {
-   const Logout({Key? key}) : super(key: key);
+  const Logout({Key? key}) : super(key: key);
 
-   void signOutUser(BuildContext context) {
-     AuthService().signOut(context);
-   }
+  void signOutUser(BuildContext context) {
+    AuthService().signOut(context);
+  }
 
   // Future<void> _confirmSignOut(BuildContext context) async {
   //   final bool confirm = await showDialog(
@@ -64,30 +63,28 @@ class Logout extends StatelessWidget {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+                  colors: [
+                    Colors.blueAccent.shade100,
+                    Colors.greenAccent.shade200
+                  ],
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                 ),
               ),
             ),
           ),
-
-          body: const Center(
-            child: Text('Logout')
-          ),
+          body: const Center(child: Text('Logout')),
         ),
-
         AlertDialog(
           title: Text('Log Out'),
           content: Text('Are you sure you want to log out?'),
           actions: <Widget>[
             ElevatedButton(
-            child: Text('No'),
-            onPressed: () {
-            Navigator.of(context).pop(false);
-            },
-          ),
-
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
             ElevatedButton(
               child: Text('Yes'),
               onPressed: () => signOutUser(context),
@@ -96,9 +93,5 @@ class Logout extends StatelessWidget {
         ),
       ],
     );
-
-
-
   }
 }
-

@@ -46,7 +46,8 @@ class AuthService {
             context,
             'Account created! Login with the same credentials!',
           );
-          Navigator.push(context, new MaterialPageRoute(builder: (context)=>Signin()));
+          Navigator.push(
+              context, new MaterialPageRoute(builder: (context) => Signin()));
         },
       );
     } catch (e) {
@@ -83,7 +84,7 @@ class AuthService {
             MaterialPageRoute(
               builder: (context) => const MyHomePage(),
             ),
-                (route) => false,
+            (route) => false,
           );
         },
       );
@@ -94,8 +95,8 @@ class AuthService {
 
   // get user data
   void getUserData(
-      BuildContext context,
-      ) async {
+    BuildContext context,
+  ) async {
     try {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -118,7 +119,10 @@ class AuthService {
       if (response == true) {
         http.Response userRes = await http.get(
           Uri.parse('${Constants.uri}/'),
-          headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8', 'x-auth-token': token},
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token
+          },
         );
 
         userProvider.setUser(userRes.body);
@@ -136,7 +140,7 @@ class AuthService {
       MaterialPageRoute(
         builder: (context) => const Signin(),
       ),
-          (route) => false,
+      (route) => false,
     );
   }
 }

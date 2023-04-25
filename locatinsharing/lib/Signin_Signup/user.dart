@@ -7,6 +7,7 @@ class User {
   final String token;
   final String password;
   final String number;
+
   User({
     required this.id,
     required this.name,
@@ -22,7 +23,7 @@ class User {
       'email': email,
       'token': token,
       'password': password,
-      'number' : number,
+      'number': number,
     };
   }
 

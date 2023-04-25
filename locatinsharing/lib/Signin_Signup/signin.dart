@@ -11,7 +11,6 @@ import 'package:locatinsharing/Navigation/screens/navigation.dart';
 import 'package:locatinsharing/SOS/SOS.dart';
 import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
-import 'Fade_Animation.dart';
 import 'auth.dart';
 import 'user.dart';
 import 'package:locatinsharing/Signin_Signup/signup.dart';
@@ -38,6 +37,7 @@ class _SigninState extends State<Signin> {
       password: passwordController.text,
     );
   }
+
   // Future save() async{
   //   var res = await http.post(
   //     Uri.parse("http://10.200.8.251:8080/signin"),headers: <String,String>{'Context-Type':'application/jason;charSet=UTF-8'},
@@ -55,7 +55,6 @@ class _SigninState extends State<Signin> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: ListView(
         children: [
@@ -73,13 +72,15 @@ class _SigninState extends State<Signin> {
                       child: Container(
                         height: 285.0,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                // begin: Alignment.topCenter,
-                              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
-                              begin: Alignment.bottomRight,
-                              end: Alignment.topLeft,
-                            ),
-
+                          gradient: LinearGradient(
+                            // begin: Alignment.topCenter,
+                            colors: [
+                              Colors.blueAccent.shade100,
+                              Colors.greenAccent.shade200
+                            ],
+                            begin: Alignment.bottomRight,
+                            end: Alignment.topLeft,
+                          ),
                           image: DecorationImage(
                             image: AssetImage(
                               "![](../../images/Logo_Icon_Transparent.png)",
@@ -87,7 +88,6 @@ class _SigninState extends State<Signin> {
                             fit: BoxFit.fitWidth,
                           ),
                         ),
-
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -126,7 +126,7 @@ class _SigninState extends State<Signin> {
                         width: 375,
                         // ignore: prefer_const_constructors
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.blueAccent[100],
                           borderRadius: const BorderRadius.all(
                             Radius.circular(
                               16.0,
@@ -145,7 +145,7 @@ class _SigninState extends State<Signin> {
                                   labelStyle: GoogleFonts.poppins(
                                       fontSize: 12,
                                       fontWeight: FontWeight.normal,
-                                      color: const Color(0xff8B9E9E)),
+                                      color: const Color(0X333333FF)),
                                   enabledBorder: const UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.blueGrey,
@@ -155,10 +155,9 @@ class _SigninState extends State<Signin> {
                                 onChanged: (value) {},
                               ),
                             ),
-
                             Container(
                               margin:
-                              const EdgeInsets.only(left: 30, right: 30),
+                                  const EdgeInsets.only(left: 30, right: 30),
                               child: TextFormField(
                                 controller: passwordController,
                                 decoration: InputDecoration(
@@ -182,7 +181,7 @@ class _SigninState extends State<Signin> {
                             Container(
                               height: 20.0,
                               margin:
-                              const EdgeInsets.symmetric(horizontal: 31.0),
+                                  const EdgeInsets.symmetric(horizontal: 31.0),
                               decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(
@@ -200,14 +199,12 @@ class _SigninState extends State<Signin> {
                               child: ElevatedButton(
                                 onPressed: signinUser,
                                 style: ElevatedButton.styleFrom(
-
                                   backgroundColor: Colors.greenAccent,
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
-                                    BorderRadius.circular(50), // <-- Radius
+                                        BorderRadius.circular(50), // <-- Radius
                                   ),
                                 ),
-
                                 child: Text(
                                   "Sign In",
                                   style: GoogleFonts.poppins(
@@ -241,15 +238,15 @@ class _SigninState extends State<Signin> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const Signup()),
+                                                  const Signup()),
                                         );
                                       },
                                       child: Text(
                                         " SignUp",
                                         style: GoogleFonts.poppins(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.greenAccent,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.greenAccent,
                                         ),
                                       ),
                                     ),

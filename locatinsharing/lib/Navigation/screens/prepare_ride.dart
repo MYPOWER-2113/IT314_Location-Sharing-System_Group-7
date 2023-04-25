@@ -5,7 +5,6 @@ import '../widgets/endpoints_card.dart';
 import '../widgets/search_listview.dart';
 import '../widgets/review_route_button.dart';
 
-
 class PrepareRide extends StatefulWidget {
   const PrepareRide({Key? key}) : super(key: key);
 
@@ -63,19 +62,13 @@ class _PrepareRideState extends State<PrepareRide> {
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
-
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios_rounded)
-
-        ),
-
+            icon: const Icon(Icons.arrow_back_ios_rounded)),
         title: const Text('Search Place to Navigate'),
-
         actions: const [
           // CircleAvatar(backgroundImage: AssetImage('assets/image/person.jpg')),
         ],
-
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -86,24 +79,24 @@ class _PrepareRideState extends State<PrepareRide> {
           ),
         ),
       ),
-
-
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const ScrollPhysics(),
           child: Column(
             children: [
               endpointsCard(sourceController, destinationController),
-              isLoading ? const LinearProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white)
-              ) : Container(),
-              isEmptyResponse ? Padding(
+              isLoading
+                  ? const LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
+                  : Container(),
+              isEmptyResponse
+                  ? Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Center(
-                          child: Text(hasResponded ? noResponse : noRequest)
-                      )
-              ) : Container(),
-              searchListView(responses, isResponseForDestination,destinationController, sourceController),
+                          child: Text(hasResponded ? noResponse : noRequest)))
+                  : Container(),
+              searchListView(responses, isResponseForDestination,
+                  destinationController, sourceController),
             ],
           ),
         ),

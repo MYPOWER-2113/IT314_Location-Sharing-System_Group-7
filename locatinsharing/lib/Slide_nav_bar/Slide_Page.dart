@@ -20,7 +20,6 @@ class DrawerScreen extends StatelessWidget {
       "trailing": Icon(Icons.chevron_right),
       "action_id": 1,
     },
-
     {
       "leading": Icon(
         Icons.help,
@@ -30,7 +29,6 @@ class DrawerScreen extends StatelessWidget {
       "trailing": Icon(Icons.chevron_right),
       "action_id": 2,
     },
-
     {
       "leading": Icon(
         Icons.settings,
@@ -40,7 +38,6 @@ class DrawerScreen extends StatelessWidget {
       "trailing": Icon(Icons.chevron_right),
       "action_id": 3,
     },
-
     {
       "leading": Icon(
         Icons.exit_to_app,
@@ -66,7 +63,6 @@ class DrawerScreen extends StatelessWidget {
               UserAccountsDrawerHeader(
                 accountName: Text(user.name),
                 accountEmail: Text(user.email),
-
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   // image: DecorationImage(
@@ -75,38 +71,36 @@ class DrawerScreen extends StatelessWidget {
                   // ),
                 ),
               ),
-          // child: ListView(
-          //   children: [
-          //     const ListTile(
-          //       leading: CircleAvatar(
-          //         backgroundImage: NetworkImage(
-          //             "https://www.channelfutures.com/files/2019/10/Focus-877x432.jpg"),
-          //       ),
-          //       title: Text(
-          //         "BL Kumawat",
-          //         style: TextStyle(
-          //           color: Colors.black,
-          //         ),
-          //       ),
-          //       subtitle: Text(
-          //         "7014333352",
-          //         style: TextStyle(
-          //           color: Colors.black,
-          //         ),
-          //       ),
-          //     ),
-          //     const SizedBox(
-          //       height: 1,
-          //     ),
+              // child: ListView(
+              //   children: [
+              //     const ListTile(
+              //       leading: CircleAvatar(
+              //         backgroundImage: NetworkImage(
+              //             "https://www.channelfutures.com/files/2019/10/Focus-877x432.jpg"),
+              //       ),
+              //       title: Text(
+              //         "BL Kumawat",
+              //         style: TextStyle(
+              //           color: Colors.black,
+              //         ),
+              //       ),
+              //       subtitle: Text(
+              //         "7014333352",
+              //         style: TextStyle(
+              //           color: Colors.black,
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(
+              //       height: 1,
+              //     ),
               ...drawerMenuListname.map((sideMenuData) {
-
                 return ListTile(
                   leading: sideMenuData['leading'],
                   title: Text(
                     sideMenuData['title'],
                   ),
                   trailing: sideMenuData['trailing'],
-
                   onTap: () {
                     Navigator.pop(context);
                     if (sideMenuData['action_id'] == 1) {
@@ -115,32 +109,28 @@ class DrawerScreen extends StatelessWidget {
                           builder: (context) => AboutUs(),
                         ),
                       );
-                    }
-
-                    else if (sideMenuData['action_id'] == 2) {
+                    } else if (sideMenuData['action_id'] == 2) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Help(),
                         ),
                       );
-                    }
-
-                    else if (sideMenuData['action_id'] == 3) {
+                    } else if (sideMenuData['action_id'] == 3) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => SettingsPage(locationSharingEnabled: true, receiveNotifications: false,),
+                          builder: (context) => SettingsPage(
+                            locationSharingEnabled: true,
+                            receiveNotifications: false,
+                          ),
                         ),
                       );
-                    }
-
-                    else if (sideMenuData['action_id'] == 4) {
+                    } else if (sideMenuData['action_id'] == 4) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Logout(),
                         ),
                       );
                     }
-
                   },
                 );
               }).toList(),

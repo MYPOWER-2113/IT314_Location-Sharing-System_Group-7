@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
 // import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
 import 'package:flutter_mapbox_navigation/library.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import '../helper/shared_prefs.dart';
 import '../ui/rate_ride.dart';
-
 
 class TurnByTurn extends StatefulWidget {
   const TurnByTurn({Key? key}) : super(key: key);
@@ -99,8 +99,7 @@ class _TurnByTurnState extends State<TurnByTurn> {
         if (!isMultipleStop) {
           await Future.delayed(const Duration(seconds: 3));
           await _controller.finishNavigation();
-        }
-        else {}
+        } else {}
         break;
 
       case MapBoxEvent.navigation_finished:

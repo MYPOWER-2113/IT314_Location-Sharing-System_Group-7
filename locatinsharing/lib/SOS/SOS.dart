@@ -12,6 +12,7 @@ import 'package:latlong2/latlong.dart' as ll;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
+
 //import 'package:mapbox_gl/mapbox_gl.dart' as mpgl;
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
@@ -32,17 +33,14 @@ import 'package:flutter_android_volume_keydown/flutter_android_volume_keydown.da
 int _volumeButtonPressCount = 0;
 DateTime _lastVolumeButtonPressTime = DateTime.now();
 
-
-
 class SOS extends StatefulWidget {
   const SOS({super.key});
+
   @override
   State<SOS> createState() => _SOS();
 }
 
-
 class _SOS extends State<SOS> {
-
   int selectedPage = 1;
 
   final _pageOptions = [
@@ -66,28 +64,24 @@ class _SOS extends State<SOS> {
     );
   }
 
-
   // for switch state start here
   bool isSwitched = false;
   final switchData = GetStorage();
-
 
   @override
   void initState() {
     super.initState();
 
-    if(switchData.read('isSwitched') != null)
-      {
-        setState(() {
-          isSwitched = switchData.read('isSwitched');
-        });
-      }
+    if (switchData.read('isSwitched') != null) {
+      setState(() {
+        isSwitched = switchData.read('isSwitched');
+      });
+    }
   }
+
   // for switch state ends here
 
-
   // -----> if switch is on activate volume button to take input
-
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +92,10 @@ class _SOS extends State<SOS> {
 
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications_none, size: 30,),
+            icon: Icon(
+              Icons.notifications_none,
+              size: 30,
+            ),
             onPressed: () {},
           ),
         ],
@@ -114,69 +111,75 @@ class _SOS extends State<SOS> {
           ),
         ),
       ),
-
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blue[900],
         onTap: _onItemTapped,
-
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 30,),
+            icon: Icon(
+              Icons.home,
+              size: 30,
+            ),
             label: 'Home',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.emergency_share, size: 30,),
+            icon: Icon(
+              Icons.emergency_share,
+              size: 30,
+            ),
             label: 'SOS Share',
             backgroundColor: Colors.blueAccent.shade100,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.navigation, size: 30,),
+            icon: Icon(
+              Icons.navigation,
+              size: 30,
+            ),
             label: 'Navigation',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.share_location_sharp, size: 30,),
+            icon: Icon(
+              Icons.share_location_sharp,
+              size: 30,
+            ),
             label: 'ShareLocation',
             backgroundColor: Colors.blueAccent.shade100,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_4, size: 30,),
+            icon: Icon(
+              Icons.person_4,
+              size: 30,
+            ),
             label: 'Contacts',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.near_me_rounded, size: 30,),
+            icon: Icon(
+              Icons.near_me_rounded,
+              size: 30,
+            ),
             label: 'Near Me',
             backgroundColor: Colors.blueAccent.shade100,
           ),
         ],
-
         elevation: 50,
         selectedFontSize: 15,
       ),
-
       body: Align(
         alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            
-
-            Text("SOS messaging",style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
+            Text(
+              "SOS messaging",
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
-            ),
-
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: LiteRollingSwitch(
@@ -189,7 +192,6 @@ class _SOS extends State<SOS> {
                 iconOff: Icons.power_settings_new,
                 animationDuration: Duration(milliseconds: 400),
                 onChanged: (value) {
-
                   setState(() {
                     isSwitched = value;
                     switchData.write('isSwitched', isSwitched);
@@ -216,11 +218,10 @@ class _SOS extends State<SOS> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 20),
                 child: Text('The switch is turned on!'),
-
               ),
           ],
         ),
-        ),
+      ),
     );
   }
 }
@@ -286,6 +287,7 @@ class _SOS extends State<SOS> {
 
 class _MyAppState extends State<SOS> {
   StreamSubscription<HardwareButton>? subscription;
+
   @override
   void initState() {
     super.initState();
@@ -308,21 +310,20 @@ class _MyAppState extends State<SOS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+      appBar: AppBar(
+        title: const Text('Plugin example app'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            ElevatedButton(
+                onPressed: startListening,
+                child: const Text("Start listening")),
+            ElevatedButton(
+                onPressed: stopListening, child: const Text("Stop listening")),
+          ],
         ),
-        body: Center(
-          child: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: startListening,
-                  child: const Text("Start listening")),
-              ElevatedButton(
-                  onPressed: stopListening,
-                  child: const Text("Stop listening")),
-            ],
-          ),
-        ),
-      );
+      ),
+    );
   }
 }

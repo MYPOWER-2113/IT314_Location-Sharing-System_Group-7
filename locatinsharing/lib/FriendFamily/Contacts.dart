@@ -4,8 +4,10 @@ import '../utlis/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 // import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'package:flutter_contacts/flutter_contacts.dart';
@@ -18,7 +20,6 @@ import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 import '../../Slide_nav_bar/Slide_Page.dart';
 
-
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
 
@@ -27,7 +28,6 @@ class Contacts extends StatefulWidget {
 }
 
 class _ContactsState extends State<Contacts> {
-
   List<Contact>? contacts = [];
 
   List<Contact> contactsFiltered = [];
@@ -75,10 +75,9 @@ class _ContactsState extends State<Contacts> {
         String contactName = element.displayName!.toLowerCase();
         bool nameMatch = contactName.contains(searchTerm);
         if (nameMatch == true) {
-
           return true;
         }
-        if (searchTermFlattren.isEmpty){
+        if (searchTermFlattren.isEmpty) {
           return false;
         }
         var phone = element.phones!.firstWhere((p) {
@@ -102,9 +101,6 @@ class _ContactsState extends State<Contacts> {
       MaterialPageRoute(builder: (context) => _pageOptions[index]),
     );
   }
-
-
-
 
   Future<void> askPermissions() async {
     PermissionStatus permissionStatus = await getContactsPermissions();
@@ -156,7 +152,10 @@ class _ContactsState extends State<Contacts> {
 
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications_none, size: 30,),
+            icon: Icon(
+              Icons.notifications_none,
+              size: 30,
+            ),
             onPressed: () {},
           ),
         ],
@@ -165,107 +164,112 @@ class _ContactsState extends State<Contacts> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Colors.blueAccent.shade100,
-                Colors.greenAccent.shade200
-              ],
+              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
               begin: Alignment.bottomRight,
               end: Alignment.topLeft,
             ),
           ),
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.teal[900],
         onTap: _onItemTapped,
-
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 30,),
+            icon: Icon(
+              Icons.home,
+              size: 30,
+            ),
             label: 'Home',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.emergency_share, size: 30,),
+            icon: Icon(
+              Icons.emergency_share,
+              size: 30,
+            ),
             label: 'SOS Share',
             backgroundColor: Colors.blueAccent.shade100,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.navigation, size: 30,),
+            icon: Icon(
+              Icons.navigation,
+              size: 30,
+            ),
             label: 'Navigation',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.share_location_sharp, size: 30,),
+            icon: Icon(
+              Icons.share_location_sharp,
+              size: 30,
+            ),
             label: 'ShareLocation',
             backgroundColor: Colors.blueAccent.shade100,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_4, size: 30,),
+            icon: Icon(
+              Icons.person_4,
+              size: 30,
+            ),
             label: 'Contacts',
             backgroundColor: Colors.greenAccent.shade200,
           ),
-
           BottomNavigationBarItem(
-            icon: Icon(Icons.near_me_rounded, size: 30,),
+            icon: Icon(
+              Icons.near_me_rounded,
+              size: 30,
+            ),
             label: 'Near Me',
             backgroundColor: Colors.blueAccent.shade100,
           ),
         ],
-
         elevation: 50,
         selectedFontSize: 15,
       ),
-
       body: contacts?.length == 0
           ? Center(child: CircularProgressIndicator())
           : SafeArea(
-        child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  autofocus: true,
-                  controller: searchController,
-                  decoration: InputDecoration(
-                      labelText: "search contact",
-                      prefixIcon: Icon(Icons.search)),
+              child: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    autofocus: true,
+                    controller: searchController,
+                    decoration: InputDecoration(
+                        labelText: "search contact",
+                        prefixIcon: Icon(Icons.search)),
+                  ),
                 ),
-              ),
-              listItemExit == true?
-              Expanded(
-                child: ListView.builder(
-                    itemCount: isSearching == true
-                        ? contactsFiltered.length
-                        : contacts?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      Contact contact = contacts![index];
-                      return ListTile(
-                        title: Text(contacts![index].displayName!),
-                        subtitle: Text(contact.phones!.first.value!),
-                        leading: contact.avatar!=null && contact.avatar!.isNotEmpty?
-                        CircleAvatar(
-                          backgroundImage: MemoryImage(contact.avatar!),
-                        ): CircleAvatar(
-                          child: Text(contact.initials()),
-                        ),
-                      );
-                    }
-                ),
-              )
-                  : Container(
-                child: Text("searching"),
-              ),
-            ]
-        ),
-      ),
+                listItemExit == true
+                    ? Expanded(
+                        child: ListView.builder(
+                            itemCount: isSearching == true
+                                ? contactsFiltered.length
+                                : contacts?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Contact contact = contacts![index];
+                              return ListTile(
+                                title: Text(contacts![index].displayName!),
+                                // subtitle: Text(contact.phones!.first.value!),
+                                leading: contact.avatar != null &&
+                                        contact.avatar!.isNotEmpty
+                                    ? CircleAvatar(
+                                        backgroundImage:
+                                            MemoryImage(contact.avatar!),
+                                      )
+                                    : CircleAvatar(
+                                        child: Text(contact.initials()),
+                                      ),
+                              );
+                            }),
+                      )
+                    : Container(
+                        child: Text("searching"),
+                      ),
+              ]),
+            ),
     );
   }
-
 }

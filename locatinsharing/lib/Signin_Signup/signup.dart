@@ -20,6 +20,7 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
+
   // Future save() async{
   //   var res = await http.post(Uri.parse("http://10.200.8.251:8080/signup"),headers: <String,String>{'Context-Type':'application/jason;charSet=UTF-8'},
   //       body: <String,String>{
@@ -164,11 +165,13 @@ class _SignupState extends State<Signup> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             // begin: Alignment.topCenter,
-                            colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+                            colors: [
+                              Colors.blueAccent.shade100,
+                              Colors.greenAccent.shade200
+                            ],
                             begin: Alignment.bottomRight,
                             end: Alignment.topLeft,
                           ),
-
                           image: DecorationImage(
                             image: AssetImage(
                               "![](../../images/Logo_Icon_Transparent.png)",
@@ -176,7 +179,6 @@ class _SignupState extends State<Signup> {
                             fit: BoxFit.fitWidth,
                           ),
                         ),
-
                         child: Container(
                           margin: const EdgeInsets.symmetric(
                               horizontal: 30.0, vertical: 39),
@@ -202,7 +204,6 @@ class _SignupState extends State<Signup> {
                         ),
                       ),
                     ),
-
                     Positioned(
                       top: 130,
                       right: 0,
@@ -227,8 +228,8 @@ class _SignupState extends State<Signup> {
                                 decoration: InputDecoration(
                                   labelText: 'Enter your Name',
                                   labelStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
                                     color: Colors.grey,
                                   ),
                                   enabledBorder: const UnderlineInputBorder(
@@ -240,7 +241,6 @@ class _SignupState extends State<Signup> {
                                 onChanged: (value) {},
                               ),
                             ),
-
                             Container(
                               margin: const EdgeInsets.symmetric(
                                 horizontal: 30,
@@ -251,8 +251,8 @@ class _SignupState extends State<Signup> {
                                 decoration: InputDecoration(
                                   labelText: 'Email Address',
                                   labelStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
                                     color: Colors.grey,
                                   ),
                                   enabledBorder: const UnderlineInputBorder(
@@ -264,7 +264,6 @@ class _SignupState extends State<Signup> {
                                 onChanged: (value) {},
                               ),
                             ),
-
                             Container(
                               margin: const EdgeInsets.only(
                                   left: 30, right: 30, top: 30),
@@ -274,8 +273,8 @@ class _SignupState extends State<Signup> {
                                 decoration: InputDecoration(
                                   labelText: 'Phone Number',
                                   labelStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
                                     color: Colors.grey,
                                   ),
                                   enabledBorder: const UnderlineInputBorder(
@@ -287,7 +286,6 @@ class _SignupState extends State<Signup> {
                                 onChanged: (value) {},
                               ),
                             ),
-
                             Container(
                               margin: const EdgeInsets.only(
                                   left: 30, right: 30, top: 30),
@@ -298,8 +296,8 @@ class _SignupState extends State<Signup> {
                                 decoration: InputDecoration(
                                   labelText: 'Password',
                                   labelStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
                                     color: Colors.grey,
                                   ),
                                   enabledBorder: const UnderlineInputBorder(
@@ -311,11 +309,9 @@ class _SignupState extends State<Signup> {
                                 onChanged: (value) {},
                               ),
                             ),
-
                             const SizedBox(
                               height: 59.0,
                             ),
-
                             SizedBox(
                               width: 325,
                               height: 50,
@@ -324,10 +320,20 @@ class _SignupState extends State<Signup> {
                                   backgroundColor: Colors.greenAccent,
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
-                                    BorderRadius.circular(50), // <-- Radius
+                                        BorderRadius.circular(50), // <-- Radius
                                   ),
                                 ),
+
                                 onPressed: signupUser,
+                                // onPressed: () {
+                                //   Navigator.pushReplacement(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             const MyHomePage()),
+                                //   );
+                                // },
+
                                 child: Text(
                                   "Sign Up",
                                   style: GoogleFonts.poppins(
@@ -336,11 +342,9 @@ class _SignupState extends State<Signup> {
                                 ),
                               ),
                             ),
-
                             const SizedBox(
                               height: 50.0,
                             ),
-
                             Container(
                               height: 20,
                               width: 200,
@@ -351,7 +355,6 @@ class _SignupState extends State<Signup> {
                                   ),
                                 ),
                               ),
-
                               child: Row(
                                 children: [
                                   Text(
@@ -359,17 +362,15 @@ class _SignupState extends State<Signup> {
                                     style: GoogleFonts.poppins(
                                         fontSize: 13,
                                         fontWeight: FontWeight.normal,
-                                      color: Colors.black
-                                    ),
+                                        color: Colors.black),
                                   ),
-
                                   InkWell(
                                     onTap: () {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                            const Signin()),
+                                                const Signin()),
                                       );
                                     },
                                     child: Text(

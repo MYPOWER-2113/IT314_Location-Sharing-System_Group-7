@@ -12,18 +12,19 @@ class AboutUs extends StatelessWidget {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+                colors: [
+                  Colors.blueAccent.shade100,
+                  Colors.greenAccent.shade200
+                ],
                 begin: Alignment.bottomRight,
                 end: Alignment.topLeft,
               ),
             ),
           ),
         ),
-
-        body:SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             children: [
-
               //Name and Logo
               Container(
                 width: screenWidth,
@@ -54,8 +55,7 @@ class AboutUs extends StatelessWidget {
                   child: Text(
                     'A location-sharing system is an Android application allowing users to share their real-time locations with others. This Android application uses GPS technology to determine a user\'s location and share it with others through social media or a messaging system. This application allows users to create groups and share their location with their family and friends. This application can be accessed through a variety of devices such as smartphones, tablets, and laptops.',
                     style: Theme.of(context).textTheme.bodyText2,
-                  )
-              ),
+                  )),
 
               // //statement and values
               // Container(
@@ -116,12 +116,10 @@ class AboutUs extends StatelessWidget {
                         title: Text('202001081@daiict.ac.in'),
                       ),
                     ],
-                  )
-              ),
+                  )),
             ],
           ),
-        )
-    );
+        ));
   }
 }
 

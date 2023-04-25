@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 // import 'package:latlong2/latlong.dart';
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
 import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
@@ -22,7 +23,6 @@ import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
 import '../../Slide_nav_bar/Slide_Page.dart';
 
-
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
 
@@ -30,13 +30,14 @@ class Navigation extends StatefulWidget {
   State<Navigation> createState() => _Navigation();
 }
 
-class _Navigation extends State<Navigation>{
-
+class _Navigation extends State<Navigation> {
   late LatLng ltlg = getCurrentLatLngFromSharedPrefs();
+
   // LatLng(sharedPreferences.getDouble('latitude')!, sharedPreferences.getDouble('longitude')!) ;
   late CameraPosition _initialCameraPostion;
   late MapboxMapController controller;
-  late CameraPosition dest=CameraPosition(target: LatLng(72.63394,23.196299),zoom: 15);
+  late CameraPosition dest =
+      CameraPosition(target: LatLng(72.63394, 23.196299), zoom: 15);
   late String currAdd;
 
   // late Map _data;
@@ -46,14 +47,14 @@ class _Navigation extends State<Navigation>{
     super.initState();
 
     // initializeLocationAndSave();
-    _initialCameraPostion = CameraPosition(target: ltlg as LatLng,zoom: 15);
+    _initialCameraPostion = CameraPosition(target: ltlg as LatLng, zoom: 15);
     currAdd = getCurrentAddressFromSharedPrefs();
 
     // Map response = json.decode(sharedPreferences.getString('destination')!);
     // num distance = response['distance']/1000;
     // num duration = response['duration']/60;
 
-    dest=CameraPosition(target: LatLng(23.196299,72.63394),zoom: 15);
+    dest = CameraPosition(target: LatLng(23.196299, 72.63394), zoom: 15);
     // Initialize map symbols
   }
 
@@ -95,36 +96,35 @@ class _Navigation extends State<Navigation>{
   //
   // }
 
-
   _addSourceAndLineLayer() async {
-  //  Can animate camera to focus on items
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(dest));
+    //  Can animate camera to focus on items
+    //   controller.animateCamera(CameraUpdate.newCameraPosition(dest));
 
-  //  add a polyline between source and Destination
+    //  add a polyline between source and Destination
     late String? key;
-    key=sharedPreferences.getString('destiny')!;
+    key = sharedPreferences.getString('destiny')!;
     Map resp = json.decode(key);
     Map geometry = resp['geometry'];
-  //   Map geometry = getGeometryFromSharedPrefs("destiny");
+    //   Map geometry = getGeometryFromSharedPrefs("destiny");
     final _fills = {
       "type": "FeatureCollection",
       "features": [
         {
           "type": "Feature",
           "id": 0,
-          "properties": <String,dynamic>{},
+          "properties": <String, dynamic>{},
           "geometry": geometry,
         },
       ]
     };
 
-  //  Remove linelayer and source if it exists
-  //   if(removeLayer==true){
-  //     await controller.removeLayer("lines");
-  //     await controller.removeSource("fills");
-  //   }
+    //  Remove linelayer and source if it exists
+    //   if(removeLayer==true){
+    //     await controller.removeLayer("lines");
+    //     await controller.removeSource("fills");
+    //   }
 
-  //  add new source and linelayer
+    //  add new source and linelayer
     await controller.addSource("fills", GeojsonSourceProperties(data: _fills));
     await controller.addLineLayer(
       "fills",
@@ -139,18 +139,18 @@ class _Navigation extends State<Navigation>{
   }
 
   _onMapCreated(MapboxMapController controller) async {
-    this.controller=controller;
+    this.controller = controller;
   }
 
   _onStyleLoadedCallback() async {
-    late CameraPosition des=dest;
+    late CameraPosition des = dest;
     await controller.addSymbol(
       SymbolOptions(
         geometry: des.target,
         iconSize: 0.1,
         iconImage: "images/Variety-fruits-vegetables.png",
       ),
-    ) ;
+    );
 
     _addSourceAndLineLayer();
   }
@@ -179,7 +179,7 @@ class _Navigation extends State<Navigation>{
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         Scaffold(
@@ -191,61 +191,73 @@ class _Navigation extends State<Navigation>{
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+                  colors: [
+                    Colors.blueAccent.shade100,
+                    Colors.greenAccent.shade200
+                  ],
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                 ),
               ),
             ),
           ),
-
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _currentIndex,
             selectedItemColor: Colors.teal[900],
             onTap: _onItemTapped,
-
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home, size: 30,),
+                icon: Icon(
+                  Icons.home,
+                  size: 30,
+                ),
                 label: 'Home',
                 backgroundColor: Colors.greenAccent.shade200,
               ),
-
               BottomNavigationBarItem(
-                icon: Icon(Icons.emergency_share, size: 30,),
+                icon: Icon(
+                  Icons.emergency_share,
+                  size: 30,
+                ),
                 label: 'SOS Share',
                 backgroundColor: Colors.blueAccent.shade100,
               ),
-
               BottomNavigationBarItem(
-                icon: Icon(Icons.navigation, size: 30,),
+                icon: Icon(
+                  Icons.navigation,
+                  size: 30,
+                ),
                 label: 'Navigation',
                 backgroundColor: Colors.greenAccent.shade200,
               ),
-
               BottomNavigationBarItem(
-                icon: Icon(Icons.share_location_sharp, size: 30,),
+                icon: Icon(
+                  Icons.share_location_sharp,
+                  size: 30,
+                ),
                 label: 'ShareLocation',
                 backgroundColor: Colors.blueAccent.shade100,
               ),
-
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_4, size: 30,),
+                icon: Icon(
+                  Icons.person_4,
+                  size: 30,
+                ),
                 label: 'Contacts',
                 backgroundColor: Colors.greenAccent.shade200,
               ),
-
               BottomNavigationBarItem(
-                icon: Icon(Icons.near_me_rounded, size: 30,),
+                icon: Icon(
+                  Icons.near_me_rounded,
+                  size: 30,
+                ),
                 label: 'Near Me',
                 backgroundColor: Colors.blueAccent.shade100,
               ),
             ],
-
             elevation: 50,
             selectedFontSize: 15,
           ),
-
           body: SafeArea(
             child: Stack(
               children: [
@@ -259,9 +271,8 @@ class _Navigation extends State<Navigation>{
                   // minMaxZoomPreference: const MinMaxZoomPreference(14, 18),
                   compassEnabled: true,
                 ),
-
                 Positioned(
-                  top: 20,
+                    top: 20,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -269,74 +280,73 @@ class _Navigation extends State<Navigation>{
                         child: Padding(
                           padding: const EdgeInsets.all(10),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text(
-                                'Hello!',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 20),
-                              const Text('You are currently here:'),
-                              Text(currAdd,
-                                  style: const TextStyle(color: Colors.blueAccent)),
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                  onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => const PrepareRide()
-                                      )
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(20),
-                                    backgroundColor: Colors.greenAccent.shade200,
-                                  ),
-                                  child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: const [
-                                        Text('Where do you wanna go today?'),
-                                      ]
-                                  )
-                              ),
-                            ]
-                          ),
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  'Hello!',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 20),
+                                const Text('You are currently here:'),
+                                Text(currAdd,
+                                    style: const TextStyle(
+                                        color: Colors.blueAccent)),
+                                const SizedBox(height: 20),
+                                ElevatedButton(
+                                    onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const PrepareRide())),
+                                    style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.all(20),
+                                      backgroundColor:
+                                          Colors.greenAccent.shade200,
+                                    ),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Text('Where do you wanna go today?'),
+                                        ])),
+                              ]),
                         ),
                       ),
-                    )
-                )
+                    ))
               ],
             ),
           ),
-
           floatingActionButton: FloatingActionButton(
-            onPressed: (){
-              controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPostion));
+            onPressed: () {
+              controller.animateCamera(
+                  CameraUpdate.newCameraPosition(_initialCameraPostion));
             },
             elevation: 0,
             child: Container(
-                height: 70,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                  boxShadow: [
-                    BoxShadow(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+                boxShadow: [
+                  BoxShadow(
                     color: Colors.redAccent.withOpacity(0.2),
                     spreadRadius: 3,
                     blurRadius: 3,
                     offset: Offset(0, 3),
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
               child: const Icon(Icons.my_location),
             ),
             backgroundColor: Colors.blueAccent.shade200,
             foregroundColor: Colors.white,
           ),
-
-            floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniEndFloat,
         ),
       ],
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
+
 // import 'package:mapbox_turn_by_turn/helpers/mapbox_handler.dart';
 // import 'package:mapbox_turn_by_turn/helpers/shared_prefs.dart';
 import '../../Slide_nav_bar/Slide_Page.dart';
@@ -11,6 +12,7 @@ import '../widgets/review_route_bottom.dart';
 
 class ReviewRide extends StatefulWidget {
   final Map modifiedResponse;
+
   const ReviewRide({Key? key, required this.modifiedResponse})
       : super(key: key);
 
@@ -35,10 +37,12 @@ class _ReviewRideState extends State<ReviewRide> {
     _initialiseDirectionsResponse();
 
     // initialise initialCameraPosition, address and trip end points
-    _initialCameraPosition = CameraPosition(target: getCenterCoordinatesForPolyline(geometry), zoom: 11);
+    _initialCameraPosition = CameraPosition(
+        target: getCenterCoordinatesForPolyline(geometry), zoom: 11);
 
     for (String type in ['source', 'destination']) {
-      _kTripEndPoints.add(CameraPosition(target: getTripLatLngFromSharedPrefs(type)));
+      _kTripEndPoints
+          .add(CameraPosition(target: getTripLatLngFromSharedPrefs(type)));
     }
 
     super.initState();
@@ -105,11 +109,8 @@ class _ReviewRideState extends State<ReviewRide> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-
             icon: const Icon(Icons.arrow_back_ios_rounded)),
-
         title: const Text('Review Route'),
-
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -120,7 +121,6 @@ class _ReviewRideState extends State<ReviewRide> {
           ),
         ),
       ),
-
       body: SafeArea(
         child: Stack(
           children: [
@@ -141,10 +141,10 @@ class _ReviewRideState extends State<ReviewRide> {
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          controller.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPosition));
+        onPressed: () {
+          controller.animateCamera(
+              CameraUpdate.newCameraPosition(_initialCameraPosition));
         },
         elevation: 0,
         child: Container(

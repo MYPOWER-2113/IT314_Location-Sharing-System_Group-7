@@ -4,7 +4,9 @@ class SettingsPage extends StatefulWidget {
   bool locationSharingEnabled;
   bool receiveNotifications;
 
-  SettingsPage({required this.locationSharingEnabled, required this.receiveNotifications});
+  SettingsPage(
+      {required this.locationSharingEnabled,
+      required this.receiveNotifications});
 
   @override
   _SettingsPageState createState() => _SettingsPageState();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 // import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
 import 'package:flutter_mapbox_navigation/library.dart';
 import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
@@ -18,12 +19,13 @@ class _NavigationPageState extends State<NavigationPage> {
   // late CameraPosition _initialCameraPostion;
   LatLng source = getTripLatLngFromSharedPrefs('source');
   LatLng destination = getTripLatLngFromSharedPrefs('destination');
-  late MapboxMapController _controller ;
+  late MapboxMapController _controller;
+
   late WayPoint sourceWaypoint, destinationWaypoint;
   var wayPoints = <WayPoint>[];
 
-
   late MapboxMapController controller;
+
   // final MapboxMapController _mapController = MapboxMapController(
   //     mapboxGlPlatform: mapboxGlPlatform,
   //     initialCameraPosition: _initialCameraPostion,
@@ -85,7 +87,7 @@ class _NavigationPageState extends State<NavigationPage> {
     // final route = await _navigation.getRoute(origin: LatLng(0, 0), destination: widget.destination);
     // _navigation.startNavigation(route: route);
     // _navigation.startNavigation(wayPoints: wayPoints, options: options)
-    MapBoxOptions options=MapBoxOptions(
+    MapBoxOptions options = MapBoxOptions(
       initialLongitude: source.longitude,
       initialLatitude: source.latitude,
       zoom: 14.0,
@@ -116,8 +118,8 @@ class _NavigationPageState extends State<NavigationPage> {
     await _navigation.finishNavigation();
   }
 
-  _onMapCreated(MapboxMapController controller){
-    this.controller=controller;
+  _onMapCreated(MapboxMapController controller) {
+    this.controller = controller;
   }
 
   @override
@@ -131,7 +133,8 @@ class _NavigationPageState extends State<NavigationPage> {
           MapboxMap(
             accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
             onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(target: widget.destination, zoom: 14),
+            initialCameraPosition:
+                CameraPosition(target: widget.destination, zoom: 14),
           ),
           Positioned(
             bottom: 16,
@@ -140,7 +143,8 @@ class _NavigationPageState extends State<NavigationPage> {
             child: Column(
               children: [
                 ElevatedButton(
-                  child: Text(_isNavigating ? 'Stop Navigation' : 'Start Navigation'),
+                  child: Text(
+                      _isNavigating ? 'Stop Navigation' : 'Start Navigation'),
                   onPressed: _isNavigating ? _stopNavigation : _startNavigation,
                 ),
               ],

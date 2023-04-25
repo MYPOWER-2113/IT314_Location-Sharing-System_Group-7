@@ -7,7 +7,6 @@ import '../requests/mapbox_requests.dart';
 import '../requests/mapbox_rev_geocoding.dart';
 import '../requests/mapbox_search.dart';
 
-
 // -- Mapbox Search Query --
 String getValidatedQueryFromQuery(String query) {
   // Remove whitespaces
@@ -39,7 +38,7 @@ Future<List> getParsedResponseForQuery(String value) async {
 }
 
 // -- Mapbox Reverse Geocoding --
-Future<Map> getParsedReverseGeocoding (LatLng latLng) async{
+Future<Map> getParsedReverseGeocoding(LatLng latLng) async {
   final response = await getReverseGeocodingGivenLatLngUsingMapbox(latLng);
   Map feature = response['features'][0];
   // String st = response['features'][0]['place_name'];
@@ -53,12 +52,12 @@ Future<Map> getParsedReverseGeocoding (LatLng latLng) async{
   return revGeocode;
 }
 
-
 // -- Mapbox Directions --
-Future <Map> getDirectionsAPIResponse(LatLng sourceLatLng,LatLng destinationLatLng) async{
+Future<Map> getDirectionsAPIResponse(
+    LatLng sourceLatLng, LatLng destinationLatLng) async {
   print("${sourceLatLng.latitude},${sourceLatLng.longitude}");
 
-  final response = await getDrivingroute(sourceLatLng , destinationLatLng);
+  final response = await getDrivingroute(sourceLatLng, destinationLatLng);
 
   print("${sourceLatLng.latitude},${sourceLatLng.longitude}");
 
@@ -77,14 +76,12 @@ Future <Map> getDirectionsAPIResponse(LatLng sourceLatLng,LatLng destinationLatL
   return modifiedResponse;
 }
 
-void saveDirectionsAPIResponse(String response){
-  sharedPreferences.setString('destiny',response);
+void saveDirectionsAPIResponse(String response) {
+  sharedPreferences.setString('destiny', response);
 }
-
 
 LatLng getCenterCoordinatesForPolyline(Map geometry) {
   List coordinates = geometry['coordinates'];
   int pos = (coordinates.length / 2).round();
   return LatLng(coordinates[pos][1], coordinates[pos][0]);
 }
-

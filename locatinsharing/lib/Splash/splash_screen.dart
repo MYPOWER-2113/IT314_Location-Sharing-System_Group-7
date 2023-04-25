@@ -19,19 +19,25 @@ class MySplashScreen extends StatefulWidget {
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
-
   @override
   void initState() {
     super.initState();
     startTimer();
   }
 
-  startTimer()
-  {
-    Timer(const Duration(seconds: 3), () async{
+  startTimer() {
+    Timer(const Duration(seconds: 3), () async {
       // send user to home screen
 
-      Navigator.push(context, MaterialPageRoute(builder: (c) => Provider.of<UserProvider>(context).user.token.isEmpty ? const Signin() : const MyHomePage()));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (c) =>
+                  Provider.of<UserProvider>(context).user.token.isEmpty
+                      ? const Signin()
+                      : const MyHomePage()));
+
+      //Uncomment for homepage
       // Navigator.push(context,
       //     MaterialPageRoute(builder: (c) => MyHomePage())
       // );
@@ -39,15 +45,18 @@ class _MySplashScreenState extends State<MySplashScreen> {
   }
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Material(
       child: Container(
         color: Colors.black,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("images/Logo_Horizontal_Black.png", width: 500, height: 200,),
+            Image.asset(
+              "images/Logo_Horizontal_Black.png",
+              width: 500,
+              height: 200,
+            ),
 
             // const SizedBox(height: 80,),
             // const Text("Location Sharing App",
