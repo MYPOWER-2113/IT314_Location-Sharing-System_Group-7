@@ -34,11 +34,11 @@ Widget reviewRideBottomSheet(
                     //     image: AssetImage('assets/image/sport-car.png'),
                     //     height: 50,
                     //     width: 50),
-                    title: const Text('Premier',
+                    title: const Text('Distance',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
-                    subtitle: Text('$distance km, $dropOffTime drop off'),
-                    trailing: const Text('\$384.22',
+                    subtitle: Text('$distance km'),
+                    trailing: Text('$dropOffTime Arrival Time',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18)),
                   ),

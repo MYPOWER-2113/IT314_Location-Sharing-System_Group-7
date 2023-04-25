@@ -103,26 +103,31 @@ class _MyAppState extends State<MyApp> {
       title: 'LocSS',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-
-        // Define the default brightness and colors.
         brightness: Brightness.light,
         primaryColor: Colors.blueAccent.shade400,
 
         // Define the default font family.
         fontFamily: 'Gotham',
 
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+        textTheme: TextTheme(
+          displayLarge: TextStyle(
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.greenAccent.shade700),
           titleLarge: TextStyle(
-            fontSize: 25.0, /*fontStyle: FontStyle.italic*/
+            fontSize: 25.0,
+            /*fontStyle: FontStyle.italic*/
+            color: Colors.greenAccent,
           ),
-          bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          bodyMedium: TextStyle(
+              fontSize: 14.0, fontFamily: 'Hind', color: Colors.black),
         ),
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.blueAccent.shade200,
-      ),
+
+      // darkTheme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   primaryColor: Colors.blueAccent.shade200,
+      // ),
       debugShowCheckedModeBanner: false,
       home: MySplashScreen(),
     );

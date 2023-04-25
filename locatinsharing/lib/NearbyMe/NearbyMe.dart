@@ -329,7 +329,7 @@ class _NearMeState extends State<NearMe> {
             borderRadius: BorderRadius.all(Radius.circular(50)),
             boxShadow: [
               BoxShadow(
-                color: Colors.redAccent.withOpacity(0.2),
+                color: Colors.deepPurple.withOpacity(0.2),
                 spreadRadius: 3,
                 blurRadius: 3,
                 offset: Offset(0, 3),

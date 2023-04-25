@@ -126,7 +126,7 @@ class _SigninState extends State<Signin> {
                         width: 375,
                         // ignore: prefer_const_constructors
                         decoration: BoxDecoration(
-                          color: Colors.blueAccent[100],
+                          color: Colors.white,
                           borderRadius: const BorderRadius.all(
                             Radius.circular(
                               16.0,
@@ -140,12 +140,15 @@ class _SigninState extends State<Signin> {
                                   horizontal: 30, vertical: 35),
                               child: TextFormField(
                                 controller: emailController,
+
                                 decoration: InputDecoration(
                                   labelText: 'Your Email Address',
                                   labelStyle: GoogleFonts.poppins(
                                       fontSize: 12,
                                       fontWeight: FontWeight.normal,
-                                      color: const Color(0X333333FF)),
+                                      color: const Color(0xff8B9E9E)
+
+                                  ),
                                   enabledBorder: const UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.blueGrey,

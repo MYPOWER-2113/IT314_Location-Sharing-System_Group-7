@@ -272,7 +272,7 @@ class _Navigation extends State<Navigation> {
                   compassEnabled: true,
                 ),
                 Positioned(
-                    top: 20,
+                    top: 10,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -283,17 +283,14 @@ class _Navigation extends State<Navigation> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Text(
-                                  'Hello!',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 20),
-                                const Text('You are currently here:'),
+                                const Text('You are currently here:',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),),
                                 Text(currAdd,
                                     style: const TextStyle(
-                                        color: Colors.blueAccent)),
+                                        color: Colors.blueAccent,
+                                    fontSize: 16)),
                                 const SizedBox(height: 20),
                                 ElevatedButton(
                                     onPressed: () => Navigator.push(
@@ -333,7 +330,7 @@ class _Navigation extends State<Navigation> {
                 borderRadius: BorderRadius.all(Radius.circular(50)),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.redAccent.withOpacity(0.2),
+                    color: Colors.deepPurple.withOpacity(0.2),
                     spreadRadius: 3,
                     blurRadius: 3,
                     offset: Offset(0, 3),

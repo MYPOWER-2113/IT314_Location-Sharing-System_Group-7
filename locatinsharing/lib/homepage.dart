@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController sourceController = TextEditingController();
   MapController mapcontrol = MapController();
   late MapboxMapController mapController;
+  late CameraPosition _initialCameraPostion;
 
   bool isLoading = false;
   bool isEmptyResponse = true;
@@ -84,6 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    _initialCameraPostion = CameraPosition(target: getCurrentLatLngFromSharedPrefs(), zoom: 15);
+
   }
 
   // @override
@@ -342,6 +345,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+          ),
+
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              mapController.animateCamera(
+                  CameraUpdate.newCameraPosition(CameraPosition(target: getCurrentLatLngFromSharedPrefs(),zoom:15)));
+            },
+            elevation: 0,
+            child: Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.deepPurple.withOpacity(0.2),
+                    spreadRadius: 3,
+                    blurRadius: 3,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.my_location),
+            ),
+            backgroundColor: Colors.blueAccent.shade200,
+            foregroundColor: Colors.white,
           ),
         ),
         // Padding(
