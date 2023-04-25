@@ -85,14 +85,6 @@ class _SOS extends State<SOS> {
       appBar: AppBar(
         title: Text("SOS Emergency"),
 
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_none, size: 30,),
-            onPressed: () {},
-          ),
-        ],
-
-        //backgroundColor: Colors.cyan,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

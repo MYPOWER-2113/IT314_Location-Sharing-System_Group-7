@@ -187,13 +187,6 @@ class _Navigation extends State<Navigation>{
           appBar: AppBar(
             title: Text("Navigation"),
 
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.notifications_none, size: 30,),
-                onPressed: () {},
-              ),
-            ],
-
             //backgroundColor: Colors.cyan,
             flexibleSpace: Container(
               decoration: BoxDecoration(

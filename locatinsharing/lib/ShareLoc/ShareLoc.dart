@@ -146,11 +146,6 @@ class ShareMyLocation extends State<ShareLocation> {
                 ...MenuItems.itemSecond.map(buildItem).toList(),
               ],
           ),
-          IconButton(
-            icon: Icon(Icons.notifications_none, size: 30,),
-            // padding:
-            onPressed: () {},
-          ),
         ],
 
         //backgroundColor: Colors.cyan,

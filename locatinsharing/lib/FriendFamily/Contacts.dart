@@ -94,13 +94,6 @@ class _ContactsState extends State<Contacts> {
       appBar: AppBar(
         title: Text("Contacts"),
 
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_none, size: 30,),
-            onPressed: () {},
-          ),
-        ],
-
         //backgroundColor: Colors.cyan,
         flexibleSpace: Container(
           decoration: BoxDecoration(

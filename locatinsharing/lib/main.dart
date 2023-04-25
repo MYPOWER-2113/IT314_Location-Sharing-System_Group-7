@@ -24,8 +24,8 @@ late SharedPreferences sharedPreferences;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
-  await dotenv.load(fileName: "assets/config/.env");
 
+  await dotenv.load(fileName: "assets/config/.env");
   await GetStorage.init();
   runApp(
     MultiProvider(
@@ -48,9 +48,12 @@ class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
 
   @override
-  void initState() {
+  void initState(){
+    // sharedPreferences = await SharedPreferences.getInstance();
+
     super.initState();
     initializeLocationAndSave();
+    // sharedPreferences = await SharedPreferences.getInstance();
     authService.getUserData(context);
   }
 

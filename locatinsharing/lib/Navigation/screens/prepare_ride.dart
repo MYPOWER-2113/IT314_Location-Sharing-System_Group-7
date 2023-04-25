@@ -92,19 +92,15 @@ class _PrepareRideState extends State<PrepareRide> {
           child: Column(
             children: [
               endpointsCard(sourceController, destinationController),
-              isLoading
-                  ? const LinearProgressIndicator(
+              isLoading ? const LinearProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white)
-              )
-                  : Container(),
-              isEmptyResponse
-                  ? Padding(
+              ) : Container(),
+              isEmptyResponse ? Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Center(
                           child: Text(hasResponded ? noResponse : noRequest)
                       )
-              )
-                  : Container(),
+              ) : Container(),
               searchListView(responses, isResponseForDestination,destinationController, sourceController),
             ],
           ),

@@ -7,7 +7,6 @@ import '../helper/dio_exceptions.dart';
 
 String baseUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 String accessToken = dotenv.env['MAPBOX_ACCESS_TOKEN']!;
-
 Dio _dio = Dio();
 
 Future getReverseGeocodingGivenLatLngUsingMapbox(LatLng latLng) async {

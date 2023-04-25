@@ -227,13 +227,6 @@ class _NearMeState extends State<NearMe> {
       appBar: AppBar(
         title: Text("Near Me"),
 
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_none, size: 30,),
-            onPressed: () {},
-          ),
-        ],
-
         //backgroundColor: Colors.cyan,
         flexibleSpace: Container(
           decoration: BoxDecoration(
