@@ -79,7 +79,7 @@ class _ContactsState extends State<Contacts> {
           return true;
         }
         if (searchTermFlattren.isEmpty){
-             return false;
+          return false;
         }
         var phone = element.phones!.firstWhere((p) {
           String phnFLattered = flattenPhoneNumber(p.value!);
@@ -150,86 +150,97 @@ class _ContactsState extends State<Contacts> {
     bool isSearching = searchController.text.isNotEmpty;
     bool listItemExit = (contactsFiltered.isNotEmpty || contacts!.isNotEmpty);
     return Scaffold(
-        drawer: const DrawerScreen(),
-        appBar: AppBar(
-          title: Text("Contacts"),
+      drawer: const DrawerScreen(),
+      appBar: AppBar(
+        title: Text("Contacts"),
+
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications_none, size: 30,),
+            onPressed: () {},
+          ),
+        ],
 
         //backgroundColor: Colors.cyan,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+              colors: [
+                Colors.blueAccent.shade100,
+                Colors.greenAccent.shade200
+              ],
               begin: Alignment.bottomRight,
               end: Alignment.topLeft,
             ),
           ),
         ),
+      ),
 
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          selectedItemColor: Colors.teal[900],
-          onTap: _onItemTapped,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.teal[900],
+        onTap: _onItemTapped,
 
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home, size: 30,),
-              label: 'Home',
-              backgroundColor: Colors.greenAccent.shade200,
-            ),
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 30,),
+            label: 'Home',
+            backgroundColor: Colors.greenAccent.shade200,
+          ),
 
-            BottomNavigationBarItem(
-              icon: Icon(Icons.emergency_share, size: 30,),
-              label: 'SOS Share',
-              backgroundColor: Colors.blueAccent.shade100,
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emergency_share, size: 30,),
+            label: 'SOS Share',
+            backgroundColor: Colors.blueAccent.shade100,
+          ),
 
-            BottomNavigationBarItem(
-              icon: Icon(Icons.navigation, size: 30,),
-              label: 'Navigation',
-              backgroundColor: Colors.greenAccent.shade200,
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.navigation, size: 30,),
+            label: 'Navigation',
+            backgroundColor: Colors.greenAccent.shade200,
+          ),
 
-            BottomNavigationBarItem(
-              icon: Icon(Icons.share_location_sharp, size: 30,),
-              label: 'ShareLocation',
-              backgroundColor: Colors.blueAccent.shade100,
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.share_location_sharp, size: 30,),
+            label: 'ShareLocation',
+            backgroundColor: Colors.blueAccent.shade100,
+          ),
 
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_4, size: 30,),
-              label: 'Contacts',
-              backgroundColor: Colors.greenAccent.shade200,
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_4, size: 30,),
+            label: 'Contacts',
+            backgroundColor: Colors.greenAccent.shade200,
+          ),
 
-            BottomNavigationBarItem(
-              icon: Icon(Icons.near_me_rounded, size: 30,),
-              label: 'Near Me',
-              backgroundColor: Colors.blueAccent.shade100,
-            ),
-          ],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.near_me_rounded, size: 30,),
+            label: 'Near Me',
+            backgroundColor: Colors.blueAccent.shade100,
+          ),
+        ],
 
-          elevation: 50,
-          selectedFontSize: 15,
-        ),
+        elevation: 50,
+        selectedFontSize: 15,
+      ),
 
-        body: contacts?.length == 0
-            ? Center(child: CircularProgressIndicator())
-            : SafeArea(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      autofocus: true,
-                      controller: searchController,
-                      decoration: InputDecoration(
-                        labelText: "search contact",
-                        prefixIcon: Icon(Icons.search)),
-                    ),
-                  ),
-                  listItemExit == true?
-                  Expanded(
-                    child: ListView.builder(
+      body: contacts?.length == 0
+          ? Center(child: CircularProgressIndicator())
+          : SafeArea(
+        child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  autofocus: true,
+                  controller: searchController,
+                  decoration: InputDecoration(
+                      labelText: "search contact",
+                      prefixIcon: Icon(Icons.search)),
+                ),
+              ),
+              listItemExit == true?
+              Expanded(
+                child: ListView.builder(
                     itemCount: isSearching == true
                         ? contactsFiltered.length
                         : contacts?.length,
@@ -237,7 +248,7 @@ class _ContactsState extends State<Contacts> {
                       Contact contact = contacts![index];
                       return ListTile(
                         title: Text(contacts![index].displayName!),
-                          subtitle: Text(contact.phones!.first.value!),
+                        subtitle: Text(contact.phones!.first.value!),
                         leading: contact.avatar!=null && contact.avatar!.isNotEmpty?
                         CircleAvatar(
                           backgroundImage: MemoryImage(contact.avatar!),
@@ -246,15 +257,15 @@ class _ContactsState extends State<Contacts> {
                         ),
                       );
                     }
+                ),
+              )
+                  : Container(
+                child: Text("searching"),
+              ),
+            ]
         ),
-                  )
-              : Container(
-                 child: Text("searching"),
-               ),
-    ]
-              ),
-              ),
-            );
+      ),
+    );
   }
 
 }
