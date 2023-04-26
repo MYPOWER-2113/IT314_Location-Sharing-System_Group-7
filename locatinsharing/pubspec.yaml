@@ -10,6 +10,8 @@ environment:
 dependencies:
   contacts_service: ^0.6.3
   flutter_sms: ^2.3.3
+  fast_contacts: 1.0.0
+
   #flutter_contacts:
   flutter:
     sdk: flutter

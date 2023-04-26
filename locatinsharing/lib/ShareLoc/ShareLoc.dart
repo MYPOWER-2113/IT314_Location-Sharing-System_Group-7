@@ -1,3 +1,4 @@
+import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -83,12 +85,13 @@ PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem<MenuItem>(
     );
 
 class ShareMyLocation extends State<ShareLocation> {
+  late Future<List<Contact>> _future;
+  Contact? _selectedUser;
   @override
   void initState() {
     super.initState();
-    // initializeLocationAndSave();
+    _future = getContacts();
   }
-
   int selectedPage = 3;
 
   final _pageOptions = [
@@ -234,34 +237,50 @@ class ShareMyLocation extends State<ShareLocation> {
                   borderRadius:BorderRadius.circular(12),
                   color:Colors.grey
               ),
-              child: DropdownButton(
-                value: valueChoose,
-                hint: Text("Select Contact: "),
-                dropdownColor: Colors.grey,
-                icon: Icon(Icons.arrow_drop_down),
-                elevation: 16,
-                iconSize: 40,
-                isExpanded: true,
-                underline: SizedBox(),
-                style: TextStyle(color: Colors.black, fontSize: 22),
-                onChanged: (String? newvalue) {
-                  setState(() {
-                    valueChoose = newvalue!;
-                    indexx = listItem.indexOf(newvalue);
-                    numChoose = ppl[indexx];
-                    // String vl = newvalue!;
-                    // valueChoose = vl.substring(14);
-                    // // valueChoose = newvalue! ;
-                    // numChoose = vl.substring(0,14);
-                  });
-                },
-                items: listItem.map((valueItem) {
-                  return DropdownMenuItem<String>(
-                    value: valueItem,
-                    child: Text(valueItem),
-                  );
-                }).toList(),
-              ),
+              child: FutureBuilder<List<Contact>>(
+                  future: _future,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+
+                    if (snapshot.data == null) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          const Text(
+                            'Select user:',
+                          ),
+                          SizedBox(
+                            height: 64,
+                            child: DropdownButton<Contact>(
+                              onChanged: (user) =>
+                                  setState(() => _selectedUser = user),
+                              value: _selectedUser,
+                              items: [
+                                ...snapshot.data!.map(
+                                      (user) => DropdownMenuItem(
+                                    value: user,
+                                    child: Row(
+                                      children: [
+                                        //Image.network(user.avatar),
+                                        Text('${user.displayName} ${user.phones[0]}'),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
             ),
             Container(
               margin: EdgeInsets.all(12.0),
@@ -415,4 +434,14 @@ class ShareMyLocation extends State<ShareLocation> {
           ],
         ),
       ),*/
+  Future<List<Contact>> getContacts() async {
+    bool isGranted = await Permission.contacts.status.isGranted;
+    if (!isGranted) {
+      isGranted = await Permission.contacts.request().isGranted;
+    }
+    if (isGranted) {
+      return await FastContacts.allContacts;
+    }
+    return [];
+  }
   }

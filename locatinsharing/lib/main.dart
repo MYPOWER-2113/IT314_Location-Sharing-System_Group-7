@@ -6,6 +6,7 @@ import 'package:locatinsharing/FriendFamily/Contacts.dart';
 // import 'package:latlong2/latlong.dart' as latLng;
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
 import 'package:locatinsharing/Signin_Signup/signin.dart';
+import 'package:locatinsharing/homepage.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
@@ -15,6 +16,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:locatinsharing/Splash/splash_screen.dart';
 import 'package:provider/provider.dart';
+import 'Signin_Signup/SOS_contacts.dart';
 import 'Signin_Signup/auth.dart';
 import 'Signin_Signup/user_provider.dart';
 import 'package:get/get.dart';
