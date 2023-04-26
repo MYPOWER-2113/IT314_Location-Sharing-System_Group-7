@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
 
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,18 +103,22 @@ class ShareMyLocation extends State<ShareLocation> {
   int _currentIndex = 3;
 
   String valueChoose = "Select Contacts";
-  List ppl = [];
+  String numChoose="+919313601005";
+  int indexx = 0;
+  List ppl=[
+    "Select Contacts",
+    "+919664842368","+917014850582","+916353553548","+919313601005"];
+
   List listItem = [
     "Select Contacts",
-    "+919664842368",
-    "+917014850582",
-    "+916353553548",
-    "+919313601005"
+    "Vedant",
+    "Ronit",
+    "Hem",
+    "Aditya"
   ];
 
-  final lat = 51.153662;
-
-  final long = 0.850729;
+  // final _latlong = getCurrentLatLngFromSharedPrefs();
+  final long = getCurrentLatLngFromSharedPrefs().longitude,lat = getCurrentLatLngFromSharedPrefs().latitude;
 
   void _sendSMS(String recipitent) async {
     List<String> recepients = [recipitent];
@@ -218,23 +223,91 @@ class ShareMyLocation extends State<ShareLocation> {
         elevation: 50,
         selectedFontSize: 15,
       ),
-      body: Align(
+
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children:<Widget>[
+            Container(
+              margin: EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(8.0),
+              decoration:BoxDecoration(
+                  borderRadius:BorderRadius.circular(12),
+                  color:Colors.grey
+              ),
+              child: DropdownButton(
+                value: valueChoose,
+                hint: Text("Select Contact: "),
+                dropdownColor: Colors.grey,
+                icon: Icon(Icons.arrow_drop_down),
+                elevation: 16,
+                iconSize: 40,
+                isExpanded: true,
+                underline: SizedBox(),
+                style: TextStyle(color: Colors.black, fontSize: 22),
+                onChanged: (String? newvalue) {
+                  setState(() {
+                    valueChoose = newvalue!;
+                    indexx = listItem.indexOf(newvalue);
+                    numChoose = ppl[indexx];
+                    // String vl = newvalue!;
+                    // valueChoose = vl.substring(14);
+                    // // valueChoose = newvalue! ;
+                    // numChoose = vl.substring(0,14);
+                  });
+                },
+                items: listItem.map((valueItem) {
+                  return DropdownMenuItem<String>(
+                    value: valueItem,
+                    child: Text(valueItem),
+                  );
+                }).toList(),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(8.0),
+              decoration:BoxDecoration(
+                  borderRadius:BorderRadius.circular(8),
+              ),
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                      primary: Colors.purpleAccent,
+                      backgroundColor: Colors.blue, // Background Color
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))
+                  ),
+                  onPressed: (){
+                    if(valueChoose != "Select Contacts") {
+                      _sendSMS(numChoose);
+                      Fluttertoast.showToast(
+                          msg: "Location Shared",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 10.0
+                      );
+                    }
+                  }, child: Text("SEND", style: TextStyle(color: Colors.white,fontSize: 25),)),
+            )
+          ]
+      ),
+    );
+  }
+
+  /*body: Align(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 100,
+              height: 20,
             ),
             Padding(
                 padding: EdgeInsets.all(16.10),
                 child: Padding(
                     padding: const EdgeInsets.all(3.0),
-                    child: Container(
-                      padding: EdgeInsets.only(left: 9, right: 9),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey, width: 2),
-                          borderRadius: BorderRadius.circular(12)),
+
                       child: Column(
                         children: [
                           SizedBox(
@@ -259,6 +332,7 @@ class ShareMyLocation extends State<ShareLocation> {
                           //     ElevatedButton(onPressed: (){}, child: Text ('Share Current Locaion'))
                           //   ],
                           // ),
+
                           DropdownButton(
                             value: valueChoose,
                             // hint: Te,
@@ -273,6 +347,10 @@ class ShareMyLocation extends State<ShareLocation> {
                             onChanged: (String? newvalue) {
                               setState(() {
                                 valueChoose = newvalue!;
+                                // String vl = newvalue!;
+                                // valueChoose = vl.substring(14);
+                                // // valueChoose = newvalue! ;
+                                // numChoose = vl.substring(0,14);
                               });
                             },
                             items: listItem.map((valueItem) {
@@ -282,38 +360,59 @@ class ShareMyLocation extends State<ShareLocation> {
                               );
                             }).toList(),
                           ),
+
+
+                          SizedBox(height: 70),
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                  primary: Colors.purpleAccent,
+                                  backgroundColor: Colors.blue, // Background Color
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))
+                              ),
+                              onPressed: (){
+                                if(valueChoose != "Select Contacts") {
+                                  _sendSMS(numChoose);
+                                  Fluttertoast.showToast(
+                                      msg: "Location Shared",
+                                      toastLength: Toast.LENGTH_LONG,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 10.0
+                                  );
+                                }
+                              }, child: Text("SEND", style: TextStyle(color: Colors.white,fontSize: 25),)),
                         ],
                       ),
-                    ))),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
-              child: TextButton(
-                  style: TextButton.styleFrom(
-                      primary: Colors.purpleAccent,
-                      backgroundColor: Colors.blue, // Background Color
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0))),
-                  onPressed: () {
-                    if (valueChoose != "Select Contacts") {
-                      _sendSMS(valueChoose);
-                      Fluttertoast.showToast(
-                          msg: "Location Shared",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 10.0);
-                    }
-                  },
-                  child: Text(
-                    "SEND",
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                  )),
-            )
+                    )),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
+            //   child: TextButton(
+            //       style: TextButton.styleFrom(
+            //           primary: Colors.purpleAccent,
+            //           backgroundColor: Colors.blue, // Background Color
+            //           shape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(8.0))),
+            //       onPressed: () {
+            //         if (valueChoose != "Select Contacts") {
+            //           _sendSMS(valueChoose);
+            //           Fluttertoast.showToast(
+            //               msg: "Location Shared",
+            //               toastLength: Toast.LENGTH_LONG,
+            //               gravity: ToastGravity.CENTER,
+            //               timeInSecForIosWeb: 1,
+            //               backgroundColor: Colors.red,
+            //               textColor: Colors.white,
+            //               fontSize: 10.0);
+            //         }
+            //       },
+            //       child: Text(
+            //         "SEND",
+            //         style: TextStyle(color: Colors.white, fontSize: 25),
+            //       )),
+            // )
           ],
         ),
-      ),
-    );
+      ),*/
   }
-}
