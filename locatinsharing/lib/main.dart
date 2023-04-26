@@ -5,6 +5,7 @@ import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
 // import 'package:latlong2/latlong.dart' as latLng;
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
+import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
 import 'package:locatinsharing/Signin_Signup/signin.dart';
 import 'package:locatinsharing/homepage.dart';
 import 'package:location/location.dart';

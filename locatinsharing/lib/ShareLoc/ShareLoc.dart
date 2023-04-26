@@ -231,8 +231,8 @@ class ShareMyLocation extends State<ShareLocation> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children:<Widget>[
             Container(
-              margin: EdgeInsets.all(15.0),
-              padding: EdgeInsets.all(8.0),
+              // margin: EdgeInsets.all(15.0),
+              // padding: EdgeInsets.all(8.0),
               decoration:BoxDecoration(
                   borderRadius:BorderRadius.circular(12),
                   color:Colors.grey
@@ -249,19 +249,29 @@ class ShareMyLocation extends State<ShareLocation> {
                     }
 
                     return Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(0),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           const Text(
                             'Select user:',
+                            style: TextStyle(fontSize: 23),
                           ),
                           SizedBox(
-                            height: 64,
+                            // height: 64,
+                            // width: 400,
                             child: DropdownButton<Contact>(
-                              onChanged: (user) =>
-                                  setState(() => _selectedUser = user),
+
+                              /*onChanged: (user) =>
+                                  setState(() => _selectedUser = user),*/
+                                onChanged: (newvalue) {
+                                  setState(() {
+                                    _selectedUser = newvalue;
+                                    valueChoose = newvalue!.phones[0];
+                                  });
+                                },
                               value: _selectedUser,
+                              iconSize: 50,
                               items: [
                                 ...snapshot.data!.map(
                                       (user) => DropdownMenuItem(
@@ -296,7 +306,8 @@ class ShareMyLocation extends State<ShareLocation> {
                   ),
                   onPressed: (){
                     if(valueChoose != "Select Contacts") {
-                      _sendSMS(numChoose);
+                      // _sendSMS(_selectedUser!.phones[0]);
+                      _sendSMS(valueChoose);
                       Fluttertoast.showToast(
                           msg: "Location Shared",
                           toastLength: Toast.LENGTH_LONG,
