@@ -7,7 +7,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
 import 'package:locatinsharing/Navigation/requests/mapbox_requests.dart';
-import 'package:locatinsharing/Navigation/screens/prepare_ride.dart';
+import 'package:locatinsharing/Navigation/screens/Search_Destination_Source.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
 // import 'package:flutter_dotenv/flutter_dotenv.dart';

@@ -8,7 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:latlong2/latlong.dart';
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
 import 'package:locatinsharing/Navigation/helper/shared_prefs.dart';
-import 'package:locatinsharing/Navigation/screens/prepare_ride.dart';
+import 'package:locatinsharing/Navigation/screens/Search_Destination_Source.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
