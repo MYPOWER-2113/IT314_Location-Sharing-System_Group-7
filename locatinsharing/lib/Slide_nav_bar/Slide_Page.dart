@@ -61,8 +61,8 @@ class DrawerScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(user.name,),
-                accountEmail: Text(user.email),
+                accountName: Text(user.name, style: const TextStyle(fontSize: 18)),
+                accountEmail: Text(user.email, style: const TextStyle(fontSize: 14)),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [

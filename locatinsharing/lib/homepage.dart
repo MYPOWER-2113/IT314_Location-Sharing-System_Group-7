@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _initialCameraPostion = CameraPosition(target: getCurrentLatLngFromSharedPrefs(), zoom: 15);
-
+    _initialCameraPostion =
+        CameraPosition(target: getCurrentLatLngFromSharedPrefs(), zoom: 15);
   }
 
   // @override
@@ -349,8 +349,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              mapController.animateCamera(
-                  CameraUpdate.newCameraPosition(CameraPosition(target: getCurrentLatLngFromSharedPrefs(),zoom:15)));
+              mapController.animateCamera(CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                      target: getCurrentLatLngFromSharedPrefs(), zoom: 15)));
             },
             elevation: 0,
             child: Container(
