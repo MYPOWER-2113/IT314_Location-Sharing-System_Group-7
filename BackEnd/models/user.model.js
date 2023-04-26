@@ -36,6 +36,9 @@ const userSchema = mongoose.Schema({
       },
       message: "Please enter a valid mobile number",
     },
+  },
+  SOSnumber:{
+    type: Array,
   }
 });
 

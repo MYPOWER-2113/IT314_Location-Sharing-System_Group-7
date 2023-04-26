@@ -17,7 +17,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:locatinsharing/Splash/splash_screen.dart';
 import 'package:provider/provider.dart';
-import 'Signin_Signup/SOS_contacts.dart';
+import 'SOS/SOS_Contacts.dart';
 import 'Signin_Signup/auth.dart';
 import 'Signin_Signup/user_provider.dart';
 import 'package:get/get.dart';

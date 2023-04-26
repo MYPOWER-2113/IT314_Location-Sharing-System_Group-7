@@ -39,6 +39,8 @@ router.post("/signup", async (req, res) => {
 });
 
 
+
+
 router.post("/signin", async (req, res) => {
   try {
     const { email, password} = req.body;
@@ -82,6 +84,29 @@ router.post("/tokenIsValid", async (req, res) => {
 router.get("/", auth, async (req, res) => {
   const user = await User.findById(req.user);
   res.json({ ...user._doc, token: req.token });
+});
+
+//store SOS number
+router.post("/SOSnumber", async (req, res) => {
+  try {
+    const { email, SOSnumber} = req.body;
+
+    existingUser = (await User.findOne({email})) ;
+    if (existingUser) {
+      existingUser.SOSnumber = SOSnumber;
+      existingUser = await existingUser.save();
+      res.json(existingUser);
+    }
+    else
+    {
+        return res
+        .status(400)
+        .json({ msg: "No such user found!" });
+    }
+
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 module.exports = router

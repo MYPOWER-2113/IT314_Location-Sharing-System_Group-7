@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:locatinsharing/Signin_Signup/signup.dart';
 import 'package:locatinsharing/Signin_Signup/user.dart';
 import 'package:locatinsharing/Signin_Signup/user_provider.dart';
 import 'package:locatinsharing/homepage.dart';
@@ -10,7 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:locatinsharing/Signin_Signup/user_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-import 'constants.dart';
+import '../SOS/SOS_Contacts.dart';
+import '../constants.dart';
 
 class AuthService {
   void signUpUser({
@@ -82,7 +84,7 @@ class AuthService {
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           navigator.pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const MyHomePage(),
+              builder: (context) => const Signup(),
             ),
             (route) => false,
           );
