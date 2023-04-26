@@ -12,7 +12,6 @@ import 'package:latlong2/latlong.dart' as ll;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as per;
-
 //import 'package:mapbox_gl/mapbox_gl.dart' as mpgl;
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
@@ -25,22 +24,22 @@ import 'package:locatinsharing/NearbyMe/NearbyMe.dart';
 
 import '../../Slide_nav_bar/Slide_Page.dart';
 
+import 'package:flutter_sms/flutter_sms.dart';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:flutter_android_volume_keydown/flutter_android_volume_keydown.dart';
+import '../Navigation/helper/shared_prefs.dart';
 
-int _volumeButtonPressCount = 0;
-DateTime _lastVolumeButtonPressTime = DateTime.now();
 
 class SOS extends StatefulWidget {
   const SOS({super.key});
-
   @override
   State<SOS> createState() => _SOS();
 }
 
 class _SOS extends State<SOS> {
+
   int selectedPage = 1;
 
   final _pageOptions = [
@@ -51,6 +50,24 @@ class _SOS extends State<SOS> {
     Contacts(),
     NearMe()
   ];
+
+  final long = getCurrentLatLngFromSharedPrefs().longitude,lat = getCurrentLatLngFromSharedPrefs().latitude;
+  void _sendSOS(String recipitent) async{
+    List<String> recepients=[recipitent];
+    // await BackgroundSms.sendMessage(
+    // phoneNumber: "+919313601005", message: "Hey . Test message", simSlot: 1);
+    await sendSMS(message:"Hi there this is message from my app. My location is https://www.google.com/maps/@$lat,$long,20z",recipients:recepients);
+  }
+
+  // void _sendMessage(String phoneNumber, String message ) async {
+  //   var result = await BackgroundSms.sendMessage(
+  //       phoneNumber: phoneNumber, message: message, simSlot: 1);
+  //   if (result == SmsStatus.sent) {
+  //     print("Sent");
+  //   } else {
+  //     print("Failed");
+  //   }
+  // }
 
   int _currentIndex = 1;
 
@@ -64,24 +81,28 @@ class _SOS extends State<SOS> {
     );
   }
 
+
   // for switch state start here
   bool isSwitched = false;
   final switchData = GetStorage();
+
 
   @override
   void initState() {
     super.initState();
 
-    if (switchData.read('isSwitched') != null) {
+    if(switchData.read('isSwitched') != null)
+    {
       setState(() {
         isSwitched = switchData.read('isSwitched');
       });
     }
   }
-
   // for switch state ends here
 
+
   // -----> if switch is on activate volume button to take input
+
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +113,7 @@ class _SOS extends State<SOS> {
 
         actions: <Widget>[
           IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-              size: 30,
-            ),
+            icon: Icon(Icons.notifications_none, size: 30,),
             onPressed: () {},
           ),
         ],
@@ -111,75 +129,69 @@ class _SOS extends State<SOS> {
           ),
         ),
       ),
+
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blue[900],
         onTap: _onItemTapped,
+
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
-            ),
+            icon: Icon(Icons.home, size: 30,),
             label: 'Home',
             backgroundColor: Colors.greenAccent.shade200,
           ),
+
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.emergency_share,
-              size: 30,
-            ),
+            icon: Icon(Icons.emergency_share, size: 30,),
             label: 'SOS Share',
             backgroundColor: Colors.blueAccent.shade100,
           ),
+
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.navigation,
-              size: 30,
-            ),
+            icon: Icon(Icons.navigation, size: 30,),
             label: 'Navigation',
             backgroundColor: Colors.greenAccent.shade200,
           ),
+
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.share_location_sharp,
-              size: 30,
-            ),
+            icon: Icon(Icons.share_location_sharp, size: 30,),
             label: 'ShareLocation',
             backgroundColor: Colors.blueAccent.shade100,
           ),
+
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_4,
-              size: 30,
-            ),
+            icon: Icon(Icons.person_4, size: 30,),
             label: 'Contacts',
             backgroundColor: Colors.greenAccent.shade200,
           ),
+
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.near_me_rounded,
-              size: 30,
-            ),
+            icon: Icon(Icons.near_me_rounded, size: 30,),
             label: 'Near Me',
             backgroundColor: Colors.blueAccent.shade100,
           ),
         ],
+
         elevation: 50,
         selectedFontSize: 15,
       ),
+
       body: Align(
         alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "SOS messaging",
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+
+
+            Text("SOS messaging",style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black
             ),
+            ),
+
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: LiteRollingSwitch(
@@ -192,6 +204,7 @@ class _SOS extends State<SOS> {
                 iconOff: Icons.power_settings_new,
                 animationDuration: Duration(milliseconds: 400),
                 onChanged: (value) {
+
                   setState(() {
                     isSwitched = value;
                     switchData.write('isSwitched', isSwitched);
@@ -214,113 +227,77 @@ class _SOS extends State<SOS> {
                 },
               ),
             ),
+
+            if (!isSwitched) // Display this only if the switch is turned off
+              Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Container(
+                  width: 280,
+                  height: 100,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'SOS allows you to immediately send your current location to your selected contact.',
+                      maxLines: 3,
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
             if (isSwitched) // Display this only if the switch is turned on
               Container(
                 margin: EdgeInsets.symmetric(vertical: 20),
-                child: Text('The switch is turned on!'),
               ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
-// class VolumeButtonListener extends State<SOS> {
-//   @override
-//   _VolumeButtonListenerState createState() => _VolumeButtonListenerState();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//    TODO: implement build
-//     throw UnimplementedError();
-//   }
-// }
-//
-// class _VolumeButtonListenerState extends State<VolumeButtonListener> {
-//   // Track the number of times the volume button has been pressed
-//
-//   // Handle the volume button press
-//   void _handleVolumeButtonPress() {
-//     setState(() {
-//       _volumeButtonPressCount++;
-//     });
-//       // Volume button has been pressed three or more times, do something here
-//       // For example, show a toast message or perform an action
-//       DateTime now = DateTime.now();
-//       if (now.difference(_lastVolumeButtonPressTime) > Duration(seconds: 5)) {
-//         // reset the press count if the last press was more than 2 seconds ago
-//         _volumeButtonPressCount = 0;
-//       }
-//       else {
-//         _lastVolumeButtonPressTime = now;
-//         if (_volumeButtonPressCount >= 3) {
-//           print('Volume button pressed three or more times');
-//           // send message
-//
-//           _volumeButtonPressCount = 0;
-//         }
-//       }
-//     }
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return RawKeyboardListener(
-//       focusNode: FocusNode(),
-//       onKey: (RawKeyEvent event) {
-//         while (event is RawKeyDownEvent) {
-//           while (event. == PhysicalKeyboardKey.audioVolumeDown ||
-//               event.physicalKey == PhysicalKeyboardKey.audioVolumeUp) {
-//             // Call the volume button press handler
-//             _handleVolumeButtonPress();
-//           }
-//         }
-//       },
-//       child: Container(
-//         // Your app's UI goes here
-//         child: Text('Press the volume button three times'),
-//       ),
-//     );
-//   }
-// }
+            if (isSwitched) // Display this only if the switch is turned on
+              Container(
+                height: 150,
+                alignment: Alignment.center,
+                child: Container(
+                  width: 280,
+                  height: 150,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'SOS is ON. Press this button in case of emergency. It will automatically send your location to your selected contact',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    ),
+                  ),
+                ),
+              ),
+            if (isSwitched)
+              Ink(
+                  decoration: ShapeDecoration(
 
-class _MyAppState extends State<SOS> {
-  StreamSubscription<HardwareButton>? subscription;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void startListening() {
-    subscription = FlutterAndroidVolumeKeydown.stream.listen((event) {
-      if (event == HardwareButton.volume_down) {
-        print("Volume down received");
-      } else if (event == HardwareButton.volume_up) {
-        print("Volume up received");
-      }
-    });
-  }
-
-  void stopListening() {
-    subscription?.cancel();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plugin example app'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            ElevatedButton(
-                onPressed: startListening,
-                child: const Text("Start listening")),
-            ElevatedButton(
-                onPressed: stopListening, child: const Text("Stop listening")),
+                    color: Colors.black,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.all_inclusive,
+                      color: Colors.blueAccent,
+                    ),
+                    iconSize: 150.0,
+                    splashColor: Colors.redAccent,
+                    padding: EdgeInsets.all(40.0),
+                    onPressed: () {
+                      _sendSOS("9998349915");
+                      // _sendMessage("=919313601005","Test Mesage",);
+                      // _sendSOS(valueChoose);
+                    },
+                  )),
+            Padding(
+              padding: EdgeInsets.all(25.0),
+            ),
           ],
         ),
       ),
