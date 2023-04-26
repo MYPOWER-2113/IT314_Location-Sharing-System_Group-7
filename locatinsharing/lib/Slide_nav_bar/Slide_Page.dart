@@ -61,10 +61,17 @@ class DrawerScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(user.name),
+                accountName: Text(user.name,),
                 accountEmail: Text(user.email),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.blueAccent.shade100,
+                      Colors.greenAccent.shade200
+                    ],
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                  ),
                   // image: DecorationImage(
                   //     fit: BoxFit.fill,
                   //     // image: NetworkImage('https://oflutter.com/wp-content/uploads/2021/02/profile-bg3.jpg')
