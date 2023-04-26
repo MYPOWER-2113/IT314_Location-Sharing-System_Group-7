@@ -84,7 +84,7 @@ class AuthService {
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           navigator.pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const Signup(),
+              builder: (context) => const MyHomePage(),
             ),
             (route) => false,
           );
