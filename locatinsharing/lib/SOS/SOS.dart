@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:latlong2/latlong.dart' as ll;
+import 'package:flutter/widgets.dart';
 
 //import 'package:flutter_dotenv/flutter_dotenv.dart';
 //import 'package:mapbox_gl/mapbox_gl.dart';
@@ -31,6 +33,11 @@ import 'package:get_storage/get_storage.dart';
 
 import '../Navigation/helper/shared_prefs.dart';
 
+//listen to volume buttons
+import 'package:volume_watcher/volume_watcher.dart';
+
+import 'SOS_Contacts.dart';
+
 
 class SOS extends StatefulWidget {
   const SOS({super.key});
@@ -52,8 +59,9 @@ class _SOS extends State<SOS> {
   ];
 
   final long = getCurrentLatLngFromSharedPrefs().longitude,lat = getCurrentLatLngFromSharedPrefs().latitude;
-  void _sendSOS(String recipitent) async{
-    List<String> recepients=[recipitent];
+  List<String> recepients=["9664842368"];
+  void _sendSOS(List<String> recepitent) async{
+    //List<String> recepients=[recipitent];
     // await BackgroundSms.sendMessage(
     // phoneNumber: "+919313601005", message: "Hey . Test message", simSlot: 1);
     await sendSMS(message:"Hi there this is message from my app. My location is https://www.google.com/maps/@$lat,$long,20z",recipients:recepients);
@@ -97,15 +105,58 @@ class _SOS extends State<SOS> {
         isSwitched = switchData.read('isSwitched');
       });
     }
+
+    //Volume button code ( didn't work due to handleVolumeButtonPressed() )
+
+    // _volumeWatcher = VolumeWatcher(onVolumeChangeListener: (_) => _handleVolumeButtonPressed());
+    // _volumeWatcher.
   }
+
+  // void dispose() {
+  //   _timer?.cancel();
+  //   super.dispose();
+  // }
+  //
+  // void _handleVolumeButtonPressed() {
+  //   if (isSwitched) {
+  //     setState(() {
+  //       _counter++;
+  //       if (_counter == 1) {
+  //         _timer = Timer(Duration(seconds: 2), _resetCounter);
+  //       } else if (_counter == 3) {
+  //         _performAction();
+  //         _resetCounter();
+  //       }
+  //     });
+  //   }
+  // }
+  // void _resetCounter() {
+  //   setState(() {
+  //     _counter = 0;
+  //     _timer?.cancel();
+  //   });
+  // }
+  //
+  // void _performAction() {
+  //   // Do something when the volume button is pressed 3 times within 2 seconds
+  //   _sendSOS("9998349915");
+  // }
+
   // for switch state ends here
 
 
   // -----> if switch is on activate volume button to take input
 
+  // buttons
+  // late VolumeWatcher _volumeWatcher;
+  // int _counter = 0;
+  // late Timer _timer;
 
   @override
   Widget build(BuildContext context) {
+    if(isSwitched)
+      if(recepients.isEmpty)
+        return sosContact();
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
@@ -290,14 +341,25 @@ class _SOS extends State<SOS> {
                     splashColor: Colors.redAccent,
                     padding: EdgeInsets.all(40.0),
                     onPressed: () {
-                      _sendSOS("9998349915");
-                      // _sendMessage("=919313601005","Test Mesage",);
+                      _sendSOS(recepients);
+                      // _sendMessage("=919313601005","Test Message",);
                       // _sendSOS(valueChoose);
                     },
                   )),
             Padding(
               padding: EdgeInsets.all(25.0),
             ),
+
+            if(recepients.isNotEmpty)
+              ElevatedButton(
+                child: Text('Edit SOS Contacts'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => sosContact()),
+                  );
+                }
+              ),
           ],
         ),
       ),
