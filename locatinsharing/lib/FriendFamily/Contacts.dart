@@ -4,6 +4,7 @@ import '../utlis/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:flutter_sms/flutter_sms.dart';
 
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,8 +29,7 @@ class Contacts extends StatefulWidget {
 }
 
 class _ContactsState extends State<Contacts> {
-  List<Contact>? contacts = [];
-
+  List<Contact> contacts = [];
   List<Contact> contactsFiltered = [];
   TextEditingController searchController = TextEditingController();
 
@@ -38,7 +38,7 @@ class _ContactsState extends State<Contacts> {
     // TODO: implement initState
     super.initState();
     askPermissions();
-    // getContact();
+     //getAllContacts();
     // searchController.addListener(() {
     //   filterContacts();
     // });
@@ -65,9 +65,10 @@ class _ContactsState extends State<Contacts> {
     });
   }
 
+
   filterContact() {
     List<Contact> _contacts = [];
-    _contacts.addAll(contacts!);
+    _contacts.addAll(contacts);
     if (searchController.text.isNotEmpty) {
       _contacts.retainWhere((element) {
         String searchTerm = searchController.text.toLowerCase();
@@ -134,7 +135,7 @@ class _ContactsState extends State<Contacts> {
   }
 
   getAllContacts() async {
-    List<Contact> _contacts = await ContactsService.getContacts();
+    List<Contact> _contacts = await ContactsService.getContacts(withThumbnails: false);
     setState(() {
       contacts = _contacts;
     });
@@ -144,7 +145,7 @@ class _ContactsState extends State<Contacts> {
   // ignore: prefer_const_literals_to_create_immutables
   Widget build(BuildContext context) {
     bool isSearching = searchController.text.isNotEmpty;
-    bool listItemExit = (contactsFiltered.isNotEmpty || contacts!.isNotEmpty);
+    bool listItemExit = (contactsFiltered.length > 0 || contacts.length > 0);
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
@@ -228,10 +229,11 @@ class _ContactsState extends State<Contacts> {
         elevation: 50,
         selectedFontSize: 15,
       ),
-      body: contacts?.length == 0
+      body: contacts.length == 0
           ? Center(child: CircularProgressIndicator())
           : SafeArea(
-              child: Column(children: [
+              child: Column(
+                  children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
@@ -247,21 +249,29 @@ class _ContactsState extends State<Contacts> {
                         child: ListView.builder(
                             itemCount: isSearching == true
                                 ? contactsFiltered.length
-                                : contacts?.length,
+                                : contacts.length,
                             itemBuilder: (BuildContext context, int index) {
-                              Contact contact = contacts![index];
+                              Contact contact = isSearching == true
+                                  ? contactsFiltered[index]
+                                  : contacts[index];
                               return ListTile(
-                                title: Text(contacts![index].displayName!),
+                                title: Text(contact.displayName!),
                                 // subtitle: Text(contact.phones!.first.value!),
                                 leading: contact.avatar != null &&
-                                        contact.avatar!.isNotEmpty
+                                        contact.avatar!.length > 0
                                     ? CircleAvatar(
+                                        backgroundColor: primaryColor,
                                         backgroundImage:
                                             MemoryImage(contact.avatar!),
                                       )
                                     : CircleAvatar(
+                                        backgroundColor: primaryColor,
                                         child: Text(contact.initials()),
                                       ),
+                                    onTap:() {
+                                      searchController.text=contact.displayName!;
+                                      sendSMS(message: 'hello', recipients: [contact.phones!.first.value!]);
+                                  },
                               );
                             }),
                       )

@@ -822,7 +822,7 @@ packages:
     source: hosted
     version: "6.1.10"
   url_launcher_android:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: url_launcher_android
       sha256: a52628068d282d01a07cd86e6ba99e497aa45ce8c91159015b2416907d78e411
