@@ -111,7 +111,7 @@ class _SOS extends State<SOS> {
 
     //Volume button code ( didn't work due to handleVolumeButtonPressed() )
 
-    // volumeWatcher = VolumeWatcher(onVolumeChangeListener: () => _handleVolumeButtonPressed());
+    // _volumeWatcher = VolumeWatcher(onVolumeChangeListener: (_) => _handleVolumeButtonPressed());
     // _volumeWatcher.
   }
 
@@ -161,214 +161,214 @@ class _SOS extends State<SOS> {
       if(recepients.isEmpty)
         return sosContact();
     return Scaffold(
-      drawer: const DrawerScreen(),
-      appBar: AppBar(
-        title: Text("SOS Emergency"),
+        drawer: const DrawerScreen(),
+        appBar: AppBar(
+          title: Text("SOS Emergency"),
 
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_none, size: 30,),
-            onPressed: () {},
-          ),
-        ],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.notifications_none, size: 30,),
+              onPressed: () {},
+            ),
+          ],
 
-        //backgroundColor: Colors.cyan,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft,
+          //backgroundColor: Colors.cyan,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+                begin: Alignment.bottomRight,
+                end: Alignment.topLeft,
+              ),
             ),
           ),
         ),
-      ),
 
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        selectedItemColor: Colors.blue[900],
-        onTap: _onItemTapped,
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          selectedItemColor: Colors.blue[900],
+          onTap: _onItemTapped,
 
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 30,),
-            label: 'Home',
-            backgroundColor: Colors.greenAccent.shade200,
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emergency_share, size: 30,),
-            label: 'SOS Share',
-            backgroundColor: Colors.blueAccent.shade100,
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.navigation, size: 30,),
-            label: 'Navigation',
-            backgroundColor: Colors.greenAccent.shade200,
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.share_location_sharp, size: 30,),
-            label: 'ShareLocation',
-            backgroundColor: Colors.blueAccent.shade100,
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_4, size: 30,),
-            label: 'Contacts',
-            backgroundColor: Colors.greenAccent.shade200,
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.near_me_rounded, size: 30,),
-            label: 'Near Me',
-            backgroundColor: Colors.blueAccent.shade100,
-          ),
-        ],
-
-        elevation: 50,
-        selectedFontSize: 15,
-      ),
-
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-
-            Text("SOS messaging",style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
-            ),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home, size: 30,),
+              label: 'Home',
+              backgroundColor: Colors.greenAccent.shade200,
             ),
 
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: LiteRollingSwitch(
-                value: isSwitched,
-                textOn: 'On',
-                textOff: 'Off',
-                colorOn: Colors.greenAccent,
-                colorOff: Colors.redAccent,
-                iconOn: Icons.check,
-                iconOff: Icons.power_settings_new,
-                animationDuration: Duration(milliseconds: 400),
-                onChanged: (value) {
-
-                  setState(() {
-                    isSwitched = value;
-                    switchData.write('isSwitched', isSwitched);
-                    // if(value) {
-                    //   VolumeButtonListener();
-                    // }
-                  });
-                },
-                onTap: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
-                  // if(state) {
-                  //   VolumeButtonListener();
-                  // }
-                },
-                onDoubleTap: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
-                },
-                onSwipe: (bool state) {
-                  print('turned ${(state) ? 'yes' : 'no'}');
-                },
-              ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.emergency_share, size: 30,),
+              label: 'SOS Share',
+              backgroundColor: Colors.blueAccent.shade100,
             ),
 
-            if (!isSwitched) // Display this only if the switch is turned off
-              Container(
-                height: 100,
-                alignment: Alignment.center,
-                child: Container(
-                  width: 280,
-                  height: 100,
-                  child: Align(
+            BottomNavigationBarItem(
+              icon: Icon(Icons.navigation, size: 30,),
+              label: 'Navigation',
+              backgroundColor: Colors.greenAccent.shade200,
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.share_location_sharp, size: 30,),
+              label: 'ShareLocation',
+              backgroundColor: Colors.blueAccent.shade100,
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_4, size: 30,),
+              label: 'Contacts',
+              backgroundColor: Colors.greenAccent.shade200,
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.near_me_rounded, size: 30,),
+              label: 'Near Me',
+              backgroundColor: Colors.blueAccent.shade100,
+            ),
+          ],
+
+          elevation: 50,
+          selectedFontSize: 15,
+        ),
+
+        body: Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+
+
+                Text("SOS messaging",style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black
+                ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: LiteRollingSwitch(
+                    value: isSwitched,
+                    textOn: 'On',
+                    textOff: 'Off',
+                    colorOn: Colors.greenAccent,
+                    colorOff: Colors.redAccent,
+                    iconOn: Icons.check,
+                    iconOff: Icons.power_settings_new,
+                    animationDuration: Duration(milliseconds: 400),
+                    onChanged: (value) {
+
+                      setState(() {
+                        isSwitched = value;
+                        switchData.write('isSwitched', isSwitched);
+                        // if(value) {
+                        //   VolumeButtonListener();
+                        // }
+                      });
+                    },
+                    onTap: (bool state) {
+                      print('turned ${(state) ? 'yes' : 'no'}');
+                      // if(state) {
+                      //   VolumeButtonListener();
+                      // }
+                    },
+                    onDoubleTap: (bool state) {
+                      print('turned ${(state) ? 'yes' : 'no'}');
+                    },
+                    onSwipe: (bool state) {
+                      print('turned ${(state) ? 'yes' : 'no'}');
+                    },
+                  ),
+                ),
+
+                if (!isSwitched) // Display this only if the switch is turned off
+                  Container(
+                    height: 100,
                     alignment: Alignment.center,
-                    child: Text(
-                      'SOS allows you to immediately send your current location to your selected contact.',
-                      maxLines: 3,
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(
-                        fontSize: 20,
+                    child: Container(
+                      width: 280,
+                      height: 100,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'SOS allows you to immediately send your current location to your selected contact.',
+                          maxLines: 3,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
 
-            if (isSwitched) // Display this only if the switch is turned on
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
-              ),
+                if (isSwitched) // Display this only if the switch is turned on
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20),
+                  ),
 
-            if (isSwitched) // Display this only if the switch is turned on
-              Container(
-                width: 280,
-                height: 150,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'SOS is ON. Press this button in case of emergency. It will automatically send your location to your selected contact',
-                    maxLines: 3,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
+                if (isSwitched) // Display this only if the switch is turned on
+                  Container(
+                    width: 280,
+                    height: 150,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'SOS is ON. Press this button in case of emergency. It will automatically send your location to your selected contact',
+                        maxLines: 3,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            if (isSwitched)
-              Ink(
-                  decoration: ShapeDecoration(
+                if (isSwitched)
+                  Ink(
+                      decoration: ShapeDecoration(
 
-                    color: Colors.black,
-                    shape: CircleBorder(),
+                        color: Colors.black,
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.all_inclusive,
+                          color: Colors.blueAccent,
+                        ),
+                        iconSize: 100.0,
+                        splashColor: Colors.redAccent,
+                        padding: EdgeInsets.all(40.0),
+                        onPressed: () {
+                          _sendSOS(recepients);
+                          // _sendMessage("=919313601005","Test Message",);
+                          // _sendSOS(valueChoose);
+                        },
+                      )),
+                Padding(
+                  padding: EdgeInsets.all(25.0),
+                ),
+
+                if(recepients.isNotEmpty)
+                  ElevatedButton(
+                      child: Text('Edit SOS Contacts'),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => sosContact()),
+                        );
+                      }
                   ),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.all_inclusive,
-                      color: Colors.blueAccent,
-                    ),
-                    iconSize: 100.0,
-                    splashColor: Colors.redAccent,
-                    padding: EdgeInsets.all(40.0),
-                    onPressed: () {
-                      _sendSOS(recepients);
-                      // _sendMessage("=919313601005","Test Message",);
-                      // _sendSOS(valueChoose);
-                    },
-                  )),
-            Padding(
-              padding: EdgeInsets.all(25.0),
+                if(isSwitched)
+                  ElevatedButton(
+                      child: Text('Make SOS call'),
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber(recepients[0]);
+                      }
+                  ),
+              ],
             ),
-
-            if(recepients.isNotEmpty)
-              ElevatedButton(
-                  child: Text('Edit SOS Contacts'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => sosContact()),
-                    );
-                  }
-              ),
-            if(isSwitched)
-              ElevatedButton(
-                  child: Text('Make SOS call'),
-                  onPressed: () {
-                    FlutterPhoneDirectCaller.callNumber(recepients[0]);
-                  }
-              ),
-          ],
-        ),
-      ),
+         ),
     );
   }
 }

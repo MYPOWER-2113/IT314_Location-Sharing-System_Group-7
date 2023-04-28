@@ -63,7 +63,7 @@ class ShareMyLocation extends State<ShareLocation> {
     List<String> recepients = [recipitent];
     await sendSMS(
         message:
-            "HI there, Its a test message from flutter. The Google map link is as follows https://www.google.com/maps/@$lat,$long,20z",
+            "My current location is  https://www.google.com/maps/@$lat,$long,20z",
         recipients: recepients);
   }
 

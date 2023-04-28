@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locatinsharing/Navigation/screens/tbt.dart';
+import 'package:locatinsharing/Navigation/ui/Ratings.dart';
 
 import '../helper/shared_prefs.dart';
 import '../screens/turn_by_turn.dart';
