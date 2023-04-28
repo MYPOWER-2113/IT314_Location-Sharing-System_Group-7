@@ -16,7 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_phone_direct_collar: ^2.1.1
+  flutter_phone_direct_caller: ^2.1.1
 
   custom_text_field: 0.0.3
   cupertino_icons: ^1.0.2
