@@ -38,6 +38,9 @@ import 'package:volume_watcher/volume_watcher.dart';
 
 import 'SOS_Contacts.dart';
 
+//to make phone call
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+
 
 class SOS extends StatefulWidget {
   const SOS({super.key});
@@ -108,7 +111,7 @@ class _SOS extends State<SOS> {
 
     //Volume button code ( didn't work due to handleVolumeButtonPressed() )
 
-    // _volumeWatcher = VolumeWatcher(onVolumeChangeListener: (_) => _handleVolumeButtonPressed());
+    // volumeWatcher = VolumeWatcher(onVolumeChangeListener: () => _handleVolumeButtonPressed());
     // _volumeWatcher.
   }
 
@@ -307,20 +310,16 @@ class _SOS extends State<SOS> {
 
             if (isSwitched) // Display this only if the switch is turned on
               Container(
+                width: 280,
                 height: 150,
-                alignment: Alignment.center,
-                child: Container(
-                  width: 280,
-                  height: 150,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'SOS is ON. Press this button in case of emergency. It will automatically send your location to your selected contact',
-                      maxLines: 3,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'SOS is ON. Press this button in case of emergency. It will automatically send your location to your selected contact',
+                    maxLines: 3,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
                       fontSize: 20,
-                    ),
                     ),
                   ),
                 ),
@@ -337,7 +336,7 @@ class _SOS extends State<SOS> {
                       Icons.all_inclusive,
                       color: Colors.blueAccent,
                     ),
-                    iconSize: 150.0,
+                    iconSize: 100.0,
                     splashColor: Colors.redAccent,
                     padding: EdgeInsets.all(40.0),
                     onPressed: () {
@@ -352,13 +351,20 @@ class _SOS extends State<SOS> {
 
             if(recepients.isNotEmpty)
               ElevatedButton(
-                child: Text('Edit SOS Contacts'),
+                  child: Text('Edit SOS Contacts'),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => sosContact()),
-                  );
-                }
+                    );
+                  }
+              ),
+            if(isSwitched)
+              ElevatedButton(
+                  child: Text('Make SOS call'),
+                  onPressed: () {
+                    FlutterPhoneDirectCaller.callNumber(recepients[0]);
+                  }
               ),
           ],
         ),
