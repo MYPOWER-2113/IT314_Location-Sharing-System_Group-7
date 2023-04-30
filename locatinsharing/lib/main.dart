@@ -1,23 +1,17 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:locatinsharing/FriendFamily/Contacts.dart';
 
 // import 'package:latlong2/latlong.dart' as latLng;
 import 'package:locatinsharing/Navigation/helper/directions_handler.dart';
-import 'package:locatinsharing/ShareLoc/ShareLoc.dart';
-import 'package:locatinsharing/Signin_Signup/signin.dart';
-import 'package:locatinsharing/homepage.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:locatinsharing/Splash/splash_screen.dart';
 import 'package:provider/provider.dart';
-import 'SOS/SOS_Contacts.dart';
 import 'Signin_Signup/auth.dart';
 import 'Signin_Signup/user_provider.dart';
 import 'package:get/get.dart';
@@ -26,9 +20,9 @@ import 'package:get_storage/get_storage.dart';
 late SharedPreferences sharedPreferences;
 
 void main() async {
+  // sharedPreferences = await SharedPreferences.getInstance();
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
-
   await dotenv.load(fileName: "assets/config/.env");
   await GetStorage.init();
   runApp(
@@ -53,11 +47,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // sharedPreferences = await SharedPreferences.getInstance();
-
     super.initState();
     initializeLocationAndSave();
-    // sharedPreferences = await SharedPreferences.getInstance();
     authService.getUserData(context);
   }
 
@@ -82,8 +73,7 @@ class _MyAppState extends State<MyApp> {
 
     LatLng currentLatLng =
         LatLng(_locationData.latitude!, _locationData.longitude!);
-    String currentAddress =
-        (await getParsedReverseGeocoding(currentLatLng))['place'];
+    // String currentAddress = (await getParsedReverseGeocoding(currentLatLng))['place'];
     // String mp = (await getParsedReverseGeocoding(currentLatLng))['place']!;
     // String _currentAddress = mp['place'];
     // print(_currentAddress);
@@ -91,6 +81,9 @@ class _MyAppState extends State<MyApp> {
     // print(currentAddress);
     sharedPreferences.setDouble('latitude', _locationData.latitude!);
     sharedPreferences.setDouble('longitude', _locationData.longitude!);
+
+    String currentAddress =
+        (await getParsedReverseGeocoding(currentLatLng))['place'];
 
     sharedPreferences.setString('current-address', currentAddress);
 
@@ -106,24 +99,26 @@ class _MyAppState extends State<MyApp> {
       title: 'LocSS',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+
+        // Define the default brightness and colors.
         brightness: Brightness.light,
         primaryColor: Colors.blueAccent.shade400,
 
         // Define the default font family.
         fontFamily: 'Gotham',
 
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           displayLarge: TextStyle(
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.greenAccent.shade700),
-          titleLarge: TextStyle(
-            fontSize: 25.0,
-            /*fontStyle: FontStyle.italic*/
+            fontSize: 40.0,
+            fontWeight: FontWeight.bold,
             color: Colors.greenAccent,
           ),
+          titleLarge: TextStyle(
+              fontSize: 25.0,
+              /*fontStyle: FontStyle.italic,*/
+              color: Colors.greenAccent),
           bodyMedium: TextStyle(
-              fontSize: 14.0, fontFamily: 'Hind', color: Colors.black),
+              fontSize: 14.0, fontFamily: 'Hind', color: Colors.blueAccent),
         ),
       ),
 
@@ -131,7 +126,9 @@ class _MyAppState extends State<MyApp> {
       //   brightness: Brightness.dark,
       //   primaryColor: Colors.blueAccent.shade200,
       // ),
+
       debugShowCheckedModeBanner: false,
+
       home: MySplashScreen(),
     );
   }

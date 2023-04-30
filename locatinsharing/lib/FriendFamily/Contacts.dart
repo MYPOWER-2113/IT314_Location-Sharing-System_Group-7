@@ -38,7 +38,7 @@ class _ContactsState extends State<Contacts> {
     // TODO: implement initState
     super.initState();
     askPermissions();
-     //getAllContacts();
+    //getAllContacts();
     // searchController.addListener(() {
     //   filterContacts();
     // });
@@ -64,7 +64,6 @@ class _ContactsState extends State<Contacts> {
       return m[0] == "+" ? "+" : "";
     });
   }
-
 
   filterContact() {
     List<Contact> _contacts = [];
@@ -135,7 +134,8 @@ class _ContactsState extends State<Contacts> {
   }
 
   getAllContacts() async {
-    List<Contact> _contacts = await ContactsService.getContacts(withThumbnails: false);
+    List<Contact> _contacts =
+        await ContactsService.getContacts(withThumbnails: false);
     setState(() {
       contacts = _contacts;
     });
@@ -232,8 +232,7 @@ class _ContactsState extends State<Contacts> {
       body: contacts.length == 0
           ? Center(child: CircularProgressIndicator())
           : SafeArea(
-              child: Column(
-                  children: [
+              child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
@@ -268,10 +267,12 @@ class _ContactsState extends State<Contacts> {
                                         backgroundColor: primaryColor,
                                         child: Text(contact.initials()),
                                       ),
-                                    onTap:() {
-                                      searchController.text=contact.displayName!;
-                                      sendSMS(message: 'hello', recipients: [contact.phones!.first.value!]);
-                                  },
+                                onTap: () {
+                                  searchController.text = contact.displayName!;
+                                  sendSMS(message: 'hello', recipients: [
+                                    contact.phones!.first.value!
+                                  ]);
+                                },
                               );
                             }),
                       )
@@ -283,5 +284,3 @@ class _ContactsState extends State<Contacts> {
     );
   }
 }
-
-

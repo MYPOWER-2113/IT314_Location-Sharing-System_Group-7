@@ -33,15 +33,16 @@ class ShareLocation extends StatefulWidget {
   State<ShareLocation> createState() => ShareMyLocation();
 }
 
-
 class ShareMyLocation extends State<ShareLocation> {
   late Future<List<Contact>> _future;
   Contact? _selectedUser;
+
   @override
   void initState() {
     super.initState();
     _future = getContacts();
   }
+
   int selectedPage = 3;
 
   final _pageOptions = [
@@ -56,8 +57,9 @@ class ShareMyLocation extends State<ShareLocation> {
   int _currentIndex = 3;
 
   String valueChoose = "Select Contacts";
-  String numChoose="+919313601005";
-  final long = getCurrentLatLngFromSharedPrefs().longitude,lat = getCurrentLatLngFromSharedPrefs().latitude;
+  String numChoose = "+919313601005";
+  final long = getCurrentLatLngFromSharedPrefs().longitude,
+      lat = getCurrentLatLngFromSharedPrefs().latitude;
 
   void _sendSMS(String recipitent) async {
     List<String> recepients = [recipitent];
@@ -83,7 +85,6 @@ class ShareMyLocation extends State<ShareLocation> {
       drawer: const DrawerScreen(),
       appBar: AppBar(
         title: Text("Share Location"),
-
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -151,17 +152,14 @@ class ShareMyLocation extends State<ShareLocation> {
         elevation: 50,
         selectedFontSize: 15,
       ),
-
       body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children:<Widget>[
+          children: <Widget>[
             Container(
               margin: EdgeInsets.all(15.0),
               padding: EdgeInsets.all(8.0),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(12),
-                  color:Colors.grey
-              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12), color: Colors.grey.shade300),
               child: FutureBuilder<List<Contact>>(
                   future: _future,
                   builder: (context, snapshot) {
@@ -185,17 +183,17 @@ class ShareMyLocation extends State<ShareLocation> {
                           SizedBox(
                             width: 400,
                             child: DropdownButton<Contact>(
-                                onChanged: (newvalue) {
-                                  setState(() {
-                                    _selectedUser = newvalue;
-                                    valueChoose = newvalue!.phones[0];
-                                  });
-                                },
+                              onChanged: (newvalue) {
+                                setState(() {
+                                  _selectedUser = newvalue;
+                                  valueChoose = newvalue!.phones[0];
+                                });
+                              },
                               value: _selectedUser,
                               iconSize: 50,
                               items: [
                                 ...snapshot.data!.map(
-                                      (user) => DropdownMenuItem(
+                                  (user) => DropdownMenuItem(
                                     value: user,
                                     child: Row(
                                       children: [
@@ -215,17 +213,17 @@ class ShareMyLocation extends State<ShareLocation> {
             Container(
               margin: EdgeInsets.all(12.0),
               padding: EdgeInsets.all(8.0),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
                   style: TextButton.styleFrom(
                       primary: Colors.purpleAccent,
                       backgroundColor: Colors.blue, // Background Color
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))
-                  ),
-                  onPressed: (){
-                    if(valueChoose != "Select Contacts") {
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0))),
+                  onPressed: () {
+                    if (valueChoose != "Select Contacts") {
                       _sendSMS(valueChoose);
                       Fluttertoast.showToast(
                           msg: "Location Shared",
@@ -234,13 +232,15 @@ class ShareMyLocation extends State<ShareLocation> {
                           timeInSecForIosWeb: 1,
                           backgroundColor: Colors.red,
                           textColor: Colors.white,
-                          fontSize: 10.0
-                      );
+                          fontSize: 10.0);
                     }
-                  }, child: Text("SEND", style: TextStyle(color: Colors.white,fontSize: 25),)),
+                  },
+                  child: Text(
+                    "SEND",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  )),
             )
-          ]
-      ),
+          ]),
     );
   }
 
@@ -254,4 +254,4 @@ class ShareMyLocation extends State<ShareLocation> {
     }
     return [];
   }
-  }
+}

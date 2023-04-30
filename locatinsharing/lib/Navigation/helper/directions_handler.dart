@@ -45,7 +45,7 @@ Future<Map> getParsedReverseGeocoding(LatLng latLng) async {
   // print(st);
   Map revGeocode = {
     'name': feature['text'],
-    'address': feature['place_name'].split('${feature['text']}, ')[1],
+    'address': feature['place_name'].split('${feature['text']}, '),
     'place': feature['place_name'],
     'location': latLng,
   };

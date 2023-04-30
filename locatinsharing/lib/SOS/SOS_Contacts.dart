@@ -10,8 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../Signin_Signup/user_provider.dart';
 import '../constants.dart';
-
-
+import 'SOS.dart';
 
 class sosContact extends StatefulWidget {
   const sosContact({Key? key}) : super(key: key);
@@ -21,9 +20,9 @@ class sosContact extends StatefulWidget {
 }
 
 class _sosContactState extends State<sosContact> {
-
   late Future<List<Contact>> _future;
   Contact? _selectedUser1, _selectedUser2, _selectedUser3;
+
   @override
   void initState() {
     super.initState();
@@ -47,17 +46,14 @@ class _sosContactState extends State<sosContact> {
           ),
         ),
       ),
-
       body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children:<Widget>[
+          children: <Widget>[
             Container(
               margin: EdgeInsets.all(15.0),
               padding: EdgeInsets.all(8.0),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(12),
-                  color:Colors.grey
-              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12), color: Colors.grey.shade300),
               child: FutureBuilder<List<Contact>>(
                   future: _future,
                   builder: (context, snapshot) {
@@ -85,7 +81,7 @@ class _sosContactState extends State<sosContact> {
                               value: _selectedUser1,
                               items: [
                                 ...snapshot.data!.map(
-                                      (user) => DropdownMenuItem(
+                                  (user) => DropdownMenuItem(
                                     value: user,
                                     child: Row(
                                       children: [
@@ -106,10 +102,8 @@ class _sosContactState extends State<sosContact> {
             Container(
               margin: EdgeInsets.all(15.0),
               padding: EdgeInsets.all(8.0),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(12),
-                  color:Colors.grey
-              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12), color: Colors.grey.shade300),
               child: FutureBuilder<List<Contact>>(
                   future: _future,
                   builder: (context, snapshot) {
@@ -133,11 +127,11 @@ class _sosContactState extends State<sosContact> {
                             height: 50,
                             child: DropdownButton<Contact>(
                               onChanged: (user) =>
-                                  setState(() => _selectedUser2 = user),
+                                  setState(() => _selectedUser2 = user!),
                               value: _selectedUser2,
                               items: [
                                 ...snapshot.data!.map(
-                                      (user) => DropdownMenuItem(
+                                  (user) => DropdownMenuItem(
                                     value: user,
                                     child: Row(
                                       children: [
@@ -158,10 +152,8 @@ class _sosContactState extends State<sosContact> {
             Container(
               margin: EdgeInsets.all(15.0),
               padding: EdgeInsets.all(8.0),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(12),
-                  color:Colors.grey
-              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12), color: Colors.grey.shade300),
               child: FutureBuilder<List<Contact>>(
                   future: _future,
                   builder: (context, snapshot) {
@@ -185,11 +177,11 @@ class _sosContactState extends State<sosContact> {
                             height: 50,
                             child: DropdownButton<Contact>(
                               onChanged: (user) =>
-                                  setState(() => _selectedUser3 = user),
+                                  setState(() => _selectedUser3 = user!),
                               value: _selectedUser3,
                               items: [
                                 ...snapshot.data!.map(
-                                      (user) => DropdownMenuItem(
+                                  (user) => DropdownMenuItem(
                                     value: user,
                                     child: Row(
                                       children: [
@@ -210,16 +202,16 @@ class _sosContactState extends State<sosContact> {
             Container(
               margin: EdgeInsets.all(12.0),
               padding: EdgeInsets.all(8.0),
-              decoration:BoxDecoration(
-                borderRadius:BorderRadius.circular(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
                   style: TextButton.styleFrom(
                       primary: Colors.purpleAccent,
                       backgroundColor: Colors.blue, // Background Color
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0))
-                  ),
-                  onPressed: (){
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0))),
+                  onPressed: () {
                     // if(valueChoose != "Select Contacts") {
                     //   _sendSMS(_selectedUser!.phones[0]);
                     //   Fluttertoast.showToast(
@@ -237,10 +229,13 @@ class _sosContactState extends State<sosContact> {
                     //   MaterialPageRoute(builder: (context) => Signin()),
                     // );
                     makeSOSlist();
-                  }, child: Text("SEND", style: TextStyle(color: Colors.white,fontSize: 25),)),
+                  },
+                  child: Text(
+                    "SEND",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  )),
             )
-          ]
-      ),
+          ]),
     );
   }
 
@@ -375,33 +370,46 @@ class _sosContactState extends State<sosContact> {
     return [];
   }
 
-  void makeSOSlist() async
-  {
-    List SOSlist = [_selectedUser1?.phones[0].toString(), _selectedUser2?.phones[0].toString(), _selectedUser3?.phones[0].toString()];
-    try {
-      final user = Provider.of<UserProvider>(context, listen: false).user;
-      http.Response res = await http.post(
-        Uri.parse('${Constants.uri}/SOSnumber'),
-        body: jsonEncode({'email': user.email, 'SOSnumber': SOSlist}),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
+  void makeSOSlist() async {
+    if (_selectedUser1 == null &&
+        _selectedUser2 == null &&
+        _selectedUser3 == null) {
+      showSnackBar(
+        context,
+        'Please select at least one contact!',
       );
+      return;
+    } else {
+      List SOSlist = [
+        _selectedUser1?.phones[0].toString(),
+        _selectedUser2?.phones[0].toString(),
+        _selectedUser3?.phones[0].toString()
+      ];
+      try {
+        final user = Provider.of<UserProvider>(context, listen: false).user;
+        http.Response res = await http.post(
+          Uri.parse('${Constants.uri}/SOSnumber'),
+          body: jsonEncode({'email': user.email, 'SOSnumber': SOSlist}),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        );
 
-      httpErrorHandle(
-        response: res,
-        context: context,
-        onSuccess: () {
-          showSnackBar(
-            context,
-            'Account created! Login with the same credentials!',
-          );
-          Navigator.push(
-              context, new MaterialPageRoute(builder: (context) => Signin()));
-        },
-      );
-    } catch (e) {
-      showSnackBar(context, e.toString());
+        httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            showSnackBar(
+              context,
+              'Contacts updated successfully!',
+            );
+            Navigator.push(
+                context, new MaterialPageRoute(builder: (context) => SOS()));
+          },
+        );
+      } catch (e) {
+        showSnackBar(context, e.toString());
+      }
     }
   }
 }

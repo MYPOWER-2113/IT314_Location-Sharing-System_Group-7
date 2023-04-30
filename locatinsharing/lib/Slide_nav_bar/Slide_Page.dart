@@ -14,7 +14,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.animation_rounded,
-        color: Color(0X69F0AEFF),
+        color: Colors.blueAccent,
       ),
       "title": "About Us",
       "trailing": Icon(Icons.chevron_right),
@@ -23,7 +23,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.help,
-        color: Color(0X82B1FFFF),
+        color: Colors.blueAccent,
       ),
       "title": "Help",
       "trailing": Icon(Icons.chevron_right),
@@ -32,7 +32,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.settings,
-        color: Color(0X69F0AEFF),
+        color: Colors.blueAccent,
       ),
       "title": "Settings",
       "trailing": Icon(Icons.chevron_right),
@@ -41,7 +41,7 @@ class DrawerScreen extends StatelessWidget {
     {
       "leading": Icon(
         Icons.exit_to_app,
-        color: Color(0X82B1FFFF),
+        color: Colors.blueAccent,
       ),
       "title": "Log Out",
       "trailing": Icon(Icons.chevron_right),
@@ -61,8 +61,10 @@ class DrawerScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(user.name, style: const TextStyle(fontSize: 18)),
-                accountEmail: Text(user.email, style: const TextStyle(fontSize: 14)),
+                accountName:
+                    Text(user.name, style: const TextStyle(fontSize: 18)),
+                accountEmail:
+                    Text(user.email, style: const TextStyle(fontSize: 14)),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [

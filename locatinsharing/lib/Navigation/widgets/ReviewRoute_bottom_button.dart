@@ -54,7 +54,7 @@ Widget reviewRideBottomSheet(
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Text('Start your premier ride now'),
+                          Text('Start your Navigation now'),
                         ])),
               ]),
         ),

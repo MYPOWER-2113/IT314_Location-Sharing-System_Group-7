@@ -283,14 +283,16 @@ class _Navigation extends State<Navigation> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Text('You are currently here:',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),),
+                                const Text(
+                                  'You are currently here:',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
                                 Text(currAdd,
                                     style: const TextStyle(
                                         color: Colors.blueAccent,
-                                    fontSize: 16)),
+                                        fontSize: 16)),
                                 const SizedBox(height: 20),
                                 ElevatedButton(
                                     onPressed: () => Navigator.push(

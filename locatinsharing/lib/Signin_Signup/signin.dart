@@ -140,15 +140,12 @@ class _SigninState extends State<Signin> {
                                   horizontal: 30, vertical: 35),
                               child: TextFormField(
                                 controller: emailController,
-
                                 decoration: InputDecoration(
                                   labelText: 'Your Email Address',
                                   labelStyle: GoogleFonts.poppins(
                                       fontSize: 12,
                                       fontWeight: FontWeight.normal,
-                                      color: const Color(0xff8B9E9E)
-
-                                  ),
+                                      color: const Color(0xff8B9E9E)),
                                   enabledBorder: const UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.blueGrey,
@@ -163,6 +160,7 @@ class _SigninState extends State<Signin> {
                                   const EdgeInsets.only(left: 30, right: 30),
                               child: TextFormField(
                                 controller: passwordController,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   labelText: 'Password',
                                   labelStyle: GoogleFonts.poppins(

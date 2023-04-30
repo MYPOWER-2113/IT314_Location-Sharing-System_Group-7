@@ -17,7 +17,17 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
+        //backgroundColor: Colors.cyan,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blueAccent.shade100, Colors.greenAccent.shade200],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +73,20 @@ class _MyAppState extends State<MyApp> {
       title: 'Location Sharing App',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Location Sharing App'),
+          title: const Text('Settings'),
+          //backgroundColor: Colors.cyan,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.blueAccent.shade100,
+                  Colors.greenAccent.shade200
+                ],
+                begin: Alignment.bottomRight,
+                end: Alignment.topLeft,
+              ),
+            ),
+          ),
         ),
         body: Center(
           child: ElevatedButton(
