@@ -64,31 +64,38 @@ git clone https://github.com/MYPOWER-2113/IT314_Location-Sharing-System_Group-7.
 6. When you run the file, splash screen will popup containing the logo of the app. Then you will be directed to Sign In Page.
 7. If you are using the app for first time, click on Sign Up, enter all the details then Sign In using the Email and Password.
 8. You will be directed to Homepage and now you can search any location.
-![Screenshot_20230430-103117](https://user-images.githubusercontent.com/123552037/235337697-5da30dd1-b61c-4f38-b4fe-245b734c1df6.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337697-5da30dd1-b61c-4f38-b4fe-245b734c1df6.jpg">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 9. There are other five buttons at bottom of the page for different functionalities.
 10. Second button is for SOS Emergency functionality where you select the contacts of your close ones and click on the red button on emergency situation. That will send notification to all the selected contacts.
-![Screenshot_20230430-103136](https://user-images.githubusercontent.com/123552037/235337665-f501f69d-676e-49a1-92c4-4db6e4bf0504.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337665-f501f69d-676e-49a1-92c4-4db6e4bf0504.jpg">
 
-![Screenshot_20230430-103201](https://user-images.githubusercontent.com/123552037/235337703-1c3b36c8-66b0-4fb6-8c4f-c2c6ed161033.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337703-1c3b36c8-66b0-4fb6-8c4f-c2c6ed161033.jpg">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 13.  Third button is for Navigation where you can navigate to any destination from your current location.
-![Screenshot_20230430-103239](https://user-images.githubusercontent.com/123552037/235337782-c7ad6d07-08f0-4919-89c0-be25d38208bc.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337782-c7ad6d07-08f0-4919-89c0-be25d38208bc.jpg">
 
-![Screenshot_20230430-103310](https://user-images.githubusercontent.com/123552037/235337792-ba0b3c83-1494-47ab-b473-3a84b1ef1755.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337792-ba0b3c83-1494-47ab-b473-3a84b1ef1755.jpg">
 
-![Screenshot_20230430-103322](https://user-images.githubusercontent.com/123552037/235337798-352178bb-a4d7-4ead-ae92-cfca3463609a.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337798-352178bb-a4d7-4ead-ae92-cfca3463609a.jpg">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 14. Fourth button is for Sharing your current Location to any of your contacts.
-![Screenshot_20230430-103347](https://user-images.githubusercontent.com/123552037/235337890-8a3c435c-73d9-4e66-a42a-e73f17f55134.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337890-8a3c435c-73d9-4e66-a42a-e73f17f55134.jpg">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 15. In Fifth Button, contacts list are shown whic are selected to be notified at energency situation.
-![Screenshot_20230430-103443](https://user-images.githubusercontent.com/123552037/235337899-4e13dbaf-6a43-439d-af18-3ed8c5851073.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235337899-4e13dbaf-6a43-439d-af18-3ed8c5851073.jpg">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 15. In Search for neraby places.
-![Screenshot_20230430-103524](https://user-images.githubusercontent.com/123552037/235338004-2d90fed6-52c4-4b19-af65-ad025ea52cf8.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235347426-94639047-bf4c-46be-a6e0-d99f9a9dee10.jpg">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 16. Click on the top left and know about Us, Frequently asked questions(FAQs) and you can logout anytime you want to.
-![Screenshot_20230430-103556](https://user-images.githubusercontent.com/123552037/235338078-646ef36b-3aec-451a-a3f0-dd291c4cb5e5.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235338078-646ef36b-3aec-451a-a3f0-dd291c4cb5e5.jpg">
 
-![Screenshot_20230430-103556](https://user-images.githubusercontent.com/123552037/235338071-98b68fc7-c857-4a8f-bd2b-4c92ad96b423.jpg)
+<img align="left" width="200" height="400" src="https://user-images.githubusercontent.com/123552037/235347438-326a1b7e-af18-4ced-b12f-d4e7d73ea1dc.jpg">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
